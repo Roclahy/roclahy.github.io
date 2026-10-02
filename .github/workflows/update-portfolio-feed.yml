@@ -1,0 +1,38 @@
+name: Update portfolio feed
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-portfolio-feed.yml"
+      - ".github/scripts/update_portfolio_feed.py"
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-feed
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refresh latest content
+        run: python3 .github/scripts/update_portfolio_feed.py
+      - name: Commit only when content changed
+        run: |
+          if git diff --quiet -- portfolio-feed.json; then
+            echo "No feed changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add portfolio-feed.json
+          git commit -m "portfolio: refresh latest content"
+          git push

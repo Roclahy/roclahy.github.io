@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-10-02T09:40:55.333Z",
+  "telegram": {
+    "url": "https://t.me/fundadora",
+    "text": "Ver la publicación más reciente en Telegram",
+    "date": "@fundadora"
+  },
+  "articles": [
+    {
+      "title": "Cómo hacer que Android te avise cuando regrese la cobertura LTE",
+      "url": "https://roclahy.com/2026/08/como-hacer-que-android-te-avise-cuando.html",
+      "category": "Cubanos · Tutoriales"
+    },
+    {
+      "title": "Cómo conseguir una experiencia similar a Brave Origin sin pagar 60 USD",
+      "url": "https://roclahy.com/2026/04/como-conseguir-una-experiencia-similar.html",
+      "category": "Android · Tutoriales"
+    }
+  ]
+}
