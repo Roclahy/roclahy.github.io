@@ -481,7 +481,7 @@ details[open] summary{border-bottom:1px solid var(--line)}
 
   async function loadPortfolioFeed(){
     try{
-      const res=await fetch('/portfolio-feed.json?v=' + Date.now(),{cache:'no-store'});
+      const res=await fetch('https://roclahy.com/api/portfolio-feed',{cache:'no-store'});
       if(!res.ok) throw new Error('feed');
       const data=await res.json();
 
