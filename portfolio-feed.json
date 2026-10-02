@@ -1,20 +1,21 @@
 {
-  "updated_at": "2026-10-02T09:40:55.333Z",
+  "updated_at": "2026-10-02T09:43:18.074577+00:00",
   "telegram": {
-    "url": "https://t.me/fundadora",
-    "text": "Ver la publicación más reciente en Telegram",
-    "date": "@fundadora"
+    "url": "https://t.me/fundadora/7890",
+    "text": "Hace algunos años vi de cerca hasta qué punto la posibilidad de editar o eliminar mensajes para ambas partes puede cambiar el contexto de una conversación. Lo que alguien escrib…",
+    "date": "01/10/2026",
+    "id": 7890
   },
   "articles": [
     {
       "title": "Cómo hacer que Android te avise cuando regrese la cobertura LTE",
       "url": "https://roclahy.com/2026/08/como-hacer-que-android-te-avise-cuando.html",
-      "category": "Cubanos · Tutoriales"
+      "category": "Tutoriales · Cubanos"
     },
     {
       "title": "Cómo conseguir una experiencia similar a Brave Origin sin pagar 60 USD",
       "url": "https://roclahy.com/2026/04/como-conseguir-una-experiencia-similar.html",
-      "category": "Android · Tutoriales"
+      "category": "Tutoriales"
     }
   ]
 }
