@@ -658,6 +658,23 @@ details{
   background:transparent!important;
   box-shadow:none;
 }
+/* Always-open trajectory card */
+.trajectory-card{
+  margin-top:12px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:color-mix(in srgb,var(--surface) 96%,var(--bg));
+  overflow:hidden;
+}
+.trajectory-title{
+  min-height:62px;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  font-weight:650;
+}
 </style>
 </head>
 <body>
@@ -813,14 +830,14 @@ details{
       </a>
     </div>
 
-    <details>
-      <summary><span data-i18n="collabs">Colaboraciones y trayectoria</span><span class="disclosure">＋</span></summary>
+    <div class="trajectory-card">
+      <div class="trajectory-title" data-i18n="collabs">Colaboraciones y trayectoria</div>
       <div class="collabs">
-        <span>Lnk.Bio</span><span>Solid Explorer</span><span>Telegraph X</span><span>2FAS Auth</span><span>Proton</span>
-        <span>Combot</span><span>NotifyMe.Music</span><span>ReactBot</span><span>EmailGate</span><span>Spotify Release</span>
-        <span>Livegram</span><span>Keep Bot</span><span>Sats.mobi</span>
+        <span>Fanatictech</span><span>iTecnoGeek</span><span>Lnk.Bio</span><span>Solid Explorer</span><span>Telegraph X</span>
+        <span>2FAS Auth</span><span>Proton</span><span>Combot</span><span>NotifyMe.Music</span><span>ReactBot</span>
+        <span>EmailGate</span><span>Spotify Release</span><span>Livegram</span><span>Keep Bot</span><span>Sats.mobi</span>
       </div>
-    </details>
+    </div>
   </section>
 </main>
 
