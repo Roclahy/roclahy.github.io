@@ -33,7 +33,9 @@ export async function onRequestGet(context) {
       const dest=(request.headers.get('sec-fetch-dest') || '').toLowerCase();
       const referer=request.headers.get('referer') || '';
       const sameSite=referer.startsWith('https://roclahy.me/') || referer.startsWith('https://roclahy-me.pages.dev/');
-      const shouldCount=!looksLikeBot(request) && (dest === 'iframe' || sameSite);
+      const cookie=request.headers.get('cookie') || '';
+      const alreadyCounted=/(?:^|;\s*)roclahy_view_session=1(?:;|$)/.test(cookie);
+      const shouldCount=!looksLikeBot(request) && !alreadyCounted && (dest === 'iframe' || sameSite);
 
       if (shouldCount) {
         await env.VIEWS_DB.prepare(
@@ -83,11 +85,20 @@ span{font-size:11px;font-weight:500}
 </body>
 </html>`;
 
-  return new Response(body,{
-    headers:{
-      'content-type':'text/html; charset=utf-8',
-      'cache-control':'no-store, max-age=0',
-      'x-content-type-options':'nosniff'
-    }
-  });
+  const headers={
+    'content-type':'text/html; charset=utf-8',
+    'cache-control':'no-store, max-age=0',
+    'x-content-type-options':'nosniff'
+  };
+
+  const cookie=request.headers.get('cookie') || '';
+  const alreadyCounted=/(?:^|;\s*)roclahy_view_session=1(?:;|$)/.test(cookie);
+  const dest=(request.headers.get('sec-fetch-dest') || '').toLowerCase();
+  const referer=request.headers.get('referer') || '';
+  const sameSite=referer.startsWith('https://roclahy.me/') || referer.startsWith('https://roclahy-me.pages.dev/');
+  if (!alreadyCounted && !looksLikeBot(request) && (dest === 'iframe' || sameSite)) {
+    headers['set-cookie']='roclahy_view_session=1; Path=/; Secure; HttpOnly; SameSite=Lax';
+  }
+
+  return new Response(body,{headers});
 }
