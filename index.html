@@ -35,11 +35,11 @@ html[data-theme="dark"]{
 }
 html[data-theme="sakura"]{
   color-scheme:light;
-  --bg:#fff7fa;--surface:#fffdfd;--surface2:rgba(255,244,248,.92);
+  --bg:#fff7fa;--surface:#fff1f6;--surface2:rgba(255,235,243,.90);
   --text:#34272e;--muted:#765f69;--faint:#9b7f8b;
-  --line:rgba(137,72,98,.12);--line2:rgba(137,72,98,.20);
-  --accent:#d84f88;--accentSoft:rgba(216,79,136,.11);
-  --shadow:0 18px 50px rgba(126,57,86,.09);--icon:none;
+  --line:rgba(137,72,98,.14);--line2:rgba(137,72,98,.22);
+  --accent:#d84f88;--accentSoft:rgba(216,79,136,.12);
+  --shadow:0 16px 42px rgba(126,57,86,.08);--icon:none;
 }
 @media(prefers-color-scheme:dark){
   html:not([data-theme]){
@@ -821,7 +821,13 @@ html[data-theme="sakura"] .book-card,
 html[data-theme="sakura"] .trajectory-card,
 html[data-theme="sakura"] .project,
 html[data-theme="sakura"] .links-card{
-  border-color:rgba(178,93,128,.14);
+  border-color:rgba(178,93,128,.16);
+}
+html[data-theme="sakura"] .project,
+html[data-theme="sakura"] .links-card,
+html[data-theme="sakura"] .trajectory-card,
+html[data-theme="sakura"] .book-card{
+  background:linear-gradient(180deg,rgba(255,245,249,.94),rgba(255,238,245,.94));
 }
 html[data-theme="sakura"] .dock{
   background:rgba(255,247,250,.90);
@@ -1218,7 +1224,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     const saved=mode==='light'?'sakura':mode;
     const value=themes.includes(saved)?saved:'dark';
     root.setAttribute('data-theme',value);
-    localStorage.setItem('roclahy-theme',value);
+    localStorage.setItem('roclahy-theme-v2',value);
 
     const next=value==='dark'?'sakura':'dark';
     if(themeIcon){
@@ -1234,7 +1240,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     }
   }
 
-  applyTheme(localStorage.getItem('roclahy-theme')||'dark');
+  applyTheme(localStorage.getItem('roclahy-theme-v2')||'dark');
   trigger.addEventListener('click',()=>{
     const current=root.getAttribute('data-theme')||'dark';
     applyTheme(current==='dark'?'sakura':'dark');
