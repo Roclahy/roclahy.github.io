@@ -16,22 +16,14 @@ async function ensureCounter(db) {
   await db.prepare(
     'CREATE TABLE IF NOT EXISTS site_counters (key TEXT PRIMARY KEY, value INTEGER NOT NULL)'
   ).run();
-
   await db.prepare(
     'INSERT OR IGNORE INTO site_counters (key, value) VALUES (?, ?)'
   ).bind(COUNTER_KEY, BASE_TOTAL).run();
 }
 
-export async function onRequest(context) {
-  const { request, env } = context;
-
-  if (request.method !== 'GET') {
-    return json({ error: 'Method not allowed' }, 405);
-  }
-
-  if (!env.VIEWS_DB) {
-    return json({ total: BASE_TOTAL, dynamic: false });
-  }
+export async function onRequestGet(context) {
+  const { env } = context;
+  if (!env.VIEWS_DB) return json({ total: BASE_TOTAL, dynamic: false });
 
   try {
     await ensureCounter(env.VIEWS_DB);
@@ -39,11 +31,8 @@ export async function onRequest(context) {
       'SELECT value FROM site_counters WHERE key = ?'
     ).bind(COUNTER_KEY).first();
 
-    return json({
-      total: Number(row?.value ?? BASE_TOTAL),
-      dynamic: true
-    });
+    return json({ total: Number(row?.value ?? BASE_TOTAL), dynamic: true });
   } catch (_) {
-    return json({ total: BASE_TOTAL, dynamic: false }, 200);
+    return json({ total: BASE_TOTAL, dynamic: false });
   }
 }

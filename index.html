@@ -634,6 +634,15 @@ details{
 @media(max-width:620px){
   .profile-description{max-width:540px;font-size:12.5px;line-height:1.62}
 }
+
+.views-widget{
+  width:220px;
+  height:28px;
+  border:0;
+  overflow:hidden;
+  background:transparent;
+  color-scheme:light dark;
+}
 </style>
 </head>
 <body>
@@ -707,11 +716,7 @@ details{
     </div>
 
     <div class="site-metric" aria-label="Vistas totales del sitio">
-      <img class="hicon" src="https://ico.hugeicons.com/view-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-      <div class="site-metric-main">
-        <strong>118,131</strong>
-        <span>vistas totales</span>
-      </div>
+      <iframe class="views-widget" src="/api/views-widget" title="Vistas totales" loading="eager"></iframe>
     </div>
   </section>
 
