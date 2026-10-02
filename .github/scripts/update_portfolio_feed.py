@@ -100,19 +100,62 @@ def telegram_latest():
         date="@fundadora"
     return {"url":post["url"],"text":text,"date":date,"id":post["id"]}
 
+class ArticleParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.current=None
+        self.in_heading=False
+        self.items=[]
+
+    def handle_starttag(self, tag, attrs):
+        a=dict(attrs)
+        if tag=="a":
+            href=a.get("href","")
+            if re.search(r"/20\\d{2}/\\d{2}/[^#?]+", href):
+                if href.startswith("/"):
+                    href="https://roclahy.com"+href
+                self.current={"url":href,"heading":[],"all":[],"fallback":a.get("title","") or a.get("aria-label","")}
+        elif self.current and tag in ("h1","h2","h3","h4"):
+            self.in_heading=True
+
+    def handle_endtag(self, tag):
+        if self.current and tag in ("h1","h2","h3","h4"):
+            self.in_heading=False
+        elif self.current and tag=="a":
+            title=" ".join(" ".join(self.current["heading"]).split())
+            if not title:
+                title=(self.current["fallback"] or " ".join(" ".join(self.current["all"]).split())).strip()
+            if title:
+                self.items.append({"title":title,"url":self.current["url"],"category":"Roclahy.com"})
+            self.current=None
+            self.in_heading=False
+
+    def handle_data(self, data):
+        if not self.current:
+            return
+        self.current["all"].append(data)
+        if self.in_heading:
+            self.current["heading"].append(data)
+
 def latest_articles():
-    raw=fetch("https://www.roclahy.com/feeds/posts/default?alt=json&max-results=2")
-    data=json.loads(raw)
+    raw=fetch("https://roclahy.com/")
+    parser=ArticleParser()
+    parser.feed(raw)
+    parser.close()
     out=[]
-    for entry in data.get("feed",{}).get("entry",[])[:2]:
-        title=entry.get("title",{}).get("$t","").strip()
-        url=""
-        for link in entry.get("link",[]):
-            if link.get("rel")=="alternate":
-                url=link.get("href","")
-                break
-        cats=[c.get("term","") for c in entry.get("category",[]) if c.get("term")]
-        out.append({"title":title,"url":url,"category":" · ".join(cats[:2]) or "Roclahy.com"})
+    seen=set()
+    for item in parser.items:
+        url=item["url"].rstrip("/")
+        if url in seen:
+            continue
+        seen.add(url)
+        title=item["title"]
+        if len(title)>160:
+            title=title[:157].rstrip()+"…"
+        item["title"]=title
+        out.append(item)
+        if len(out)==2:
+            break
     if len(out)<2:
         raise RuntimeError("Not enough Roclahy articles parsed")
     return out
