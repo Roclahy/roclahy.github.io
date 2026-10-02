@@ -790,7 +790,7 @@ body{
   object-fit:contain;
   opacity:.82;
 }
-html[data-theme="light"] .dock-icon .hicon{
+html[data-theme="sakura"] .dock-icon .hicon{
   filter:none!important;
 }
 html[data-theme="dark"] .dock-icon .hicon{
@@ -867,7 +867,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     <img class="brand-logo" src="data:image/webp;base64,UklGRoIEAABXRUJQVlA4IHYEAABQGwCdASqAAIAAPlUqkUajoqGhJJVZcHAKiWkKFqPoa/nPZ1/Vei/7hJF/rX+G8j/7l4S7wz+Wf5X8quC6AB9Tv9R4AOoF3d/w3oj/57jp6AH8z/pH/L/uvrcfQXn6/K/8J/5P8N8Bf8r/rv/G/ufCufuAO74ORx6p0y1yrUxaqsoje4duNrBK+28rXVZ/jgcWeQnRni8t3lsBG8irm9Jh76U0JZlO6pd8iNLi/BD7oIVS3dr43ulU7rpy6iqmFAnzmyErqSXV35/xE35E4o1nwq9CCs5JBz3voGRWb3tsElhgAAD+/7ZLAcjWh4dJgEyoWs062+oR3ZZcXYozaZ9ongjdIlTPyVUu1fnOokfCKDt7bHDdsUuAjbiQ68qP9kaIstg0ainT2H4Z7wxcIPG9pYM8dvUAQsgDoZNq+JRHczBVktPhvwwLEd/5kxmn/I2e8HWY8B7SVJYu65jxWE3HWGq6uWvtuGbNWV6LPMJtwoNcRr2tXYbCi1q3zUILx33efzXzPuO41PvGHUsY45Kf5/J9zf6K3/R7Rmggx5M6PjFK46JDoYiK41uEuL25KssITz9sb/Oc46kYRmm1eUCC4SLRS28X78Ha+nN3TmXmBhBRCIgkt9qkgVUmGfjlqN4DpZKrxLxHq6MyCOfqG+xAysYMjBos+GOeZoFxMitDT4Ou5Grrec6Di8Ne2LxBjKbqOSfXK4hak4ehsWEjMr7OUFfeMav31w8NH+64HSgJTlZirpX5fgPAryoDZk952rmOv6JWG0wgSRjE+Z3A/xeSQpRiVtadYOrkvvdE+KmtGXpwS+a7wO6O0pSpJjhHpfq5iyr/w3JpFOKCOgYrrpxrV1n93zShysdZZOXJFkKcaAGlrlWj5S3lfS9tG/L8OsV8KzUOkPlHLpJfFPt0rQe1RRMA1+kavf9BI37ifseLvHuoCw3PdLM+1pjodnyCTXUnXySR6Poi+F83D7qLnJUeR69wDE7+guEkU2HJZgWtSHsqdn70vQ6WGFibcGKJ5uI+7pDHbVOHODaeTpy1B54XiUD5mU3l6zz24bM8od7Av6VxIjN5+/SLNdriU4nzTYGYkde/a1PW1c1QTP5eDbFNA1IdO0icyohqXYSZLiSFRIgTjBfh/2MJhVh5sYLPaxQE/vx3cHtxaEpdI6W7r8ahS+Gi3TrshGrkQFREuaCnRCdyRWiP80xD2hmzvlOp79K///Tisbvv/pz+nohIbP0NmYbmGey9+fjzPDbj/XuetUS4834ac0nU4eyvMFVskGFMSgXSZMsyPMMcXB+LPIVigdpy6K5hZxugjztkPu2HsxuJRH9ROXeE+Ob433k4fIuAFcY3hOwLKVV7x6h9KY2H0kCgqv3syQPjMsjvA9E+o4+Lz7jznlahPtf6XITJh5X7JW6syL0Aw6WxQhLENDWocNHOzJRdagQEiRs7iVRr3fz6XC96Qj9tP027/0AKNCEIXskBd3rXfeIrjP8tNLT9neTl7ZgYGXD+eAAB5Rw9M5/vAAAAAA==" alt="" aria-hidden="true">
     <span>Roclahy</span>
   </a>
-  <button class="theme-btn" id="themeButton" type="button" aria-label="Cambiar a tema claro" title="Cambiar tema">
+  <button class="theme-btn" id="themeButton" type="button" aria-label="Cambiar a tema Sakura" title="Cambiar a tema Sakura" data-next-theme="sakura">
     <img class="hicon" id="themeIcon" src="https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp" alt="" aria-hidden="true">
     <span class="theme-sakura-glyph" aria-hidden="true">🌸</span>
   </button>
@@ -1220,21 +1220,18 @@ html[data-theme="sakura"] .book-copy .book-cta{
   if(panels.some(p=>p.dataset.panel===start))show(start);
 
   function applyTheme(mode){
-    const themes=['dark','light','sakura'];
-    const value=themes.includes(mode)?mode:'dark';
+    const themes=['dark','sakura'];
+    const saved=mode==='light'?'sakura':mode;
+    const value=themes.includes(saved)?saved:'dark';
     root.setAttribute('data-theme',value);
     localStorage.setItem('roclahy-theme',value);
 
-    const next=themes[(themes.indexOf(value)+1)%themes.length];
+    const next=value==='dark'?'sakura':'dark';
     if(themeIcon){
-      themeIcon.src=next==='light'
-        ? 'https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp'
-        : next==='dark'
-          ? 'https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp'
-          : 'https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp';
+      themeIcon.src='https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp';
     }
     if(trigger){
-      const labelKey=next==='light'?'theme_light':next==='dark'?'theme_dark':'theme_sakura';
+      const labelKey=next==='dark'?'theme_dark':'theme_sakura';
       trigger.dataset.nextTheme=next;
       trigger.setAttribute('aria-label',t(labelKey));
       trigger.setAttribute('title',t(labelKey));
@@ -1243,9 +1240,8 @@ html[data-theme="sakura"] .book-copy .book-cta{
 
   applyTheme(localStorage.getItem('roclahy-theme')||'dark');
   trigger.addEventListener('click',()=>{
-    const themes=['dark','light','sakura'];
     const current=root.getAttribute('data-theme')||'dark';
-    applyTheme(themes[(themes.indexOf(current)+1)%themes.length]);
+    applyTheme(current==='dark'?'sakura':'dark');
   });
 })();
 </script>
