@@ -957,13 +957,14 @@ details{
     const target=document.getElementById('siteViewsTotal');
     if(!target) return;
 
-    const sessionKey='roclahy-view-counted-v1';
+    const sessionKey='roclahy-view-counted-v2';
     let alreadyCounted=false;
     try{ alreadyCounted=sessionStorage.getItem(sessionKey)==='1'; }catch(_){}
 
     try{
-      const res=await fetch('/api/views',{
-        method:alreadyCounted?'GET':'POST',
+      const endpoint=alreadyCounted?'/api/views':'/api/views?count=1';
+      const res=await fetch(endpoint,{
+        method:'GET',
         headers:{'Accept':'application/json'},
         cache:'no-store'
       });
@@ -973,7 +974,7 @@ details{
       if(Number.isFinite(total)){
         target.textContent=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(total);
       }
-      if(!alreadyCounted && data.dynamic!==false){
+      if(!alreadyCounted && data.counted===true){
         try{ sessionStorage.setItem(sessionKey,'1'); }catch(_){}
       }
     }catch(_){}

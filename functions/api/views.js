@@ -1,4 +1,3 @@
-// Deployment refresh after Pages build configuration update
 const BASE_TOTAL = 118131;
 const COUNTER_KEY = 'total_views';
 
@@ -39,27 +38,31 @@ async function readTotal(db) {
 export async function onRequest(context) {
   const { request, env } = context;
 
-  if (request.method !== 'GET' && request.method !== 'POST') {
+  if (request.method !== 'GET') {
     return json({ error: 'Method not allowed' }, 405);
   }
 
-  // Keep the historical total visible until the D1 binding is attached.
   if (!env.VIEWS_DB) {
-    return json({ total: BASE_TOTAL, dynamic: false });
+    return json({ total: BASE_TOTAL, dynamic: false, counted: false });
   }
 
   try {
     await ensureCounter(env.VIEWS_DB);
 
-    if (request.method === 'POST' && !looksLikeBot(request)) {
-      await env.VIEWS_DB.prepare(
+    const url = new URL(request.url);
+    const shouldCount = url.searchParams.get('count') === '1' && !looksLikeBot(request);
+    let counted = false;
+
+    if (shouldCount) {
+      const result = await env.VIEWS_DB.prepare(
         'UPDATE site_counters SET value = value + 1 WHERE key = ?'
       ).bind(COUNTER_KEY).run();
+      counted = result.success === true;
     }
 
     const total = await readTotal(env.VIEWS_DB);
-    return json({ total, dynamic: true });
-  } catch (error) {
-    return json({ total: BASE_TOTAL, dynamic: false }, 200);
+    return json({ total, dynamic: true, counted });
+  } catch (_) {
+    return json({ total: BASE_TOTAL, dynamic: false, counted: false }, 200);
   }
 }
