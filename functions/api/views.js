@@ -12,11 +12,6 @@ function json(data, status = 200) {
   });
 }
 
-function looksLikeBot(request) {
-  const ua = (request.headers.get('user-agent') || '').toLowerCase();
-  return /bot|crawler|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegrambot|discordbot|preview/.test(ua);
-}
-
 async function ensureCounter(db) {
   await db.prepare(
     'CREATE TABLE IF NOT EXISTS site_counters (key TEXT PRIMARY KEY, value INTEGER NOT NULL)'
@@ -27,14 +22,6 @@ async function ensureCounter(db) {
   ).bind(COUNTER_KEY, BASE_TOTAL).run();
 }
 
-async function readTotal(db) {
-  const row = await db.prepare(
-    'SELECT value FROM site_counters WHERE key = ?'
-  ).bind(COUNTER_KEY).first();
-
-  return Number(row?.value ?? BASE_TOTAL);
-}
-
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -43,26 +30,20 @@ export async function onRequest(context) {
   }
 
   if (!env.VIEWS_DB) {
-    return json({ total: BASE_TOTAL, dynamic: false, counted: false });
+    return json({ total: BASE_TOTAL, dynamic: false });
   }
 
   try {
     await ensureCounter(env.VIEWS_DB);
+    const row = await env.VIEWS_DB.prepare(
+      'SELECT value FROM site_counters WHERE key = ?'
+    ).bind(COUNTER_KEY).first();
 
-    const url = new URL(request.url);
-    const shouldCount = url.searchParams.get('count') === '1' && !looksLikeBot(request);
-    let counted = false;
-
-    if (shouldCount) {
-      const result = await env.VIEWS_DB.prepare(
-        'UPDATE site_counters SET value = value + 1 WHERE key = ?'
-      ).bind(COUNTER_KEY).run();
-      counted = result.success === true;
-    }
-
-    const total = await readTotal(env.VIEWS_DB);
-    return json({ total, dynamic: true, counted });
+    return json({
+      total: Number(row?.value ?? BASE_TOTAL),
+      dynamic: true
+    });
   } catch (_) {
-    return json({ total: BASE_TOTAL, dynamic: false, counted: false }, 200);
+    return json({ total: BASE_TOTAL, dynamic: false }, 200);
   }
 }

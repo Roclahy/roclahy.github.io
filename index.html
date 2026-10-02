@@ -830,29 +830,6 @@ details{
 
 <script>
 (() => {
-  const target=document.getElementById('siteViewsTotal');
-  if(!target) return;
-  fetch('/api/views?count=1&v='+Date.now(),{
-    method:'GET',
-    headers:{'Accept':'application/json'},
-    cache:'no-store',
-    credentials:'same-origin'
-  })
-    .then(r=>r.ok?r.json():Promise.reject())
-    .then(data=>{
-      const total=Number(data.total);
-      if(Number.isFinite(total)){
-        const lang=(document.documentElement.lang||'es').startsWith('en')?'en-US':'es-ES';
-        target.textContent=new Intl.NumberFormat(lang).format(total);
-      }
-    })
-    .catch(()=>{});
-})();
-</script>
-<noscript><img src="/api/views?count=1&noscript=1" alt="" width="1" height="1" style="position:absolute;opacity:0;pointer-events:none"></noscript>
-
-<script>
-(() => {
   const root=document.documentElement;
   const panels=[...document.querySelectorAll('[data-panel]')];
   const nav=[...document.querySelectorAll('[data-nav]')];
