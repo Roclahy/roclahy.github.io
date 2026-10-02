@@ -810,7 +810,10 @@ html[data-theme="sakura"] body{
     var(--bg);
 }
 html[data-theme="sakura"] .topbar{
-  background:color-mix(in srgb,#fff8fb 84%,transparent);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  box-shadow:none;
 }
 html[data-theme="sakura"] .theme-btn,
 html[data-theme="sakura"] .profile-contact-links a,
@@ -839,16 +842,7 @@ html[data-theme="sakura"] .hicon{
   opacity:.76;
 }
 .theme-sakura-glyph{
-  display:none;
-  font-size:19px;
-  line-height:1;
-  transform:translateY(-.5px);
-}
-.theme-btn[data-next-theme="sakura"] .hicon{
   display:none!important;
-}
-.theme-btn[data-next-theme="sakura"] .theme-sakura-glyph{
-  display:block;
 }
 html[data-theme="sakura"] .verified-icon{
   color:#d84f88;
@@ -1228,7 +1222,9 @@ html[data-theme="sakura"] .book-copy .book-cta{
 
     const next=value==='dark'?'sakura':'dark';
     if(themeIcon){
-      themeIcon.src='https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp';
+      themeIcon.src=value==='sakura'
+        ? 'https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp'
+        : 'https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp';
     }
     if(trigger){
       const labelKey=next==='dark'?'theme_dark':'theme_sakura';
