@@ -1,254 +1,446 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Rosanna / Roclahy — tecnología, producto, QA, contenido y proyectos digitales.">
-  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-  <meta property="og:title" content="Rosanna — Roclahy">
-  <meta property="og:description" content="Tecnología, producto, QA y contenido.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://roclahy.me/">
-  <meta property="og:image" content="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg">
-  <title>Rosanna — Roclahy</title>
-  <link rel="stylesheet" href="./portfolio.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Portfolio personal de Rosanna, conocida como Roclahy: tecnología, QA, contenido, escritura y proyectos digitales.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Rosanna — Roclahy">
+<meta property="og:description" content="Tecnología, QA, contenido, escritura y proyectos digitales.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://roclahy.me/">
+<meta property="og:image" content="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg">
+<link rel="icon" href="data:image/png;base64,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">
+<title>Rosanna — Roclahy</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f5f5f7;--surface:#fff;--surface2:rgba(255,255,255,.86);
+  --text:#1d1d1f;--muted:#6e6e73;--faint:#86868b;
+  --line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.13);
+  --accent:#0071e3;--accentSoft:rgba(0,113,227,.08);
+  --shadow:0 18px 50px rgba(0,0,0,.07);--icon:none;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#000;--surface:#161617;--surface2:rgba(28,28,30,.88);
+  --text:#f5f5f7;--muted:#a1a1a6;--faint:#8e8e93;
+  --line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.16);
+  --accent:#2997ff;--accentSoft:rgba(41,151,255,.12);
+  --shadow:0 18px 50px rgba(0,0,0,.32);--icon:invert(1);
+}
+@media(prefers-color-scheme:dark){
+  html:not([data-theme]){
+    color-scheme:dark;
+    --bg:#000;--surface:#161617;--surface2:rgba(28,28,30,.88);
+    --text:#f5f5f7;--muted:#a1a1a6;--faint:#8e8e93;
+    --line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.16);
+    --accent:#2997ff;--accentSoft:rgba(41,151,255,.12);
+    --shadow:0 18px 50px rgba(0,0,0,.32);--icon:invert(1);
+  }
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+  margin:0;min-width:320px;min-height:100vh;
+  padding:0 14px calc(108px + env(safe-area-inset-bottom));
+  background:radial-gradient(circle at 8% 0,rgba(0,113,227,.06),transparent 26rem),var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.topbar{
+  position:sticky;top:0;z-index:40;width:min(100%,900px);height:64px;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:color-mix(in srgb,var(--bg) 80%,transparent);
+  backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+}
+.brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;letter-spacing:-.025em}
+.brand-logo{width:32px;height:32px;border-radius:10px;object-fit:cover}
+.theme-btn{
+  width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);
+  border-radius:50%;background:var(--surface2);cursor:pointer
+}
+.hicon{width:19px;height:19px;object-fit:contain;filter:var(--icon);opacity:.82}
+.theme-menu{
+  position:fixed;top:56px;right:max(14px,calc((100vw - 900px)/2));z-index:70;width:168px;
+  padding:6px;border:1px solid var(--line);border-radius:18px;background:var(--surface2);
+  box-shadow:var(--shadow);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)
+}
+.theme-menu[hidden]{display:none}
+.theme-menu button{
+  width:100%;min-height:42px;display:flex;align-items:center;gap:10px;padding:0 11px;
+  border:0;border-radius:12px;background:transparent;cursor:pointer
+}
+.theme-menu button.is-selected{background:var(--accentSoft);color:var(--accent)}
+.theme-menu .hicon{width:17px;height:17px}
+.theme-menu span{font-size:13px;font-weight:600}
+.shell{width:min(100%,900px);margin:auto}
+.panel{animation:in .2s ease}
+.panel[hidden]{display:none!important}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hero{
+  display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;
+  padding:28px 0 24px;border-bottom:1px solid var(--line)
+}
+.avatar{
+  width:82px;height:82px;border-radius:50%;object-fit:cover;object-position:center 34%;
+  box-shadow:0 0 0 1px var(--line),0 10px 26px rgba(0,0,0,.09)
+}
+.kicker{margin:0 0 8px;color:var(--accent);font-size:13px;font-weight:700}
+h1,h2,h3{margin:0;letter-spacing:-.045em}
+h1{font-size:clamp(36px,7vw,60px);line-height:1}
+h2{font-size:clamp(34px,6vw,52px);line-height:1.02}
+h3{font-size:20px}
+.lead{
+  max-width:690px;margin:14px 0 0;color:var(--muted);font-size:17px;line-height:1.5;letter-spacing:-.018em
+}
+.identity{
+  margin:12px 0 0;color:var(--faint);font-size:13px;line-height:1.55
+}
+.quick{
+  display:flex;flex-wrap:wrap;gap:8px;padding:18px 0 0
+}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 13px;
+  border:1px solid var(--line);border-radius:999px;background:var(--surface2);
+  color:var(--muted);font-size:13px;font-weight:600
+}
+.pill:hover{border-color:var(--line2);color:var(--text)}
+.pill .hicon{width:16px;height:16px}
+.section{padding:26px 0 0}
+.section-title{
+  display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:12px
+}
+.section-title p{margin:0;color:var(--muted);font-size:13px}
+.section-title a{color:var(--accent);font-size:13px;font-weight:650}
+.rows{display:grid;gap:9px}
+.row{
+  min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:13px;
+  padding:13px 15px;border:1px solid var(--line);border-radius:20px;background:var(--surface)
+}
+.row:hover{border-color:var(--line2)}
+.row-icon{
+  width:44px;height:44px;border-radius:13px;display:grid;place-items:center;overflow:hidden;
+  background:#0b0b0c;border:1px solid var(--line)
+}
+.row-icon img{width:100%;height:100%;object-fit:cover}
+.row-icon.soft{background:var(--accentSoft)}
+.row-icon.soft img{width:22px;height:22px;filter:var(--icon)}
+.row-copy strong{display:block;font-size:15px;letter-spacing:-.02em}
+.row-copy small{display:block;margin-top:4px;color:var(--muted);font-size:12px;line-height:1.35}
+.arrow{color:var(--faint);font-size:18px}
+.article-row{
+  min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:13px 2px;border-bottom:1px solid var(--line)
+}
+.article-row:first-child{border-top:1px solid var(--line)}
+.article-row span:first-child{font-size:14px;font-weight:600;line-height:1.35}
+.article-row small{display:block;margin-top:3px;color:var(--faint);font-size:11px}
+.subhead{padding:28px 0 18px}
+.subhead p{max-width:650px;margin:12px 0 0;color:var(--muted);font-size:15px;line-height:1.5}
+.project-list{display:grid;gap:10px}
+.project{
+  min-height:88px;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:14px;
+  padding:15px 16px;border:1px solid var(--line);border-radius:22px;background:var(--surface)
+}
+.project:hover{border-color:var(--line2)}
+.project-logo{
+  width:50px;height:50px;border-radius:14px;overflow:hidden;display:grid;place-items:center;
+  background:#050505;border:1px solid var(--line)
+}
+.project-logo img{width:100%;height:100%;object-fit:cover}
+.project-logo.rocla img{width:42px;height:42px;object-fit:contain}
+.project-logo.generic{background:var(--accentSoft)}
+.project-logo.generic .hicon{width:23px;height:23px}
+.project strong{display:block;font-size:16px;letter-spacing:-.025em}
+.project small{display:block;margin-top:5px;color:var(--muted);font-size:12px;line-height:1.38}
+.writing-card{
+  overflow:hidden;border:1px solid var(--line);border-radius:28px;background:var(--surface);box-shadow:var(--shadow)
+}
+.writing-hero{
+  padding:28px;background:linear-gradient(145deg,rgba(0,0,0,.05),transparent),var(--surface)
+}
+.writing-mark{
+  width:52px;height:52px;margin-bottom:18px;border-radius:16px;display:grid;place-items:center;
+  background:#0b0b0c
+}
+.writing-mark .hicon{filter:invert(1);width:25px;height:25px}
+.writing-card h2{font-size:clamp(36px,7vw,56px)}
+.writing-card p{max-width:640px;margin:14px 0 0;color:var(--muted);font-size:15px;line-height:1.55}
+.writing-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.cta{
+  min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:0 15px;
+  border:0;border-radius:999px;background:var(--accent);color:#fff;font-size:13px;font-weight:700
+}
+.cta.secondary{background:var(--accentSoft);color:var(--accent)}
+.writing-note{
+  padding:18px 28px 24px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;line-height:1.5
+}
+.links-card{
+  padding:18px;border:1px solid var(--line);border-radius:26px;background:var(--surface)
+}
+.link-row{
+  min-height:66px;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px;
+  padding:10px 8px;border-bottom:1px solid var(--line)
+}
+.link-row:last-child{border-bottom:0}
+.link-row .hicon{width:20px;height:20px;justify-self:center}
+.link-row strong{display:block;font-size:15px}
+.link-row small{display:block;margin-top:3px;color:var(--muted);font-size:12px}
+details{
+  margin-top:12px;border:1px solid var(--line);border-radius:22px;background:var(--surface);overflow:hidden
+}
+summary{
+  min-height:62px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:0 16px;cursor:pointer;list-style:none;font-size:14px;font-weight:650
+}
+summary::-webkit-details-marker{display:none}
+details[open] summary{border-bottom:1px solid var(--line)}
+.collabs{
+  display:flex;flex-wrap:wrap;gap:8px;padding:16px
+}
+.collabs span{
+  padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px
+}
+.dock{
+  position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));z-index:60;transform:translateX(-50%);
+  width:min(calc(100% - 20px),560px);display:flex;gap:4px;padding:5px;border:1px solid var(--line);
+  border-radius:22px;background:color-mix(in srgb,var(--surface) 90%,transparent);
+  box-shadow:0 14px 42px rgba(0,0,0,.16);backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%)
+}
+.dock button{
+  flex:1;min-width:0;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border:0;border-radius:16px;background:transparent;color:var(--muted);cursor:pointer
+}
+.dock button.is-active{background:var(--accentSoft);color:var(--accent)}
+.dock .hicon{width:18px;height:18px}
+.dock span{font-size:10px;font-weight:650}
+@media(max-width:620px){
+  body{padding-inline:12px}
+  .topbar{height:60px}
+  .hero{grid-template-columns:1fr;gap:16px;padding-top:22px}
+  .avatar{width:72px;height:72px}
+  h1{font-size:42px}
+  .lead{font-size:16px}
+  .quick{padding-top:16px}
+  .row{min-height:72px;border-radius:18px}
+  .project{min-height:82px;border-radius:19px;padding:13px 14px}
+  .project-logo{width:46px;height:46px}
+  .writing-card{border-radius:24px}
+  .writing-hero{padding:24px}
+  .writing-note{padding:16px 24px 22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="brand-dot" aria-hidden="true"></span>
-      <span>Roclahy</span>
-    </div>
+<header class="topbar">
+  <a class="brand" href="#inicio" data-go="inicio" aria-label="Roclahy, inicio">
+    <img class="brand-logo" src="data:image/webp;base64,UklGRhYIAABXRUJQVlA4IAoIAACwNACdASoAAQABPmEwl0ekIyKhJNXoqIAMCWlu4XPxG+wR/unZz/XeVDUJviP2S/MeLfezwAvxz+Y/cjwPAAPrR/r/Ar/sPQD69/533AP1W/2nlIeB9QA/kv90/6npifUHnu/Pv79/6v8P8DP64elV5uXsujBUQfBtl0ELcNz6gfBtl0ELcNz6gfBtl0zuToIjFXDFFZlvWog+DatHPqFe9utGgzMx3X7zp4h4CKhcD6NCLrAvLLoIWy5pxUphuYvqcRAF/7gYW8dd9TBhXfUQfBqTrA2JiLK58JD4lFCSfc/08xkveIqV942RVDfHSdDLoIGAQcbNgMOGM24b2L0PZBQfyeo4mYlbCMMPj5W5MxwY0Jbq8NELcA5OVQyMWQxcbi5kqty431ngLqjQLeh50QtwD6asKlzLql2mt35vmufspmKqq/EU+OEC7sByUOqXNv1wol3wo1rni2vPzhza3EK3asrtjMHgJXX2vrd03gqyCqNdZyCMkogHzUrvvRZOLsKp0+9v/HTOu+8+Wpw0Qtw3PqB8G2XQQtw3PqB8G2XQQtw3PqB8G2XQQtwzAAP7/oQ4AEfRVuf1eHd/xZL2eUbZyCeGDXG+38b9tG9KPLszBGBT7v75V5fFxvK5Jbmh9p5IPdeNQQnTVL+WD0aPDFlwVh6F7XnF2FtVzcDxcwT5bcN6oXDeLiVSsPxc+WaincGJmd26J4XXzIhBHWliL1+krLPv5ca1VwOdLuC+4zQZeNM/r9AGhWzaUrWOCRaSN/C5crEslnQvPleR9qNmIREyplWu4tgR7m/vfitApDWW+Ng1Ugb+ZC20oPcCj9MucSACi7V+ommrJKKHwUl5c2S/dzUWwCAeIU6cEyVJPJ32eFQbT2x/VvsNG3xTqNqlzHSrNcuj3Kho5MMAFuCJEbr1CB4g+xipw/NXUR9QaZdUozEspLps5OIVSnvxfc2HTt89u+Ip+jCUwj9R56vZoi+7BwmFQTXyJwb9PFJ4ifeYLTLRuau152Zy1BkmB1iXNcVVmPloFXjL81WKo3geS4JwnhNC9qceccMXj+0ClbJM0qR4bx/1RoAKWim5hwaITzSPPKblrHUjNhZYcNCp5aBnQOvLMkuIIGut7JAXw7e/seJtf0qSxPUDvI50GgHOUQyCtgIFd+it55ro3mAxjA1ekk8KsxWCkm2LAm0CL29L5Gs0gyfB3vgz2mdm9nQlmaZm30b99Bp6O7QDLOx8PfHAlj9B2QDAV9CK6bw1Y8d7BUCTCSeGdAbuqAkCThyEIQPe16uXxyIJG5xg3CvYuoI9RHrVh8vCYsrfTp40qsUrx6vnm0bhEGSsUAelm/NmPwjqlZ+jCeq7YYYX+5Gn3Pk8ysxd9MTzGJNa6obksvHK1nHxDF+klAWVZpdVSzdDYwNtZkxgutge3vSlwobi6/6pXi3bL0Pg6i79n4eDbG56xT4aGFT5OzAE4jXM+DqZFWwRWjs/UR5iosBkCNTBvz3BwjDTJgN+Ny0PiPDN/mZ+rG5xdkJVrgSIymJsSC49U0TKXZCxoRBjkq/91wFSinN56ecYEpx3PWzgsD37WPowsUA/4T/9Jsy7Dj8MM9XlGrQk5DDlcHsuqvVJ1TfdfpEwdneZ1IL7wELzACIeYyspT0Ngiar1CafafcN23A5EyjlUm+91aY+Qs2KrhfJhGOIVNNSwEzvgZQ5r8e/WeB/oddj0c4dAAN/2OKl/2dDlBjBBHkdmkvNDEHUD9RLUkxdJ7XOIildkryiM4ExGYafM28Wfd2BdgQx4VQ5V8G2QyHsZXyrGlpkWjk705Xog9Gk/B4IwyXB+41PFZIruU7hF2sWvx6mAmXrVaAlakh/6TUkbR0NSFEsvSTUqE+PlBKllF+bLVgg8og18xRTJa5yZMnSkKT6zE5G4/lSVnJrP6bOQECx5HY/KhZ/j0Lscjl6YtMqmWVoC2m3DtVjX9EeXUSUU+JgPbguwdTnHpWD5kvwwLiJ6f3RHL9lwdGXlDWP8KpqPnSGYb8UTLzukbjSpaC3DhzcHt67NfGCyVcYefn/p2mlcMvHOeVfDQUQR/Won6HYcK3oyQoPEKVOzJVqioYWEEWvq0ntg4JkqNmUN4ObIMB2SvM2+GZ5b64xD6pglOJYq9J0rSIJ6dfL+hWDcjBwPEmjU36dc7IA/ckjcRD78sEwbxeMy+ZSMmWpQ6H4Cub6sYDw7G96bdFdwAfxx5QMgVcufcGwPQ+OfJXkxHqr9tzt/GdPcpul+jcPz7nr2v2uTpenm49LtHpItuu5XI+NY+6Uu96+WYewNGzRKaaR7jPPseKau022+Mcorozum/BPBIvSWSGlzuA+YBKg+m0BQZVheqKayhYe9R89d5C8qYhSnhJwq4zhqRhRTfcDox+Pln69A/Ge8CzzpcQjKi69AsQyL49t4D3QPtqYQvwTLbLpTQuhVaNXYcffM1vmQ5VpGltUG7bM5AKzadNhkq9AMEcfHF8LQHlJymAlv9LMIc78Sl0wTU/6CU69GAmjVDTcJVGqawWgzcfCPPmVWy/i5sp/l3Wty/N2iB6mDfWw05RpgX0mkRZyRb7PzmDxqXOj62tH/SfnVXqv1H5fZcZuGkrxt9+ae8ooqcyv+N1Hd1pZ9HAIw6jIbVJsx6/MC8nyvD4KrzV3V2m25VXkcvwtjVSKSkRBi54t5PdWA17bQE2Bk9xVy593zChuh28F5Ki/PNIFBnmgZ6JYyzUHDIaIBs3QAAAAA==" alt="" aria-hidden="true">
+    <span>Roclahy</span>
+  </a>
+  <button class="theme-btn" id="themeButton" type="button" aria-label="Cambiar apariencia" aria-expanded="false">
+    <img class="hicon" src="https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+  </button>
+  <div class="theme-menu" id="themeMenu" hidden>
+    <button type="button" data-theme-choice="light"><img class="hicon" src="https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp" alt=""><span>Claro</span></button>
+    <button type="button" data-theme-choice="auto"><img class="hicon" src="https://ico.hugeicons.com/computer-stroke-rounded%402x.webp" alt=""><span>Automático</span></button>
+    <button type="button" data-theme-choice="dark"><img class="hicon" src="https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp" alt=""><span>Oscuro</span></button>
+  </div>
+</header>
 
-    <button class="appearance-button" id="appearanceButton" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="appearanceMenu">
-      <img src="https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-      <span>Apariencia</span>
-    </button>
-
-    <div class="appearance-menu" id="appearanceMenu" hidden>
-      <button type="button" data-theme-choice="light">
-        <img src="https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-        <span>Claro</span>
-      </button>
-      <button type="button" data-theme-choice="auto">
-        <img src="https://ico.hugeicons.com/computer-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-        <span>Automático</span>
-      </button>
-      <button type="button" data-theme-choice="dark">
-        <img src="https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-        <span>Oscuro</span>
-      </button>
-    </div>
-  </header>
-
-  <main class="app-shell">
-    <section class="panel is-active" data-panel="inicio" aria-labelledby="inicio-title">
-      <div class="intro-card">
-        <img
-          class="avatar"
-          src="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg"
-          alt="Rosanna"
-          width="96"
-          height="96"
-          decoding="async"
-          fetchpriority="high"
-        >
-        <div class="intro-copy">
-          <p class="eyebrow">Rosanna · @roclahy</p>
-          <h1 id="inicio-title">Tecnología, producto y contenido.</h1>
-          <p class="lead">Creo, pruebo y explico productos digitales. Roclahy reúne mis proyectos, publicaciones y trabajo.</p>
-
-          <div class="quick-actions">
-            <button class="button primary" type="button" data-go="proyectos">Ver proyectos</button>
-            <a class="button secondary" href="mailto:hola@roclahy.com">Escribirme</a>
-          </div>
+<main class="shell">
+  <section class="panel" data-panel="inicio">
+    <div class="hero">
+      <img class="avatar" src="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg" alt="Rosanna" width="82" height="82" fetchpriority="high" decoding="async">
+      <div>
+        <p class="kicker">Rosanna · Roclahy</p>
+        <h1>Tecnología, escritura y creación.</h1>
+        <p class="lead">Soy Rosanna, conocida como Roclahy. Aquí reúno mi trabajo, mis proyectos, mis publicaciones y mi faceta como escritora.</p>
+        <p class="identity">Tecnología · QA · Creadora de contenido · Escritora · Analista · Comentarista</p>
+        <div class="quick">
+          <a class="pill" href="https://roclahy.com/" target="_blank" rel="noopener"><img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt="">roclahy.com</a>
+          <a class="pill" href="https://t.me/fundadora" target="_blank" rel="noopener"><img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="">Telegram</a>
+          <a class="pill" href="mailto:ros@pm.me"><img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="">ros@pm.me</a>
         </div>
       </div>
+    </div>
 
-      <div class="compact-grid">
-        <button class="mini-card" type="button" data-go="proyectos">
-          <span>
-            <strong>Proyectos</strong>
-            <small>RoCla USSD, ASTRA y más</small>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
+    <div class="section">
+      <div class="section-title">
+        <div><h3>Ahora</h3><p>Lo más visible de mi trabajo.</p></div>
+      </div>
+      <div class="rows">
+        <button class="row" type="button" data-go="proyectos">
+          <span class="row-icon"><img src="data:image/webp;base64,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" alt=""></span>
+          <span class="row-copy"><strong>Proyectos</strong><small>RoCla USSD, ASTRA, Roclahy.com y Rocli.com</small></span>
+          <span class="arrow">↗</span>
         </button>
-
-        <a class="mini-card" href="https://roclahy.com/" target="_blank" rel="noopener">
-          <span>
-            <strong>Roclahy.com</strong>
-            <small>Tecnología, análisis y guías</small>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <a class="mini-card" href="https://t.me/roclahy" target="_blank" rel="noopener">
-          <span>
-            <strong>Telegram</strong>
-            <small>Canal oficial</small>
-          </span>
-          <img class="tiny-icon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-        </a>
-
-        <a class="mini-card" href="mailto:hola@roclahy.com">
-          <span>
-            <strong>hola@roclahy.com</strong>
-            <small>Contacto profesional</small>
-          </span>
-          <img class="tiny-icon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-        </a>
+        <button class="row" type="button" data-go="escritura">
+          <span class="row-icon soft"><img src="https://ico.hugeicons.com/pencil-edit-01-stroke-rounded%402x.webp" alt=""></span>
+          <span class="row-copy"><strong>Bebé Addams</strong><small>Mi faceta de escritora</small></span>
+          <span class="arrow">↗</span>
+        </button>
       </div>
-    </section>
+    </div>
 
-    <section class="panel" data-panel="proyectos" aria-labelledby="proyectos-title" hidden>
-      <div class="section-heading">
-        <p class="eyebrow">Ecosistema</p>
-        <h2 id="proyectos-title">Proyectos</h2>
-        <p>Una vista compacta de los productos y sitios que forman parte de Roclahy.</p>
+    <div class="section">
+      <div class="section-title">
+        <div><h3>Último en Roclahy</h3><p>Publicaciones recientes.</p></div>
+        <a href="https://roclahy.com/" target="_blank" rel="noopener">Ver todo ↗</a>
       </div>
+      <a class="article-row" href="https://roclahy.com/2026/08/como-hacer-que-android-te-avise-cuando" target="_blank" rel="noopener">
+        <span>Cómo hacer que Android te avise cuando regrese la cobertura LTE<small>Android · Tutorial</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="article-row" href="https://roclahy.com/2026/04/como-conseguir-una-experiencia-similar" target="_blank" rel="noopener">
+        <span>Cómo conseguir una experiencia similar a Brave Origin sin pagar 60 USD<small>Android · Tutorial</small></span><span class="arrow">↗</span>
+      </a>
+    </div>
+  </section>
 
-      <div class="project-list">
-        <a class="project-row" href="https://roclaussd.roclahy.com/" target="_blank" rel="noopener">
-          <span class="project-icon rocla" aria-hidden="true">R</span>
-          <span class="project-copy">
-            <strong>RoCla USSD</strong>
-            <small>Aplicación Android para servicios Cubacel, llamadas, mensajes y herramientas de red.</small>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
+  <section class="panel" data-panel="proyectos" hidden>
+    <div class="subhead">
+      <p class="kicker">Selección</p>
+      <h2>Proyectos</h2>
+      <p>Una parte de lo que creo y mantengo, presentada sin convertir el portfolio entero en una página de producto.</p>
+    </div>
+    <div class="project-list">
+      <a class="project" href="https://roclaussd.roclahy.com/" target="_blank" rel="noopener">
+        <span class="project-logo rocla"><img src="https://roclaussd.roclahy.com/assets/logo.svg?v=20260904-43" alt="Logo de RoCla USSD"></span>
+        <span><strong>RoCla USSD</strong><small>Mi aplicación Android para gestionar servicios Cubacel de forma ligera y clara.</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="project" href="https://astra.roclahy.com/" target="_blank" rel="noopener">
+        <span class="project-logo"><img src="data:image/webp;base64,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" alt="Logo de ASTRA"></span>
+        <span><strong>ASTRA</strong><small>Asistentes de Telegram entrenados con conocimiento propio mediante inteligencia artificial.</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="project" href="https://roclahy.com/" target="_blank" rel="noopener">
+        <span class="project-logo"><img src="data:image/webp;base64,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" alt="Logo de Roclahy"></span>
+        <span><strong>Roclahy.com</strong><small>Mi publicación de tecnología: análisis, guías, pruebas y opinión.</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="project" href="https://rocli.com/" target="_blank" rel="noopener">
+        <span class="project-logo generic"><img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt=""></span>
+        <span><strong>Rocli.com</strong><small>Proyecto web dentro de mi ecosistema creativo y tecnológico.</small></span><span class="arrow">↗</span>
+      </a>
+    </div>
+  </section>
 
-        <a class="project-row" href="https://astra.roclahy.com/" target="_blank" rel="noopener">
-          <span class="project-icon astra" aria-hidden="true">A</span>
-          <span class="project-copy">
-            <strong>ASTRA</strong>
-            <small>Asistentes de Telegram entrenados con conocimiento propio e inteligencia artificial.</small>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <a class="project-row" href="https://roclahy.com/" target="_blank" rel="noopener">
-          <img class="project-image-icon" src="https://ico.hugeicons.com/news-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-          <span class="project-copy">
-            <strong>Roclahy.com</strong>
-            <small>Publicación de tecnología, análisis, pruebas y guías.</small>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <a class="project-row" href="https://rocli.com/" target="_blank" rel="noopener">
-          <img class="project-image-icon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-          <span class="project-copy">
-            <strong>Rocli.com</strong>
-            <small>Página web dentro del ecosistema Roclahy.</small>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <div class="project-row static">
-          <span class="project-icon brand-icon" aria-hidden="true">R</span>
-          <span class="project-copy">
-            <strong>Roclahy</strong>
-            <small>Marca principal que conecta productos, contenido, investigación y proyectos futuros.</small>
-          </span>
+  <section class="panel" data-panel="escritura" hidden>
+    <div class="subhead">
+      <p class="kicker">Escritura</p>
+      <h2>También escribo ficción.</h2>
+      <p>La tecnología es una parte de lo que hago. La escritura es otra.</p>
+    </div>
+    <article class="writing-card">
+      <div class="writing-hero">
+        <div class="writing-mark"><img class="hicon" src="https://ico.hugeicons.com/pencil-edit-01-stroke-rounded%402x.webp" alt=""></div>
+        <p class="kicker">Una historia Wenclair</p>
+        <h2>Bebé Addams</h2>
+        <p>Una historia ambientada en el universo de los Addams, escrita por Roclahy. Es mi espacio más narrativo: humor oscuro, drama, referencias y una mirada muy ligada al universo de Wednesday.</p>
+        <div class="writing-actions">
+          <a class="cta" href="https://www.wattpad.com/story/404172546" target="_blank" rel="noopener">Leer · Popular</a>
+          <a class="cta secondary" href="https://www.wattpad.com/story/406864800" target="_blank" rel="noopener">Leer · Nuevo</a>
         </div>
       </div>
-    </section>
+      <div class="writing-note">Bebé Addams llegó al #1 de la categoría Wenclair en Wattpad en español. También mantiene una banda sonora asociada a la lectura.</div>
+    </article>
 
-    <section class="panel" data-panel="perfil" aria-labelledby="perfil-title" hidden>
-      <div class="profile-layout">
-        <div class="profile-head">
-          <img
-            class="avatar avatar-small"
-            src="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg"
-            alt="Rosanna"
-            width="72"
-            height="72"
-            loading="lazy"
-            decoding="async"
-          >
-          <div>
-            <p class="eyebrow">Sobre mí</p>
-            <h2 id="perfil-title">Rosanna</h2>
-          </div>
-        </div>
+    <div class="section">
+      <div class="section-title"><div><h3>Escritura tecnológica</h3><p>Mi otra vertiente editorial.</p></div></div>
+      <a class="row" href="https://roclahy.com/" target="_blank" rel="noopener">
+        <span class="row-icon soft"><img src="https://ico.hugeicons.com/news-01-stroke-rounded%402x.webp" alt=""></span>
+        <span class="row-copy"><strong>Roclahy.com</strong><small>Artículos, análisis, tutoriales, revisiones y opinión tecnológica.</small></span>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+  </section>
 
-        <p class="profile-text">Trabajo entre tecnología, QA, producto y comunicación. Me interesa detectar fricción, simplificar experiencias y explicar herramientas técnicas de forma clara.</p>
+  <section class="panel" data-panel="enlaces" hidden>
+    <div class="subhead">
+      <p class="kicker">Enlaces oficiales</p>
+      <h2>Encuéntrame.</h2>
+      <p>Los accesos principales de Roclahy reunidos en un solo lugar.</p>
+    </div>
+    <div class="links-card">
+      <a class="link-row" href="https://roclahy.com/" target="_blank" rel="noopener">
+        <img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt=""><span><strong>Roclahy.com</strong><small>Sitio oficial</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="link-row" href="https://t.me/fundadora" target="_blank" rel="noopener">
+        <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt=""><span><strong>Telegram</strong><small>t.me/fundadora</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="link-row" href="mailto:ros@pm.me">
+        <img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt=""><span><strong>Correo</strong><small>ros@pm.me</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="link-row" href="https://github.com/Roclahy" target="_blank" rel="noopener">
+        <img class="hicon" src="https://ico.hugeicons.com/github-stroke-rounded%402x.webp" alt=""><span><strong>GitHub</strong><small>Roclahy</small></span><span class="arrow">↗</span>
+      </a>
+      <a class="link-row" href="https://www.youtube.com/watch?v=pCRCeoh_3IM" target="_blank" rel="noopener">
+        <img class="hicon" src="https://ico.hugeicons.com/youtube-stroke-rounded%402x.webp" alt=""><span><strong>Video reciente</strong><small>YouTube</small></span><span class="arrow">↗</span>
+      </a>
+    </div>
 
-        <div class="skills">
-          <span>Producto</span>
-          <span>QA</span>
-          <span>Tecnología</span>
-          <span>Contenido</span>
-          <span>Análisis</span>
-          <span>Redacción</span>
-        </div>
-
-        <div class="profile-links">
-          <a href="https://roclahy.com/" target="_blank" rel="noopener">Roclahy.com <span>↗</span></a>
-          <a href="https://t.me/roclahy" target="_blank" rel="noopener">Telegram <span>↗</span></a>
-          <a href="mailto:hola@roclahy.com">Correo <span>↗</span></a>
-        </div>
+    <details>
+      <summary><span>Colaboraciones y trayectoria</span><span class="arrow">＋</span></summary>
+      <div class="collabs">
+        <span>Lnk.Bio</span><span>Solid Explorer</span><span>Telegraph X</span><span>2FAS Auth</span><span>Proton</span>
+        <span>Combot</span><span>NotifyMe.Music</span><span>ReactBot</span><span>EmailGate</span><span>Spotify Release</span>
+        <span>Livegram</span><span>Keep Bot</span><span>Sats.mobi</span>
       </div>
-    </section>
+    </details>
+  </section>
+</main>
 
-    <section class="panel" data-panel="contacto" aria-labelledby="contacto-title" hidden>
-      <div class="contact-card">
-        <p class="eyebrow">Contacto</p>
-        <h2 id="contacto-title">Hablemos.</h2>
-        <p>Para colaboraciones, productos, pruebas, tecnología o contacto profesional.</p>
+<nav class="dock" aria-label="Navegación del portfolio">
+  <button type="button" class="is-active" data-nav="inicio"><img class="hicon" src="https://ico.hugeicons.com/home-01-stroke-rounded%402x.webp" alt=""><span>Inicio</span></button>
+  <button type="button" data-nav="proyectos"><img class="hicon" src="https://ico.hugeicons.com/briefcase-02-stroke-rounded%402x.webp" alt=""><span>Proyectos</span></button>
+  <button type="button" data-nav="escritura"><img class="hicon" src="https://ico.hugeicons.com/pencil-edit-01-stroke-rounded%402x.webp" alt=""><span>Escritura</span></button>
+  <button type="button" data-nav="enlaces"><img class="hicon" src="https://ico.hugeicons.com/link-01-stroke-rounded%402x.webp" alt=""><span>Enlaces</span></button>
+</nav>
 
-        <div class="contact-stack">
-          <a href="mailto:hola@roclahy.com">
-            <img src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-            <span>
-              <strong>Correo</strong>
-              <small>hola@roclahy.com</small>
-            </span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
+<script>
+(() => {
+  const root=document.documentElement;
+  const panels=[...document.querySelectorAll('[data-panel]')];
+  const nav=[...document.querySelectorAll('[data-nav]')];
+  const go=[...document.querySelectorAll('[data-go]')];
+  const menu=document.getElementById('themeMenu');
+  const trigger=document.getElementById('themeButton');
+  const themeButtons=[...document.querySelectorAll('[data-theme-choice]')];
 
-          <a href="https://t.me/roclahy" target="_blank" rel="noopener">
-            <img src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-            <span>
-              <strong>Telegram</strong>
-              <small>@roclahy</small>
-            </span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
+  function show(name){
+    panels.forEach(p=>p.hidden=p.dataset.panel!==name);
+    nav.forEach(b=>b.classList.toggle('is-active',b.dataset.nav===name));
+    history.replaceState(null,'','#'+name);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  nav.forEach(b=>b.addEventListener('click',()=>show(b.dataset.nav)));
+  go.forEach(b=>b.addEventListener('click',(e)=>{if(b.dataset.go){e.preventDefault();show(b.dataset.go)}}));
+  const start=location.hash.slice(1);
+  if(panels.some(p=>p.dataset.panel===start))show(start);
 
-          <a href="https://github.com/Roclahy" target="_blank" rel="noopener">
-            <img src="https://ico.hugeicons.com/github-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-            <span>
-              <strong>GitHub</strong>
-              <small>Roclahy</small>
-            </span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <nav class="dock" aria-label="Secciones del portfolio">
-    <button class="dock-item is-active" type="button" data-nav="inicio" aria-label="Inicio">
-      <img src="https://ico.hugeicons.com/home-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-      <span>Inicio</span>
-    </button>
-    <button class="dock-item" type="button" data-nav="proyectos" aria-label="Proyectos">
-      <img src="https://ico.hugeicons.com/briefcase-02-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-      <span>Proyectos</span>
-    </button>
-    <button class="dock-item" type="button" data-nav="perfil" aria-label="Perfil">
-      <img src="https://ico.hugeicons.com/user-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-      <span>Perfil</span>
-    </button>
-    <button class="dock-item" type="button" data-nav="contacto" aria-label="Contacto">
-      <img src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-      <span>Contacto</span>
-    </button>
-  </nav>
-
-  <script src="./portfolio.js" defer></script>
+  function theme(mode){
+    if(mode==='auto')root.removeAttribute('data-theme');else root.setAttribute('data-theme',mode);
+    localStorage.setItem('roclahy-theme',mode);
+    themeButtons.forEach(b=>b.classList.toggle('is-selected',b.dataset.themeChoice===mode));
+    menu.hidden=true;trigger.setAttribute('aria-expanded','false');
+  }
+  theme(localStorage.getItem('roclahy-theme')||'auto');
+  trigger.addEventListener('click',(e)=>{
+    e.stopPropagation();menu.hidden=!menu.hidden;trigger.setAttribute('aria-expanded',String(!menu.hidden));
+  });
+  themeButtons.forEach(b=>b.addEventListener('click',()=>theme(b.dataset.themeChoice)));
+  document.addEventListener('click',(e)=>{
+    if(!menu.hidden&&!menu.contains(e.target)&&!trigger.contains(e.target)){menu.hidden=true;trigger.setAttribute('aria-expanded','false')}
+  });
+})();
+</script>
 </body>
 </html>
