@@ -675,6 +675,99 @@ details{
   font-size:14px;
   font-weight:650;
 }
+
+/* Compact Material You navigation + neutral dark-mode icon treatment */
+html[data-theme="dark"] .hicon{
+  filter:brightness(0) invert(1);
+  opacity:.78;
+}
+
+.dock{
+  bottom:max(12px,env(safe-area-inset-bottom));
+  width:min(calc(100% - 44px),390px);
+  gap:0;
+  padding:4px 6px;
+  border-radius:30px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);
+  border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(0,0,0,.18);
+  backdrop-filter:blur(24px) saturate(150%);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+}
+.dock button{
+  min-height:50px;
+  padding:3px 4px 4px;
+  gap:2px;
+  border-radius:24px;
+  background:transparent;
+  color:var(--muted);
+}
+.dock button.is-active{
+  background:transparent;
+  color:var(--accent);
+}
+.dock-icon{
+  width:46px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:18px;
+  transition:background .18s ease,color .18s ease;
+}
+.dock-icon .hicon{display:none}
+.dock-icon::before{
+  content:"";
+  width:20px;
+  height:20px;
+  background:currentColor;
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  -webkit-mask-size:contain;
+  mask-repeat:no-repeat;
+  mask-position:center;
+  mask-size:contain;
+}
+.dock [data-nav="inicio"] .dock-icon::before{
+  -webkit-mask-image:url("https://ico.hugeicons.com/home-01-stroke-rounded%402x.webp");
+  mask-image:url("https://ico.hugeicons.com/home-01-stroke-rounded%402x.webp");
+}
+.dock [data-nav="proyectos"] .dock-icon::before{
+  -webkit-mask-image:url("https://ico.hugeicons.com/briefcase-02-stroke-rounded%402x.webp");
+  mask-image:url("https://ico.hugeicons.com/briefcase-02-stroke-rounded%402x.webp");
+}
+.dock [data-nav="escritura"] .dock-icon::before{
+  -webkit-mask-image:url("https://ico.hugeicons.com/pencil-edit-01-stroke-rounded%402x.webp");
+  mask-image:url("https://ico.hugeicons.com/pencil-edit-01-stroke-rounded%402x.webp");
+}
+.dock [data-nav="enlaces"] .dock-icon::before{
+  -webkit-mask-image:url("https://ico.hugeicons.com/link-01-stroke-rounded%402x.webp");
+  mask-image:url("https://ico.hugeicons.com/link-01-stroke-rounded%402x.webp");
+}
+.dock button.is-active .dock-icon{
+  background:color-mix(in srgb,var(--accent) 18%,transparent);
+}
+.dock .dock-label{
+  font-size:9.5px;
+  line-height:1.1;
+  font-weight:650;
+}
+html[data-theme="dark"] .dock button{
+  color:#c7c7cc;
+}
+html[data-theme="dark"] .dock button.is-active{
+  color:#64b5ff;
+}
+html[data-theme="dark"] .dock button.is-active .dock-icon{
+  background:rgba(41,151,255,.18);
+}
+body{
+  padding-bottom:calc(92px + env(safe-area-inset-bottom));
+}
+@media(max-width:620px){
+  .dock{width:min(calc(100% - 44px),390px)}
+  .site-footer{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+}
+
 </style>
 </head>
 <body>
@@ -703,13 +796,13 @@ details{
         <p class="profile-description" data-i18n="profile_description">Escribo contenido desde 2019 y soy la principal QA de los proyectos de Roclahy™. Escribir me ha permitido llegar a millones de lectores, y analizo casi cualquier tema que despierte mi curiosidad. La tecnología me apasiona y ocupa una parte central de mi vida. Leo de agosto.</p>
       </div>
       <div class="profile-contact-links" aria-label="Contacto rápido">
-        <a href="https://t.me/fundadora" target="_blank" rel="noopener">
-          <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
-          <span data-i18n="telegram">Telegram</span>
-        </a>
         <a href="mailto:ros@pm.me">
           <img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
           <span data-i18n="email">Correo</span>
+        </a>
+        <a href="https://t.me/fundadora" target="_blank" rel="noopener">
+          <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+          <span data-i18n="telegram">Telegram</span>
         </a>
       </div>
     </div>
