@@ -953,6 +953,33 @@ details{
   const projectTechLogo=document.querySelector('a.project[href="https://roclahy.com/"] .project-logo img');
   if(techLogo && projectTechLogo) techLogo.src=projectTechLogo.src;
 
+  async function loadViewCount(){
+    const target=document.getElementById('siteViewsTotal');
+    if(!target) return;
+
+    const sessionKey='roclahy-view-counted-v1';
+    let alreadyCounted=false;
+    try{ alreadyCounted=sessionStorage.getItem(sessionKey)==='1'; }catch(_){}
+
+    try{
+      const res=await fetch('/api/views',{
+        method:alreadyCounted?'GET':'POST',
+        headers:{'Accept':'application/json'},
+        cache:'no-store'
+      });
+      if(!res.ok) throw new Error('views');
+      const data=await res.json();
+      const total=Number(data.total);
+      if(Number.isFinite(total)){
+        target.textContent=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(total);
+      }
+      if(!alreadyCounted && data.dynamic!==false){
+        try{ sessionStorage.setItem(sessionKey,'1'); }catch(_){}
+      }
+    }catch(_){}
+  }
+  loadViewCount();
+
   async function loadPortfolioFeed(){
     try{
       const res=await fetch('https://roclahy.com/api/portfolio-feed',{cache:'no-store'});
