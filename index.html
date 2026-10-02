@@ -768,6 +768,31 @@ body{
   .site-footer{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 }
 
+
+/* Fix: use the actual Hugeicons images in the bottom pill.
+   External WEBP files are not reliable as CSS masks on every browser. */
+.dock-icon::before{
+  content:none!important;
+  display:none!important;
+}
+.dock-icon .hicon{
+  display:block!important;
+  width:20px!important;
+  height:20px!important;
+  object-fit:contain;
+  opacity:.82;
+}
+html[data-theme="light"] .dock-icon .hicon{
+  filter:none!important;
+}
+html[data-theme="dark"] .dock-icon .hicon{
+  filter:brightness(0) invert(1)!important;
+  opacity:.78;
+}
+.dock button.is-active .dock-icon .hicon{
+  opacity:1;
+}
+
 </style>
 </head>
 <body>
