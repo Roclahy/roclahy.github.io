@@ -33,6 +33,14 @@ html[data-theme="dark"]{
   --accent:#2997ff;--accentSoft:rgba(41,151,255,.12);
   --shadow:0 18px 50px rgba(0,0,0,.32);--icon:invert(1);
 }
+html[data-theme="sakura"]{
+  color-scheme:light;
+  --bg:#fff7fa;--surface:#fffdfd;--surface2:rgba(255,244,248,.92);
+  --text:#34272e;--muted:#765f69;--faint:#9b7f8b;
+  --line:rgba(137,72,98,.12);--line2:rgba(137,72,98,.20);
+  --accent:#d84f88;--accentSoft:rgba(216,79,136,.11);
+  --shadow:0 18px 50px rgba(126,57,86,.09);--icon:none;
+}
 @media(prefers-color-scheme:dark){
   html:not([data-theme]){
     color-scheme:dark;
@@ -793,6 +801,64 @@ html[data-theme="dark"] .dock-icon .hicon{
   opacity:1;
 }
 
+
+/* Sakura theme */
+html[data-theme="sakura"] body{
+  background:
+    radial-gradient(circle at 12% 4%,rgba(255,190,214,.24),transparent 22rem),
+    radial-gradient(circle at 92% 22%,rgba(244,169,199,.16),transparent 24rem),
+    var(--bg);
+}
+html[data-theme="sakura"] .topbar{
+  background:color-mix(in srgb,#fff8fb 84%,transparent);
+}
+html[data-theme="sakura"] .theme-btn,
+html[data-theme="sakura"] .profile-contact-links a,
+html[data-theme="sakura"] .book-card,
+html[data-theme="sakura"] .trajectory-card,
+html[data-theme="sakura"] .project,
+html[data-theme="sakura"] .links-card{
+  border-color:rgba(178,93,128,.14);
+}
+html[data-theme="sakura"] .dock{
+  background:rgba(255,247,250,.90);
+  border-color:rgba(178,93,128,.14);
+  box-shadow:0 10px 30px rgba(126,57,86,.10);
+}
+html[data-theme="sakura"] .dock button{
+  color:#8b6c79;
+}
+html[data-theme="sakura"] .dock button.is-active{
+  color:#c43f79;
+}
+html[data-theme="sakura"] .dock button.is-active .dock-icon{
+  background:rgba(216,79,136,.13);
+}
+html[data-theme="sakura"] .hicon{
+  filter:none!important;
+  opacity:.76;
+}
+html[data-theme="sakura"] .theme-btn .hicon{
+  display:none;
+}
+.theme-sakura-glyph{
+  display:none;
+  font-size:19px;
+  line-height:1;
+  transform:translateY(-.5px);
+}
+html[data-theme="sakura"] .theme-sakura-glyph{
+  display:block;
+}
+html[data-theme="sakura"] .verified-icon{
+  color:#d84f88;
+}
+html[data-theme="sakura"] .kicker,
+html[data-theme="sakura"] .section-title a,
+html[data-theme="sakura"] .book-copy .book-cta{
+  color:#c43f79;
+}
+
 </style>
 </head>
 <body>
@@ -803,6 +869,7 @@ html[data-theme="dark"] .dock-icon .hicon{
   </a>
   <button class="theme-btn" id="themeButton" type="button" aria-label="Cambiar a tema claro" title="Cambiar tema">
     <img class="hicon" id="themeIcon" src="https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+    <span class="theme-sakura-glyph" aria-hidden="true">🌸</span>
   </button>
 </header>
 
@@ -1038,6 +1105,7 @@ html[data-theme="dark"] .dock-icon .hicon{
       views:'vistas totales',
       theme_light:'Cambiar a tema claro',
       theme_dark:'Cambiar a tema oscuro',
+      theme_sakura:'Cambiar a tema Sakura',
       verified:'Cuenta oficial verificada'
     },
     en:{
@@ -1083,6 +1151,7 @@ html[data-theme="dark"] .dock-icon .hicon{
       views:'total views',
       theme_light:'Switch to light mode',
       theme_dark:'Switch to dark mode',
+      theme_sakura:'Switch to Sakura theme',
       verified:'Official verified account'
     }
   };
@@ -1151,25 +1220,31 @@ html[data-theme="dark"] .dock-icon .hicon{
   if(panels.some(p=>p.dataset.panel===start))show(start);
 
   function applyTheme(mode){
-    const value=mode==='light'?'light':'dark';
+    const themes=['dark','light','sakura'];
+    const value=themes.includes(mode)?mode:'dark';
     root.setAttribute('data-theme',value);
     localStorage.setItem('roclahy-theme',value);
 
-    const next=value==='dark'?'light':'dark';
+    const next=themes[(themes.indexOf(value)+1)%themes.length];
     if(themeIcon){
       themeIcon.src=next==='light'
         ? 'https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp'
-        : 'https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp';
+        : next==='dark'
+          ? 'https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp'
+          : 'https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp';
     }
     if(trigger){
-      trigger.setAttribute('aria-label',next==='light'?t('theme_light'):t('theme_dark'));
+      const labelKey=next==='light'?'theme_light':next==='dark'?'theme_dark':'theme_sakura';
+      trigger.setAttribute('aria-label',t(labelKey));
+      trigger.setAttribute('title',t(labelKey));
     }
   }
 
-  applyTheme(localStorage.getItem('roclahy-theme')==='light'?'light':'dark');
+  applyTheme(localStorage.getItem('roclahy-theme')||'dark');
   trigger.addEventListener('click',()=>{
-    const current=root.getAttribute('data-theme')==='light'?'light':'dark';
-    applyTheme(current==='dark'?'light':'dark');
+    const themes=['dark','light','sakura'];
+    const current=root.getAttribute('data-theme')||'dark';
+    applyTheme(themes[(themes.indexOf(current)+1)%themes.length]);
   });
 })();
 </script>
