@@ -1,3 +1,4 @@
+// Deployment refresh after Pages build configuration update
 const BASE_TOTAL = 118131;
 const COUNTER_KEY = 'total_views';
 
