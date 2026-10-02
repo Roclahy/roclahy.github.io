@@ -57,18 +57,31 @@ export async function onRequestGet(context) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-html,body{margin:0;padding:0;background:transparent}
+html,body{
+  margin:0;
+  padding:0;
+  background:transparent!important;
+  color-scheme:light dark;
+}
 body{
   min-height:28px;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:transparent!important;
   color:#86868b;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   font-size:11px;
   line-height:1;
 }
-.wrap{display:flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  white-space:nowrap;
+  background:transparent!important;
+}
 svg{width:14px;height:14px;opacity:.78;flex:none}
 strong{font-size:11.5px;font-weight:650;color:#86868b}
 span{font-size:11px;font-weight:500}
