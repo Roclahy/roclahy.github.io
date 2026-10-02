@@ -70,19 +70,6 @@ img{display:block}
   border-radius:50%;background:var(--surface2);cursor:pointer
 }
 .hicon{width:19px;height:19px;object-fit:contain;filter:var(--icon);opacity:.82}
-.theme-menu{
-  position:fixed;top:56px;right:max(14px,calc((100vw - 900px)/2));z-index:70;width:168px;
-  padding:6px;border:1px solid var(--line);border-radius:18px;background:var(--surface2);
-  box-shadow:var(--shadow);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)
-}
-.theme-menu[hidden]{display:none}
-.theme-menu button{
-  width:100%;min-height:42px;display:flex;align-items:center;gap:10px;padding:0 11px;
-  border:0;border-radius:12px;background:transparent;cursor:pointer
-}
-.theme-menu button.is-selected{background:var(--accentSoft);color:var(--accent)}
-.theme-menu .hicon{width:17px;height:17px}
-.theme-menu span{font-size:13px;font-weight:600}
 .shell{width:min(100%,900px);margin:auto}
 .panel{animation:in .2s ease}
 .panel[hidden]{display:none!important}
@@ -94,6 +81,19 @@ img{display:block}
 .profile-block{display:flex;flex-direction:column;align-items:center}
 .profile-name{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin-top:12px;font-size:18px;font-weight:750;letter-spacing:-.03em}
 .profile-handle{margin-top:4px;color:var(--muted);font-size:14px;font-weight:600}
+.profile-description{
+  max-width:620px;margin:12px auto 0;color:var(--faint);
+  font-size:13px;line-height:1.55;letter-spacing:.01em
+}
+.site-metric{
+  width:min(100%,420px);margin:18px auto 0;padding:15px 18px;
+  border:1px solid var(--line);border-radius:20px;background:var(--surface2);
+  text-align:left
+}
+.site-metric-main{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.site-metric strong{font-size:26px;line-height:1;letter-spacing:-.04em}
+.site-metric span{color:var(--muted);font-size:13px;font-weight:650}
+.site-metric small{display:block;margin-top:6px;color:var(--faint);font-size:10.5px;line-height:1.35}
 .verified-icon{width:19px;height:19px;color:#1d9bf0;flex:0 0 auto}
 .hero h1{margin-top:24px}
 .avatar{
@@ -268,6 +268,9 @@ details[open] summary{border-bottom:1px solid var(--line)}
   .topbar{height:60px}
   .hero{padding-top:22px}
   .avatar{width:78px;height:78px}
+  .profile-description{max-width:330px;font-size:12.5px}
+  .site-metric{width:min(100%,340px);padding:14px 16px;border-radius:18px}
+  .site-metric strong{font-size:24px}
   h1{font-size:42px}
   .lead{font-size:16px}
   .row{min-height:72px;border-radius:18px}
@@ -288,13 +291,9 @@ details[open] summary{border-bottom:1px solid var(--line)}
     <img class="brand-logo" src="data:image/webp;base64,UklGRoIEAABXRUJQVlA4IHYEAABQGwCdASqAAIAAPlUqkUajoqGhJJVZcHAKiWkKFqPoa/nPZ1/Vei/7hJF/rX+G8j/7l4S7wz+Wf5X8quC6AB9Tv9R4AOoF3d/w3oj/57jp6AH8z/pH/L/uvrcfQXn6/K/8J/5P8N8Bf8r/rv/G/ufCufuAO74ORx6p0y1yrUxaqsoje4duNrBK+28rXVZ/jgcWeQnRni8t3lsBG8irm9Jh76U0JZlO6pd8iNLi/BD7oIVS3dr43ulU7rpy6iqmFAnzmyErqSXV35/xE35E4o1nwq9CCs5JBz3voGRWb3tsElhgAAD+/7ZLAcjWh4dJgEyoWs062+oR3ZZcXYozaZ9ongjdIlTPyVUu1fnOokfCKDt7bHDdsUuAjbiQ68qP9kaIstg0ainT2H4Z7wxcIPG9pYM8dvUAQsgDoZNq+JRHczBVktPhvwwLEd/5kxmn/I2e8HWY8B7SVJYu65jxWE3HWGq6uWvtuGbNWV6LPMJtwoNcRr2tXYbCi1q3zUILx33efzXzPuO41PvGHUsY45Kf5/J9zf6K3/R7Rmggx5M6PjFK46JDoYiK41uEuL25KssITz9sb/Oc46kYRmm1eUCC4SLRS28X78Ha+nN3TmXmBhBRCIgkt9qkgVUmGfjlqN4DpZKrxLxHq6MyCOfqG+xAysYMjBos+GOeZoFxMitDT4Ou5Grrec6Di8Ne2LxBjKbqOSfXK4hak4ehsWEjMr7OUFfeMav31w8NH+64HSgJTlZirpX5fgPAryoDZk952rmOv6JWG0wgSRjE+Z3A/xeSQpRiVtadYOrkvvdE+KmtGXpwS+a7wO6O0pSpJjhHpfq5iyr/w3JpFOKCOgYrrpxrV1n93zShysdZZOXJFkKcaAGlrlWj5S3lfS9tG/L8OsV8KzUOkPlHLpJfFPt0rQe1RRMA1+kavf9BI37ifseLvHuoCw3PdLM+1pjodnyCTXUnXySR6Poi+F83D7qLnJUeR69wDE7+guEkU2HJZgWtSHsqdn70vQ6WGFibcGKJ5uI+7pDHbVOHODaeTpy1B54XiUD5mU3l6zz24bM8od7Av6VxIjN5+/SLNdriU4nzTYGYkde/a1PW1c1QTP5eDbFNA1IdO0icyohqXYSZLiSFRIgTjBfh/2MJhVh5sYLPaxQE/vx3cHtxaEpdI6W7r8ahS+Gi3TrshGrkQFREuaCnRCdyRWiP80xD2hmzvlOp79K///Tisbvv/pz+nohIbP0NmYbmGey9+fjzPDbj/XuetUS4834ac0nU4eyvMFVskGFMSgXSZMsyPMMcXB+LPIVigdpy6K5hZxugjztkPu2HsxuJRH9ROXeE+Ob433k4fIuAFcY3hOwLKVV7x6h9KY2H0kCgqv3syQPjMsjvA9E+o4+Lz7jznlahPtf6XITJh5X7JW6syL0Aw6WxQhLENDWocNHOzJRdagQEiRs7iVRr3fz6XC96Qj9tP027/0AKNCEIXskBd3rXfeIrjP8tNLT9neTl7ZgYGXD+eAAB5Rw9M5/vAAAAAA==" alt="" aria-hidden="true">
     <span>Roclahy</span>
   </a>
-  <button class="theme-btn" id="themeButton" type="button" aria-label="Cambiar apariencia" aria-expanded="false">
-    <img class="hicon" src="https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+  <button class="theme-btn" id="themeButton" type="button" aria-label="Cambiar a tema claro" title="Cambiar tema">
+    <img class="hicon" id="themeIcon" src="https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp" alt="" aria-hidden="true">
   </button>
-  <div class="theme-menu" id="themeMenu" hidden>
-    <button type="button" data-theme-choice="light"><img class="hicon" src="https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp" alt=""><span>Claro</span></button>
-    <button type="button" data-theme-choice="dark"><img class="hicon" src="https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp" alt=""><span>Oscuro</span></button>
-  </div>
 </header>
 
 <main class="shell">
@@ -309,6 +308,14 @@ details[open] summary{border-bottom:1px solid var(--line)}
           </svg>
         </div>
         <div class="profile-handle">@roclahy</div>
+        <p class="profile-description">Tecnología. QA. Creadora de contenido. Escritora. Analista. Comentarista.</p>
+      </div>
+      <div class="site-metric" aria-label="Vistas totales históricas del sitio">
+        <div class="site-metric-main">
+          <strong>118,131</strong>
+          <span>vistas totales</span>
+        </div>
+        <small>Histórico migrado de Lnk.Bio · 2 oct 2024–2 oct 2026</small>
       </div>
       <div class="profile-contact-links" aria-label="Contacto rápido">
         <a href="https://t.me/fundadora" target="_blank" rel="noopener">Telegram ↗</a>
@@ -462,9 +469,8 @@ details[open] summary{border-bottom:1px solid var(--line)}
   const panels=[...document.querySelectorAll('[data-panel]')];
   const nav=[...document.querySelectorAll('[data-nav]')];
   const go=[...document.querySelectorAll('[data-go]')];
-  const menu=document.getElementById('themeMenu');
   const trigger=document.getElementById('themeButton');
-  const themeButtons=[...document.querySelectorAll('[data-theme-choice]')];
+  const themeIcon=document.getElementById('themeIcon');
 
   async function loadPortfolioFeed(){
     try{
@@ -507,20 +513,26 @@ details[open] summary{border-bottom:1px solid var(--line)}
   const start=location.hash.slice(1);
   if(panels.some(p=>p.dataset.panel===start))show(start);
 
-  function theme(mode){
+  function applyTheme(mode){
     const value=mode==='light'?'light':'dark';
     root.setAttribute('data-theme',value);
     localStorage.setItem('roclahy-theme',value);
-    themeButtons.forEach(b=>b.classList.toggle('is-selected',b.dataset.themeChoice===value));
-    menu.hidden=true;trigger.setAttribute('aria-expanded','false');
+
+    const next=value==='dark'?'light':'dark';
+    if(themeIcon){
+      themeIcon.src=next==='light'
+        ? 'https://ico.hugeicons.com/sun-03-stroke-rounded%402x.webp'
+        : 'https://ico.hugeicons.com/moon-02-stroke-rounded%402x.webp';
+    }
+    if(trigger){
+      trigger.setAttribute('aria-label',next==='light'?'Cambiar a tema claro':'Cambiar a tema oscuro');
+    }
   }
-  theme(localStorage.getItem('roclahy-theme')==='light'?'light':'dark');
-  trigger.addEventListener('click',(e)=>{
-    e.stopPropagation();menu.hidden=!menu.hidden;trigger.setAttribute('aria-expanded',String(!menu.hidden));
-  });
-  themeButtons.forEach(b=>b.addEventListener('click',()=>theme(b.dataset.themeChoice)));
-  document.addEventListener('click',(e)=>{
-    if(!menu.hidden&&!menu.contains(e.target)&&!trigger.contains(e.target)){menu.hidden=true;trigger.setAttribute('aria-expanded','false')}
+
+  applyTheme(localStorage.getItem('roclahy-theme')==='light'?'light':'dark');
+  trigger.addEventListener('click',()=>{
+    const current=root.getAttribute('data-theme')==='light'?'light':'dark';
+    applyTheme(current==='dark'?'light':'dark');
   });
 })();
 </script>
