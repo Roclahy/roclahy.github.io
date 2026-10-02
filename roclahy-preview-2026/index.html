@@ -112,12 +112,15 @@ h3{font-size:20px}
   margin:12px auto 0;color:var(--faint);font-size:13px;line-height:1.55
 }
 .profile-contact-links{
-  display:flex;align-items:center;justify-content:center;gap:9px;margin-top:13px;
-  color:var(--muted);font-size:12px;font-weight:600
+  display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap
 }
-.profile-contact-links a{color:var(--muted);padding:3px 0}
-.profile-contact-links a:hover{color:var(--accent)}
-.profile-contact-links span{color:var(--line2)}
+.profile-contact-links a{
+  display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 11px;
+  border:1px solid var(--line);border-radius:999px;background:transparent;
+  color:var(--muted);font-size:11.5px;font-weight:650
+}
+.profile-contact-links a:hover{border-color:var(--line2);color:var(--text)}
+.profile-contact-links .hicon{width:15px;height:15px}
 .latest-section{padding-top:34px}
 .latest-title{margin-bottom:10px}
 .latest-feed{display:grid}
@@ -315,12 +318,16 @@ details[open] summary{border-bottom:1px solid var(--line)}
           <strong>118,131</strong>
           <span>vistas totales</span>
         </div>
-        <small>Histórico migrado de Lnk.Bio · 2 oct 2024–2 oct 2026</small>
       </div>
       <div class="profile-contact-links" aria-label="Contacto rápido">
-        <a href="https://t.me/fundadora" target="_blank" rel="noopener">Telegram ↗</a>
-        <span aria-hidden="true">·</span>
-        <a href="mailto:ros@pm.me">Correo ↗</a>
+        <a href="https://t.me/fundadora" target="_blank" rel="noopener">
+          <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+          <span>Telegram</span>
+        </a>
+        <a href="mailto:ros@pm.me">
+          <img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+          <span>Correo</span>
+        </a>
       </div>
     </div>
     <div class="section latest-section">
@@ -474,7 +481,7 @@ details[open] summary{border-bottom:1px solid var(--line)}
 
   async function loadPortfolioFeed(){
     try{
-      const res=await fetch('/portfolio-feed.json?v=' + Date.now(),{cache:'no-store'});
+      const res=await fetch('https://roclahy.com/api/portfolio-feed',{cache:'no-store'});
       if(!res.ok) throw new Error('feed');
       const data=await res.json();
 
