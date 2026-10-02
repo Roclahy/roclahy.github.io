@@ -10,9 +10,14 @@
 <meta property="og:description" content="Tecnología, QA, contenido, escritura y proyectos digitales.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://roclahy.me/">
+<link rel="canonical" href="https://roclahy.me/">
+<link rel="me" href="https://t.me/fundadora">
 <meta property="og:image" content="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg">
 <link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRoIEAABXRUJQVlA4IHYEAABQGwCdASqAAIAAPlUqkUajoqGhJJVZcHAKiWkKFqPoa/nPZ1/Vei/7hJF/rX+G8j/7l4S7wz+Wf5X8quC6AB9Tv9R4AOoF3d/w3oj/57jp6AH8z/pH/L/uvrcfQXn6/K/8J/5P8N8Bf8r/rv/G/ufCufuAO74ORx6p0y1yrUxaqsoje4duNrBK+28rXVZ/jgcWeQnRni8t3lsBG8irm9Jh76U0JZlO6pd8iNLi/BD7oIVS3dr43ulU7rpy6iqmFAnzmyErqSXV35/xE35E4o1nwq9CCs5JBz3voGRWb3tsElhgAAD+/7ZLAcjWh4dJgEyoWs062+oR3ZZcXYozaZ9ongjdIlTPyVUu1fnOokfCKDt7bHDdsUuAjbiQ68qP9kaIstg0ainT2H4Z7wxcIPG9pYM8dvUAQsgDoZNq+JRHczBVktPhvwwLEd/5kxmn/I2e8HWY8B7SVJYu65jxWE3HWGq6uWvtuGbNWV6LPMJtwoNcRr2tXYbCi1q3zUILx33efzXzPuO41PvGHUsY45Kf5/J9zf6K3/R7Rmggx5M6PjFK46JDoYiK41uEuL25KssITz9sb/Oc46kYRmm1eUCC4SLRS28X78Ha+nN3TmXmBhBRCIgkt9qkgVUmGfjlqN4DpZKrxLxHq6MyCOfqG+xAysYMjBos+GOeZoFxMitDT4Ou5Grrec6Di8Ne2LxBjKbqOSfXK4hak4ehsWEjMr7OUFfeMav31w8NH+64HSgJTlZirpX5fgPAryoDZk952rmOv6JWG0wgSRjE+Z3A/xeSQpRiVtadYOrkvvdE+KmtGXpwS+a7wO6O0pSpJjhHpfq5iyr/w3JpFOKCOgYrrpxrV1n93zShysdZZOXJFkKcaAGlrlWj5S3lfS9tG/L8OsV8KzUOkPlHLpJfFPt0rQe1RRMA1+kavf9BI37ifseLvHuoCw3PdLM+1pjodnyCTXUnXySR6Poi+F83D7qLnJUeR69wDE7+guEkU2HJZgWtSHsqdn70vQ6WGFibcGKJ5uI+7pDHbVOHODaeTpy1B54XiUD5mU3l6zz24bM8od7Av6VxIjN5+/SLNdriU4nzTYGYkde/a1PW1c1QTP5eDbFNA1IdO0icyohqXYSZLiSFRIgTjBfh/2MJhVh5sYLPaxQE/vx3cHtxaEpdI6W7r8ahS+Gi3TrshGrkQFREuaCnRCdyRWiP80xD2hmzvlOp79K///Tisbvv/pz+nohIbP0NmYbmGey9+fjzPDbj/XuetUS4834ac0nU4eyvMFVskGFMSgXSZMsyPMMcXB+LPIVigdpy6K5hZxugjztkPu2HsxuJRH9ROXeE+Ob433k4fIuAFcY3hOwLKVV7x6h9KY2H0kCgqv3syQPjMsjvA9E+o4+Lz7jznlahPtf6XITJh5X7JW6syL0Aw6WxQhLENDWocNHOzJRdagQEiRs7iVRr3fz6XC96Qj9tP027/0AKNCEIXskBd3rXfeIrjP8tNLT9neTl7ZgYGXD+eAAB5Rw9M5/vAAAAAA==">
 <title>Rosanna — Roclahy</title>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","@id":"https://roclahy.me/#person","name":"Rosanna","alternateName":"Roclahy","url":"https://roclahy.me/","sameAs":["https://t.me/fundadora","https://roclahy.com/"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -103,6 +108,30 @@ img{display:block}
 .site-metric strong{font-size:11.5px;line-height:1;font-weight:700;letter-spacing:-.01em;color:var(--muted)}
 .site-metric span{color:var(--faint);font-size:11px;font-weight:550}
 .verified-icon{width:19px;height:19px;color:#1d9bf0;flex:0 0 auto}
+.verified-badge{display:inline-grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;border-radius:50%}
+.verified-badge:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.verification-dialog{
+  width:min(calc(100% - 28px),460px);max-height:min(78vh,620px);padding:0;
+  border:1px solid var(--line);border-radius:28px;background:var(--surface);color:var(--text);
+  box-shadow:0 24px 80px rgba(0,0,0,.28);overflow:hidden
+}
+.verification-dialog::backdrop{background:rgba(0,0,0,.48);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.verification-card{padding:24px}
+.verification-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.verification-title{display:flex;align-items:center;gap:9px}
+.verification-title .verified-icon{width:24px;height:24px}
+.verification-title h3{font-size:20px;letter-spacing:-.03em}
+.verification-close{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface2);cursor:pointer;color:var(--muted);font-size:18px}
+.verification-copy{margin:16px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+.verification-list{display:grid;gap:9px;margin:18px 0 0;padding:0;list-style:none}
+.verification-list li{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border:1px solid var(--line);border-radius:16px;background:var(--surface2);font-size:12.5px;line-height:1.4}
+.verification-list b{font-weight:700}
+.verification-check{color:#22a06b;font-weight:800}
+.verification-actions{display:grid;gap:8px;margin-top:18px}
+.verification-actions a{min-height:42px;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:12.5px;font-weight:700}
+.verification-actions .primary{background:var(--accent);color:#fff}
+.verification-actions .secondary{border:1px solid var(--line);background:var(--surface2);color:var(--text)}
+.verification-note{margin:14px 0 0;color:var(--faint);font-size:10.5px;line-height:1.45}
 .hero h1{margin-top:24px}
 .avatar{
   width:82px;height:82px;border-radius:50%;object-fit:cover;object-position:center 34%;
@@ -884,9 +913,11 @@ html[data-theme="sakura"] .book-copy .book-cta{
         <img class="avatar" src="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg" alt="Rosanna" width="82" height="82" fetchpriority="high" decoding="async">
         <div class="profile-name">
           <span>Rosanna</span>
-          <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Cuenta oficial verificada" role="img">
-            <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"/>
-          </svg>
+          <button class="verified-badge" id="verifiedBadge" type="button" aria-label="Ver verificación de página oficial" aria-haspopup="dialog">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"/>
+            </svg>
+          </button>
         </div>
         <div class="profile-handle">@roclahy</div>
         <p class="profile-description" data-i18n="profile_description">Escribo contenido desde 2019 y soy la principal QA de los proyectos de Roclahy™. Escribir me ha permitido llegar a millones de lectores, y analizo casi cualquier tema que despierte mi curiosidad. La tecnología me apasiona y ocupa una parte central de mi vida. Leo de agosto.</p>
@@ -896,7 +927,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
           <img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="" aria-hidden="true">
           <span data-i18n="email">Correo</span>
         </a>
-        <a href="https://t.me/fundadora" target="_blank" rel="noopener">
+        <a href="https://t.me/fundadora" target="_blank" rel="me noopener">
           <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
           <span data-i18n="telegram">Telegram</span>
         </a>
@@ -908,7 +939,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
       </div>
 
       <div class="latest-feed" id="latestFeed">
-        <a class="latest-item telegram-item" id="latestTelegram" href="https://t.me/fundadora" target="_blank" rel="noopener">
+        <a class="latest-item telegram-item" id="latestTelegram" href="https://t.me/fundadora" target="_blank" rel="me noopener">
           <span class="latest-source" aria-label="Publicación del canal de Telegram">
             <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="" aria-hidden="true">
           </span>
@@ -1011,7 +1042,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
       <a class="link-row" href="https://roclahy.com/" target="_blank" rel="noopener">
         <img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt=""><span><strong>Roclahy.com</strong><small data-i18n="official_site">Sitio oficial</small></span>
       </a>
-      <a class="link-row" href="https://t.me/fundadora" target="_blank" rel="noopener">
+      <a class="link-row" href="https://t.me/fundadora" target="_blank" rel="me noopener">
         <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt=""><span><strong>Telegram</strong><small>t.me/fundadora</small></span>
       </a>
       <a class="link-row" href="mailto:ros@pm.me">
@@ -1062,6 +1093,15 @@ html[data-theme="sakura"] .book-copy .book-cta{
   const go=[...document.querySelectorAll('[data-go]')];
   const trigger=document.getElementById('themeButton');
   const themeIcon=document.getElementById('themeIcon');
+  const verifiedBadge=document.getElementById('verifiedBadge');
+  const verificationDialog=document.getElementById('verificationDialog');
+  const verificationClose=document.getElementById('verificationClose');
+
+  verifiedBadge?.addEventListener('click',()=>verificationDialog?.showModal());
+  verificationClose?.addEventListener('click',()=>verificationDialog?.close());
+  verificationDialog?.addEventListener('click',(event)=>{
+    if(event.target===verificationDialog) verificationDialog.close();
+  });
 
   const browserLanguage=(navigator.languages?.[0]||navigator.language||'es').toLowerCase();
   const locale=browserLanguage.startsWith('en')?'en':'es';
@@ -1251,5 +1291,27 @@ html[data-theme="sakura"] .book-copy .book-cta{
   });
 })();
 </script>
+<dialog class="verification-dialog" id="verificationDialog" aria-labelledby="verificationTitle">
+  <div class="verification-card">
+    <div class="verification-head">
+      <div class="verification-title">
+        <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"/></svg>
+        <h3 id="verificationTitle">Página oficial de Roclahy</h3>
+      </div>
+      <button class="verification-close" id="verificationClose" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <p class="verification-copy">Esta insignia confirma que <strong>roclahy.me</strong> es la dirección canónica utilizada por Roclahy para identificar su presencia pública en Internet.</p>
+    <ul class="verification-list">
+      <li><span class="verification-check">✓</span><span><b>Control del dominio.</b> Esta página puede publicar una prueba técnica bajo <code>roclahy.me/.well-known/</code>.</span></li>
+      <li><span class="verification-check">✓</span><span><b>Identidad enlazada.</b> Los perfiles públicos de Roclahy utilizan <b>roclahy.me</b> como dirección de referencia.</span></li>
+      <li><span class="verification-check">✓</span><span><b>Relación oficial.</b> Esta página enlaza los servicios y perfiles oficiales mediante metadatos de identidad.</span></li>
+    </ul>
+    <div class="verification-actions">
+      <a class="primary" href="/.well-known/roclahy-verification.json" target="_blank" rel="noopener">Ver prueba técnica</a>
+      <a class="secondary" href="https://roclahy.com/" target="_blank" rel="me noopener">Abrir Roclahy.com</a>
+    </div>
+    <p class="verification-note">Esta verificación acredita control y vinculación de presencia web. No representa una verificación de identidad legal realizada por un tercero.</p>
+  </div>
+</dialog>
 </body>
 </html>
