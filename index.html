@@ -111,21 +111,34 @@ h3{font-size:20px}
 .identity{
   margin:12px auto 0;color:var(--faint);font-size:13px;line-height:1.55
 }
-.quick{
-  width:min(100%,520px);margin:18px auto 0;display:grid;grid-template-columns:repeat(3,1fr);
-  gap:0;padding:5px;border:1px solid var(--line);border-radius:22px;background:var(--surface2);
-  box-shadow:0 10px 30px rgba(0,0,0,.08)
+.profile-contact-links{
+  display:flex;align-items:center;justify-content:center;gap:9px;margin-top:13px;
+  color:var(--muted);font-size:12px;font-weight:600
 }
-.pill{
-  min-width:0;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:5px;padding:7px 8px;border:0;border-radius:17px;background:transparent;
-  color:var(--muted);font-size:11px;font-weight:600;text-align:center
+.profile-contact-links a{color:var(--muted);padding:3px 0}
+.profile-contact-links a:hover{color:var(--accent)}
+.profile-contact-links span{color:var(--line2)}
+.latest-section{padding-top:34px}
+.latest-title{margin-bottom:10px}
+.latest-feed{display:grid}
+.latest-item{
+  min-height:72px;display:grid;grid-template-columns:90px minmax(0,1fr) auto;align-items:center;gap:12px;
+  padding:13px 2px;border-bottom:1px solid var(--line)
 }
-.pill:hover{background:var(--accentSoft);color:var(--text)}
-.pill+.pill{position:relative}
-.pill+.pill::before{content:"";position:absolute;left:-3px;top:12px;bottom:12px;width:1px;background:var(--line)}
-.pill:hover::before,.pill:hover+.pill::before{opacity:0}
-.pill .hicon{width:19px;height:19px}
+.latest-item:first-child{border-top:1px solid var(--line)}
+.latest-item:hover .latest-copy strong{color:var(--accent)}
+.latest-source{
+  display:flex;align-items:center;gap:6px;color:var(--faint);font-size:11px;font-weight:700;
+  text-transform:none;white-space:nowrap
+}
+.latest-source .hicon{width:16px;height:16px}
+.latest-copy{min-width:0}
+.latest-copy strong{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+  color:var(--text);font-size:14px;line-height:1.35;letter-spacing:-.015em
+}
+.latest-copy small{display:block;margin-top:4px;color:var(--faint);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.telegram-item .latest-source{color:#2aabee}
 .section{padding:26px 0 0}
 .section-title{
   display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:12px
@@ -246,6 +259,8 @@ details[open] summary{border-bottom:1px solid var(--line)}
 .dock .hicon{width:18px;height:18px}
 .dock span{font-size:10px;font-weight:650}
 @media(max-width:620px){
+  .latest-item{grid-template-columns:76px minmax(0,1fr) auto;gap:10px;min-height:68px}
+  .latest-copy strong{font-size:13.5px}
   .books-grid{grid-template-columns:1fr}
   .book-card{grid-template-columns:86px 1fr}
   .book-cover{width:86px}
@@ -255,8 +270,6 @@ details[open] summary{border-bottom:1px solid var(--line)}
   .avatar{width:78px;height:78px}
   h1{font-size:42px}
   .lead{font-size:16px}
-  .quick{width:100%;margin-top:16px;padding:5px}
-  .pill{min-height:56px;font-size:10.5px}
   .row{min-height:72px;border-radius:18px}
   .project{min-height:82px;border-radius:19px;padding:13px 14px}
   .project-logo{width:46px;height:46px}
@@ -297,45 +310,48 @@ details[open] summary{border-bottom:1px solid var(--line)}
         </div>
         <div class="profile-handle">@roclahy</div>
       </div>
-      <h1>Tecnología, escritura y creación.</h1>
-      <p class="lead">Soy Rosanna, conocida como Roclahy. Aquí reúno mi trabajo, mis proyectos, mis publicaciones y mi faceta como escritora.</p>
-      <p class="identity">Tecnología · QA · Creadora de contenido · Escritora · Analista · Comentarista</p>
-      <div class="quick">
-        <a class="pill" href="https://roclahy.com/" target="_blank" rel="noopener" aria-label="Abrir roclahy.com"><img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt="">Roclahy</a>
-        <a class="pill" href="https://t.me/fundadora" target="_blank" rel="noopener" aria-label="Abrir Telegram"><img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="">Telegram</a>
-        <a class="pill" href="mailto:ros@pm.me" aria-label="Escribir a ros@pm.me"><img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="">Correo</a>
+      <div class="profile-contact-links" aria-label="Contacto rápido">
+        <a href="https://t.me/fundadora" target="_blank" rel="noopener">Telegram ↗</a>
+        <span aria-hidden="true">·</span>
+        <a href="mailto:ros@pm.me">Correo ↗</a>
       </div>
     </div>
+    <div class="section latest-section">
+      <div class="section-title latest-title">
+        <div><h3>Último en Roclahy</h3><p>Telegram y publicaciones recientes.</p></div>
+      </div>
 
-    <div class="section">
-      <div class="section-title">
-        <div><h3>Ahora</h3><p>Lo más visible de mi trabajo.</p></div>
-      </div>
-      <div class="rows">
-        <button class="row" type="button" data-go="proyectos">
-          <span class="row-icon"><img src="data:image/webp;base64,UklGRmYDAABXRUJQVlA4IFoDAADwGQCdASrAAMAAPnk8nkkko6MhJLho2JAPCWlu4W3BG8YBkK7+cqmGCmVeRL6KFQKh7xpU89cZpQU89bgaCFS0c9QUW7cePlJEW+cpdbgRKmHngvGejo2KRThouo5uM15HDF7H2xNMLOXHZZADgV2FRzvVFBpb+uz3H9jMzhKY0lmCYzSZdvpuE3iw/yYDGKApLux1h4pgFaKbSYuTgWt6m9WM8SgMFiv3yxqxMKQhAR/D5koeG/U02RSFS6Zx5fuxeVQ4xUPnf7eOXIUXyBwKh7xpU89cVAAA/v6HIA++NtzW8cTIuT+aZxsEQ4bHS+6e9HR+BaAoI28lB4r+zjSeajAqlNoHE5X5gyNe94xrNtqsp0oGI1OCms5UDjzZC7DGUD6/d1nwN4StgGTEN9j/mqgrPF37KM4XHP2loWRcsHz59+Wg6ZXj0mOyMBSlWUgfvKuvzZyTWcIiBx3VYD7ysAU9UDf/KwPrdDJ7f8+l87XXiSnhksMCOdfOMdTZMG15JxTtgwogZeElDwr+X2j5hxK7H3E4DJW0qHMnnbYZHVROoy8miJ513yei3aFP8v2bbKQteapNy9jfP+0KWCEemwmk1RzQZjLFR/tQJjh4M4fvwYoX/idO6ZmquTl2eS6JFS6PQLe9sfi0iCfTIVJEg0VxG2Nz0IbxUnhZnTur25qktbAXXm00PFr232pxHfAaXSIOuH2nHP+jD+9+q9OlmWic9yRs9vRXD+GGvCXoHenx0cu60wkCOI2Z7yIobeANFdBVNY94mgTdbonUmw5mkF3bMvncdP4mWfewwnRLuUfODM7waAnj2IgSGmdBD9ZguhyC4bX4KDjLw0CgSUCLY8MaQJtHmcb5f+ldQRcckTVmURy9MU9flQO+ebOt9wJfWVd/sN7t64//zCoPHVXZoWIyq6gj84Xdmk/lR2PjDy/MBi2k4h2GGyfpxuyBLyAOXWjqTRB7CXuzlhrkXUW1/tew2j4nonhRH3Wsrbsb/IE1NWW2D7Oegdin+8LE/RikNKwIzcZ/K0e7egIsMFoYakEA+EHuLMJLOIgMb/T8AryQ4rATdld6IK7OiDPo0IZYJoBey4MWW1omDoDR7B6UyBkp0Si7dWIg7krr6J4d+cil9PwRgAAAAAA=" alt="Logo de Roclahy"></span>
-          <span class="row-copy"><strong>Proyectos</strong><small>RoCla USSD, RoCla VPN, ASTRA y Roclahy.com</small></span>
-          <span class="arrow">↗</span>
-        </button>
-        <button class="row" type="button" data-go="escritura">
-          <span class="row-icon soft"><img src="https://ico.hugeicons.com/pencil-edit-01-stroke-rounded%402x.webp" alt=""></span>
-          <span class="row-copy"><strong>Bebé Addams</strong><small>Mi faceta de escritora</small></span>
-          <span class="arrow">↗</span>
-        </button>
-      </div>
-    </div>
+      <div class="latest-feed" id="latestFeed">
+        <a class="latest-item telegram-item" id="latestTelegram" href="https://t.me/fundadora" target="_blank" rel="noopener">
+          <span class="latest-source">
+            <img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="">
+            Telegram
+          </span>
+          <span class="latest-copy">
+            <strong id="latestTelegramText">Ver la publicación más reciente en Telegram</strong>
+            <small id="latestTelegramMeta">@fundadora</small>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
 
-    <div class="section">
-      <div class="section-title">
-        <div><h3>Último en Roclahy</h3><p>Publicaciones recientes.</p></div>
-        <a href="https://roclahy.com/" target="_blank" rel="noopener">Ver todo ↗</a>
+        <a class="latest-item" id="latestArticle1" href="https://roclahy.com/2026/08/como-hacer-que-android-te-avise-cuando.html" target="_blank" rel="noopener">
+          <span class="latest-source">Roclahy.com</span>
+          <span class="latest-copy">
+            <strong>Cómo hacer que Android te avise cuando regrese la cobertura LTE</strong>
+            <small>Artículo reciente</small>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="latest-item" id="latestArticle2" href="https://roclahy.com/2026/04/como-conseguir-una-experiencia-similar.html" target="_blank" rel="noopener">
+          <span class="latest-source">Roclahy.com</span>
+          <span class="latest-copy">
+            <strong>Cómo conseguir una experiencia similar a Brave Origin sin pagar 60 USD</strong>
+            <small>Artículo reciente</small>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
       </div>
-      <a class="article-row" href="https://roclahy.com/2026/08/como-hacer-que-android-te-avise-cuando" target="_blank" rel="noopener">
-        <span>Cómo hacer que Android te avise cuando regrese la cobertura LTE<small>Android · Tutorial</small></span><span class="arrow">↗</span>
-      </a>
-      <a class="article-row" href="https://roclahy.com/2026/04/como-conseguir-una-experiencia-similar" target="_blank" rel="noopener">
-        <span>Cómo conseguir una experiencia similar a Brave Origin sin pagar 60 USD<small>Android · Tutorial</small></span><span class="arrow">↗</span>
-      </a>
     </div>
   </section>
 
@@ -449,6 +465,36 @@ details[open] summary{border-bottom:1px solid var(--line)}
   const menu=document.getElementById('themeMenu');
   const trigger=document.getElementById('themeButton');
   const themeButtons=[...document.querySelectorAll('[data-theme-choice]')];
+
+  async function loadPortfolioFeed(){
+    try{
+      const res=await fetch('/portfolio-feed.json?v=' + Date.now(),{cache:'no-store'});
+      if(!res.ok) throw new Error('feed');
+      const data=await res.json();
+
+      const tg=document.getElementById('latestTelegram');
+      const tgText=document.getElementById('latestTelegramText');
+      const tgMeta=document.getElementById('latestTelegramMeta');
+      if(data.telegram && tg && tgText){
+        tg.href=data.telegram.url || 'https://t.me/fundadora';
+        tgText.textContent=data.telegram.text || 'Nueva publicación en Telegram';
+        if(tgMeta) tgMeta.textContent=data.telegram.date || '@fundadora';
+      }
+
+      const articles=[data.articles?.[0],data.articles?.[1]];
+      ['latestArticle1','latestArticle2'].forEach((id,index)=>{
+        const item=document.getElementById(id);
+        const article=articles[index];
+        if(!item || !article) return;
+        item.href=article.url;
+        const title=item.querySelector('strong');
+        const meta=item.querySelector('small');
+        if(title) title.textContent=article.title;
+        if(meta) meta.textContent=article.category || 'Artículo reciente';
+      });
+    }catch(_){}
+  }
+  loadPortfolioFeed();
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
