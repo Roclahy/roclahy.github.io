@@ -598,6 +598,33 @@ details{
   .site-footer{padding-bottom:calc(94px + env(safe-area-inset-bottom))}
 }
 
+/* Profile balance refinement */
+.profile-contact-links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  width:min(100%,344px);
+  margin:16px auto 0;
+  gap:10px;
+}
+.profile-contact-links a{
+  width:100%;
+  min-height:38px;
+  padding:0 14px;
+  justify-content:center;
+}
+.hero{
+  padding-top:28px;
+}
+.avatar{
+  width:94px;
+  height:94px;
+}
+@media(max-width:620px){
+  .hero{padding-top:18px}
+  .avatar{width:90px;height:90px}
+  .profile-contact-links{width:min(100%,340px)}
+}
+
 </style>
 </head>
 <body>
