@@ -9,7 +9,7 @@
     "https://roclahy.com/"
   ],
   "official_profiles": [
-    "https://t.me/fundadora"
+    "https://t.me/rclhy"
   ],
   "verification_methods": [
     "domain-control",
@@ -20,9 +20,9 @@
   ],
   "last_updated": "2026-10-02",
   "telegram": {
-    "username": "fundadora",
-    "profile_url": "https://t.me/fundadora",
+    "username": "rclhy",
+    "profile_url": "https://t.me/rclhy",
     "user_id": "1480932444",
-    "note": "The numeric Telegram user ID is included as a stable account identifier even if the public username changes."
+    "note": "The numeric Telegram user ID is a stable account identifier even if the public username changes."
   }
 }
