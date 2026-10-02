@@ -1094,13 +1094,15 @@ html[data-theme="sakura"] .book-copy .book-cta{
   const trigger=document.getElementById('themeButton');
   const themeIcon=document.getElementById('themeIcon');
   const verifiedBadge=document.getElementById('verifiedBadge');
-  const verificationDialog=document.getElementById('verificationDialog');
-  const verificationClose=document.getElementById('verificationClose');
 
-  verifiedBadge?.addEventListener('click',()=>verificationDialog?.showModal());
-  verificationClose?.addEventListener('click',()=>verificationDialog?.close());
-  verificationDialog?.addEventListener('click',(event)=>{
-    if(event.target===verificationDialog) verificationDialog.close();
+  verifiedBadge?.addEventListener('click',()=>{
+    document.getElementById('verificationDialog')?.showModal();
+  });
+  document.addEventListener('click',(event)=>{
+    const dialog=document.getElementById('verificationDialog');
+    if(!dialog)return;
+    if(event.target?.id==='verificationClose') dialog.close();
+    if(event.target===dialog) dialog.close();
   });
 
   const browserLanguage=(navigator.languages?.[0]||navigator.language||'es').toLowerCase();
