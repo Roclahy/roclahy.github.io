@@ -15,7 +15,14 @@
     "domain-control",
     "cross-linked-official-sites",
     "rel-me-identity-linking",
-    "public-profile-backlinks"
+    "public-profile-backlinks",
+    "stable-telegram-user-id"
   ],
-  "last_updated": "2026-10-02"
+  "last_updated": "2026-10-02",
+  "telegram": {
+    "username": "fundadora",
+    "profile_url": "https://t.me/fundadora",
+    "user_id": "1480932444",
+    "note": "The numeric Telegram user ID is included as a stable account identifier even if the public username changes."
+  }
 }
