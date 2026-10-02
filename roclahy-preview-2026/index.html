@@ -297,6 +297,185 @@ details[open] summary{border-bottom:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+/* Apple-style refinement */
+body{
+  background:var(--bg);
+}
+.topbar{
+  height:62px;
+  padding:0 2px;
+}
+.brand{
+  gap:9px;
+  font-size:15px;
+  font-weight:700;
+}
+.brand-logo{
+  width:28px;
+  height:28px;
+  border-radius:8px;
+}
+.theme-btn{
+  width:40px;
+  height:40px;
+  background:color-mix(in srgb,var(--surface2) 92%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  transition:transform .18s ease,background .18s ease,border-color .18s ease;
+}
+.theme-btn:active{transform:scale(.95)}
+.hero{
+  padding:40px 0 30px;
+  border-bottom:0;
+}
+.avatar{
+  width:84px;
+  height:84px;
+  box-shadow:0 0 0 1px var(--line),0 8px 24px rgba(0,0,0,.10);
+}
+.profile-name{
+  margin-top:14px;
+  font-size:19px;
+  font-weight:720;
+}
+.profile-handle{
+  margin-top:3px;
+  font-size:13px;
+}
+.profile-description{
+  max-width:430px;
+  margin-top:13px;
+  font-size:12.5px;
+  line-height:1.6;
+  letter-spacing:0;
+}
+.profile-contact-links{
+  margin-top:16px;
+}
+.profile-contact-links a{
+  min-height:35px;
+  padding:0 12px;
+  background:color-mix(in srgb,var(--surface2) 92%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.latest-section{
+  padding-top:38px;
+}
+.section-title{
+  margin-bottom:13px;
+}
+.section-title h3{
+  font-size:22px;
+  letter-spacing:-.035em;
+}
+.section-title p{
+  margin-top:3px;
+  font-size:12.5px;
+}
+.latest-feed,
+.project-list,
+.links-card{
+  border-radius:24px;
+  background:color-mix(in srgb,var(--surface) 96%,var(--bg));
+  box-shadow:0 1px 0 rgba(255,255,255,.025);
+}
+.latest-item{
+  min-height:72px;
+  padding:14px 16px;
+}
+.latest-source{
+  font-size:10px;
+  letter-spacing:.01em;
+}
+.latest-copy strong{
+  font-size:13.5px;
+  line-height:1.38;
+}
+.project{
+  min-height:86px;
+  padding:14px 16px;
+}
+.project-logo{
+  width:48px;
+  height:48px;
+  border-radius:13px;
+}
+.project strong{
+  font-size:15.5px;
+}
+.project small{
+  margin-top:4px;
+  line-height:1.42;
+}
+.writing-card{
+  border-radius:26px;
+  box-shadow:0 1px 0 rgba(255,255,255,.025);
+}
+.writing-hero{
+  padding:26px;
+  background:var(--surface);
+}
+.book-card{
+  border-radius:20px;
+  background:color-mix(in srgb,var(--surface2) 94%,transparent);
+}
+.links-card{
+  padding:3px 14px;
+}
+details{
+  border-radius:20px;
+  background:color-mix(in srgb,var(--surface) 96%,var(--bg));
+}
+.site-metric{
+  margin:30px auto 0;
+  padding:0;
+  border:0;
+  opacity:.72;
+  font-size:10.5px;
+}
+.site-metric .hicon{
+  width:13px;
+  height:13px;
+}
+.site-metric strong{
+  font-size:10.5px;
+  font-weight:650;
+  color:var(--faint);
+}
+.site-metric span{
+  font-size:10.5px;
+  font-weight:500;
+}
+.dock{
+  border-radius:24px;
+  background:color-mix(in srgb,var(--surface) 78%,transparent);
+  box-shadow:0 12px 38px rgba(0,0,0,.16);
+  backdrop-filter:blur(30px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+}
+.dock button{
+  border-radius:18px;
+}
+.dock button.is-active{
+  background:color-mix(in srgb,var(--accent) 14%,transparent);
+}
+.site-footer{
+  width:min(100%,760px);
+  margin:34px auto 0;
+  padding:0 0 28px;
+  color:var(--faint);
+  text-align:center;
+  font-size:10.5px;
+  line-height:1.4;
+}
+@media(max-width:620px){
+  .hero{padding-top:30px;padding-bottom:26px}
+  .avatar{width:80px;height:80px}
+  .latest-section{padding-top:34px}
+  .latest-feed,.project-list,.links-card{border-radius:22px}
+  .site-metric{margin-top:26px}
+  .site-footer{margin-top:28px;padding-bottom:24px}
+}
+
 </style>
 </head>
 <body>
@@ -470,6 +649,8 @@ details[open] summary{border-bottom:1px solid var(--line)}
     </details>
   </section>
 </main>
+
+<footer class="site-footer">© 2026 Roclahy. Derechos reservados.</footer>
 
 <nav class="dock" aria-label="Navegación del portfolio">
   <button type="button" class="is-active" data-nav="inicio"><img class="hicon" src="https://ico.hugeicons.com/home-01-stroke-rounded%402x.webp" alt=""><span>Inicio</span></button>
