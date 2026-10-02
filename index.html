@@ -838,16 +838,16 @@ html[data-theme="sakura"] .hicon{
   filter:none!important;
   opacity:.76;
 }
-html[data-theme="sakura"] .theme-btn .hicon{
-  display:none;
-}
 .theme-sakura-glyph{
   display:none;
   font-size:19px;
   line-height:1;
   transform:translateY(-.5px);
 }
-html[data-theme="sakura"] .theme-sakura-glyph{
+.theme-btn[data-next-theme="sakura"] .hicon{
+  display:none!important;
+}
+.theme-btn[data-next-theme="sakura"] .theme-sakura-glyph{
   display:block;
 }
 html[data-theme="sakura"] .verified-icon{
@@ -1235,6 +1235,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     }
     if(trigger){
       const labelKey=next==='light'?'theme_light':next==='dark'?'theme_dark':'theme_sakura';
+      trigger.dataset.nextTheme=next;
       trigger.setAttribute('aria-label',t(labelKey));
       trigger.setAttribute('title',t(labelKey));
     }
