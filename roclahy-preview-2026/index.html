@@ -13,6 +13,9 @@
 <meta property="og:image" content="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg">
 <link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRoIEAABXRUJQVlA4IHYEAABQGwCdASqAAIAAPlUqkUajoqGhJJVZcHAKiWkKFqPoa/nPZ1/Vei/7hJF/rX+G8j/7l4S7wz+Wf5X8quC6AB9Tv9R4AOoF3d/w3oj/57jp6AH8z/pH/L/uvrcfQXn6/K/8J/5P8N8Bf8r/rv/G/ufCufuAO74ORx6p0y1yrUxaqsoje4duNrBK+28rXVZ/jgcWeQnRni8t3lsBG8irm9Jh76U0JZlO6pd8iNLi/BD7oIVS3dr43ulU7rpy6iqmFAnzmyErqSXV35/xE35E4o1nwq9CCs5JBz3voGRWb3tsElhgAAD+/7ZLAcjWh4dJgEyoWs062+oR3ZZcXYozaZ9ongjdIlTPyVUu1fnOokfCKDt7bHDdsUuAjbiQ68qP9kaIstg0ainT2H4Z7wxcIPG9pYM8dvUAQsgDoZNq+JRHczBVktPhvwwLEd/5kxmn/I2e8HWY8B7SVJYu65jxWE3HWGq6uWvtuGbNWV6LPMJtwoNcRr2tXYbCi1q3zUILx33efzXzPuO41PvGHUsY45Kf5/J9zf6K3/R7Rmggx5M6PjFK46JDoYiK41uEuL25KssITz9sb/Oc46kYRmm1eUCC4SLRS28X78Ha+nN3TmXmBhBRCIgkt9qkgVUmGfjlqN4DpZKrxLxHq6MyCOfqG+xAysYMjBos+GOeZoFxMitDT4Ou5Grrec6Di8Ne2LxBjKbqOSfXK4hak4ehsWEjMr7OUFfeMav31w8NH+64HSgJTlZirpX5fgPAryoDZk952rmOv6JWG0wgSRjE+Z3A/xeSQpRiVtadYOrkvvdE+KmtGXpwS+a7wO6O0pSpJjhHpfq5iyr/w3JpFOKCOgYrrpxrV1n93zShysdZZOXJFkKcaAGlrlWj5S3lfS9tG/L8OsV8KzUOkPlHLpJfFPt0rQe1RRMA1+kavf9BI37ifseLvHuoCw3PdLM+1pjodnyCTXUnXySR6Poi+F83D7qLnJUeR69wDE7+guEkU2HJZgWtSHsqdn70vQ6WGFibcGKJ5uI+7pDHbVOHODaeTpy1B54XiUD5mU3l6zz24bM8od7Av6VxIjN5+/SLNdriU4nzTYGYkde/a1PW1c1QTP5eDbFNA1IdO0icyohqXYSZLiSFRIgTjBfh/2MJhVh5sYLPaxQE/vx3cHtxaEpdI6W7r8ahS+Gi3TrshGrkQFREuaCnRCdyRWiP80xD2hmzvlOp79K///Tisbvv/pz+nohIbP0NmYbmGey9+fjzPDbj/XuetUS4834ac0nU4eyvMFVskGFMSgXSZMsyPMMcXB+LPIVigdpy6K5hZxugjztkPu2HsxuJRH9ROXeE+Ob433k4fIuAFcY3hOwLKVV7x6h9KY2H0kCgqv3syQPjMsjvA9E+o4+Lz7jznlahPtf6XITJh5X7JW6syL0Aw6WxQhLENDWocNHOzJRdagQEiRs7iVRr3fz6XC96Qj9tP027/0AKNCEIXskBd3rXfeIrjP8tNLT9neTl7ZgYGXD+eAAB5Rw9M5/vAAAAAA==">
 <title>Rosanna — Roclahy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:light;
@@ -47,7 +50,7 @@ body{
   padding:0 14px calc(108px + env(safe-area-inset-bottom));
   background:radial-gradient(circle at 8% 0,rgba(0,113,227,.06),transparent 26rem),var(--bg);
   color:var(--text);
-  font-family:Inter,"SF Pro Display","SF Pro Text","Segoe UI Variable Display","Segoe UI Variable","Roboto Flex",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,system-ui,sans-serif;
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 button,a{font:inherit;-webkit-tap-highlight-color:transparent}
@@ -109,15 +112,20 @@ h3{font-size:20px}
   margin:12px auto 0;color:var(--faint);font-size:13px;line-height:1.55
 }
 .quick{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:18px 0 0
+  width:min(100%,520px);margin:18px auto 0;display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;padding:5px;border:1px solid var(--line);border-radius:22px;background:var(--surface2);
+  box-shadow:0 10px 30px rgba(0,0,0,.08)
 }
 .pill{
-  display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 13px;
-  border:1px solid var(--line);border-radius:999px;background:var(--surface2);
-  color:var(--muted);font-size:13px;font-weight:600
+  min-width:0;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:7px 8px;border:0;border-radius:17px;background:transparent;
+  color:var(--muted);font-size:11px;font-weight:600;text-align:center
 }
-.pill:hover{border-color:var(--line2);color:var(--text)}
-.pill .hicon{width:16px;height:16px}
+.pill:hover{background:var(--accentSoft);color:var(--text)}
+.pill+.pill{position:relative}
+.pill+.pill::before{content:"";position:absolute;left:-3px;top:12px;bottom:12px;width:1px;background:var(--line)}
+.pill:hover::before,.pill:hover+.pill::before{opacity:0}
+.pill .hicon{width:19px;height:19px}
 .section{padding:26px 0 0}
 .section-title{
   display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:12px
@@ -161,6 +169,8 @@ h3{font-size:20px}
 }
 .project-logo img{width:100%;height:100%;object-fit:cover}
 .project-logo.rocla img{width:42px;height:42px;object-fit:contain}
+.project-logo.vpn{background:#1460f3}
+.project-logo.vpn img{width:42px;height:42px;object-fit:contain}
 .project-logo.generic{background:var(--accentSoft)}
 .project-logo.generic .hicon{width:23px;height:23px}
 .project strong{display:block;font-size:16px;letter-spacing:-.025em}
@@ -245,7 +255,8 @@ details[open] summary{border-bottom:1px solid var(--line)}
   .avatar{width:78px;height:78px}
   h1{font-size:42px}
   .lead{font-size:16px}
-  .quick{padding-top:16px}
+  .quick{width:100%;margin-top:16px;padding:5px}
+  .pill{min-height:56px;font-size:10.5px}
   .row{min-height:72px;border-radius:18px}
   .project{min-height:82px;border-radius:19px;padding:13px 14px}
   .project-logo{width:46px;height:46px}
@@ -290,9 +301,9 @@ details[open] summary{border-bottom:1px solid var(--line)}
       <p class="lead">Soy Rosanna, conocida como Roclahy. Aquí reúno mi trabajo, mis proyectos, mis publicaciones y mi faceta como escritora.</p>
       <p class="identity">Tecnología · QA · Creadora de contenido · Escritora · Analista · Comentarista</p>
       <div class="quick">
-        <a class="pill" href="https://roclahy.com/" target="_blank" rel="noopener"><img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt="">roclahy.com</a>
-        <a class="pill" href="https://t.me/fundadora" target="_blank" rel="noopener"><img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="">Telegram</a>
-        <a class="pill" href="mailto:ros@pm.me"><img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="">ros@pm.me</a>
+        <a class="pill" href="https://roclahy.com/" target="_blank" rel="noopener" aria-label="Abrir roclahy.com"><img class="hicon" src="https://ico.hugeicons.com/globe-02-stroke-rounded%402x.webp" alt="">Roclahy</a>
+        <a class="pill" href="https://t.me/fundadora" target="_blank" rel="noopener" aria-label="Abrir Telegram"><img class="hicon" src="https://ico.hugeicons.com/telegram-stroke-rounded%402x.webp" alt="">Telegram</a>
+        <a class="pill" href="mailto:ros@pm.me" aria-label="Escribir a ros@pm.me"><img class="hicon" src="https://ico.hugeicons.com/mail-01-stroke-rounded%402x.webp" alt="">Correo</a>
       </div>
     </div>
 
@@ -337,19 +348,19 @@ details[open] summary{border-bottom:1px solid var(--line)}
     <div class="project-list">
       <a class="project" href="https://roclaussd.roclahy.com/" target="_blank" rel="noopener">
         <span class="project-logo rocla"><img src="https://roclaussd.roclahy.com/assets/logo.svg?v=20260904-43" alt="Logo de RoCla USSD"></span>
-        <span><strong>RoCla USSD</strong><small>Mi aplicación Android para gestionar servicios Cubacel de forma ligera y clara.</small></span><span class="arrow">↗</span>
+        <span><strong>RoCla USSD</strong><small>App Android ultraligera para gestionar planes, consultas, red y seguridad de tu línea Cubacel.</small></span><span class="arrow">↗</span>
       </a>
       <a class="project" href="https://roclavpn.com" target="_blank" rel="noopener">
-        <span class="project-logo"><img src="data:image/webp;base64,UklGRtAHAABXRUJQVlA4IMQHAACQJQCdASqAAIAAPlUokUUjoqGTyzWgOAVEtABDC5dPXfyJ/LH5Sqa/Svvj/OvaT0vc1+d5yf/sf7F+W/vj9Q/3O+4B+j/+b/pv9u7BHmA/YL9sfeN/wH7Ae5r/HeoB/lv9F1h/oAftp6ZH7sfBt+2X7re03//+sA4UTsX/uXRHBz1i/ujEdvEv5V/oN47AB9WOJfSpzLPHv+Yf5X2Cv1r9KD2W+jQauuzWzZdGT3W0UT/dAsnbLHz/1FnhvX5bdJv/5h12STfmcVcuM/JTosXowHZMiUGsG7wkf4U8YuX4ybsDo3h9xFOWAoM9Zp7qgpJ9J8UOi8gIWT9ki3x8p3Pxuo+rnA8C4UYW5USpE7weLnSGISEOF3pZx/ayxsrawfVHN4CNl/jQkdDvb0o/PR5RtyWzCAAA/vOk///8fY8fY8fY4+x//+u8VwZ1bgAAPmROlDm2enebLO4Tm79XZyk8WkKu96qUUq9PIokLs/9ATuaSWyl44ea8gWL4JvlHsWlHT8eEX32STSRsWIkOEz3cmrXB3vcfNPIZq2uJUyJIdoWFM/CRG5Skcno5Ji7s0KHHyQFP/QbKVmSa/nowd9ZyNGb1qI1TNtJPB8WIF3U6SwoPfHkr0GnsUw3PztSbbMs0X+D0W+xvdosSskBG3NPss+FNhVUmII1QQokrN3SmQ8oDA9HCU4nItPrH85+u5qNfTs1ZL9o2XeS/quroSQicRDhqlNf4riiBWLf9aSGSCLU9d5sLhmwcsDWPsaeMpf4deFVN3499GCvx6fvUT0bWDVPuoV+Iq/uJyqiGB4xWwFI5Nt26+ylKB0z2iF9WDHwAFoZQNQ0zgvLWmJzlHTrmYo70iEWgDSkaggkUh/4WONTNoQOrYdvWUFXQxSiNeuBNOvcSI7+2EPmgEuP6jJHirt7hpDae/myN9REdrDEycAsJFSbDpbpt6y0mgarbLC8Kb/eeaB/AHpzYMrpbPVNCZ581PpAWBv8BCm3NNJ4jsMmwq8xT3r+dCi+CllzKt2/eqHl5j/Bm+Hew7qab+9nvbAdkTMwS7NXkPMfzNhb/2bi7zN2HfnkC6KwK8EWhwQ1+aIlXp/eCSjj/ALWc67C29h/pqi8pJmhuD6XxaWsqkW25U/riOWoaLOHizbb4CLCxy4r/v6VWu+VPsezgLhewjy84CtJHTXOODBhcP5jVT0f/1/WCz4G/jmVBqw2bSwdzHMpgFSNeOI3V634wFBMf7lMWOb0goR49jy9zLxZjieaup4kid+th04cfaRA3VU+zFzTwEbcbr7QEKR/wzJmfsYwxxW/g5L8jZsb4bD2MnZuswTXuZFc/moN8f6QGy8be6+qtf30LpI4Bz4i7MDm9eSU2jl85Wt1BaW3IJkAi3EzTJJnEcSLzyziEfaqOBo2ffcdntGSJwRlPj+kd/jIMOLJx9lkfVZHyUd3CWKKrR/poaC7XBGatOR3Oz7KAfMWbsOO6dkR5C+EIOJgT+rcYjkY1ar10o21F5HlyE4RN8govpA7u/l6BG8HMb5qMPOPfptYYqWo5W1xMDxyfgY5m6ownr4cQ66/rqsM8mPrO3uPoBbJWovVkt2LkKSXC+lAOIR7yrUbQkWhkow0Upo006kHG7+Sl3bpJl8DwZlyBkuJQDVfMzFr+obw4ykdv/4vyvFzorsfOdraUOsWgmsthX3T3q1V8oW4cNuXZJAmQhYQbLlu10NkMhTz6paMdSqz2adynOv0D8bcCvQYYaE6h9pq9RVtnhzYg7bVq9sJkjkfab0lnTqi8iyIML6rL/oQ4hoqqmMNg8rr6yhC1FHbr0FJYZHG9APnwValBR1FcdkStcqX57nWPD27AIQe/yDv++C3GnwK1agppHYrg/8Np9xl7Q+0NGWDy7AKxcrOefB0V5AmfIb4iPSg/+VX27lM/mc+vQ8WWSvJWbrd3GgylIXb2fstbe/KLdwP4qNDwufg4hGiBg1/kTsRdExd6hDnGRX9pU4qEIMezA1p5h/aCySHN+SIselGpD7RM79gBByuu+ssdC+uItGk0TxNlsvwpzAflIfYTjmH6B14Q6dekZ8FjdHH78/6+YeIFz6H0Ljzh6DvzGHdlmN9wQizAu7u5wGwp4tr68qgDqc9ngnrftJNCc39yylUCxHV0LLtWckYAAJl8ZWHozgrqeatxYMs2MrrMgeRYnGqgtUqHkqr0HNTUeQzy2tznyMyyM+6+8ZqAet5+GY7WAuAa4B50CFFGbbfm3B+OtQmnUuaC/i6u2O+aEeHn5KcSEbswQg/8ecD7yH7ZK5Q3nVGCiaJreC1yGiDAdH2DmI8MNVnt/w/AUq2YDOaQhwfLHTjYT7vRIyK81K28RA9LMAJKTz+PhmarvLIpKLq3ziCYs099FPxpia3sjc82P6N+2RsjRae7Pga7eTK7K68CUcoTkaGoXapyyUAm/tXWXHdTGviNhzWiqIx+hTjK94earakkfhwBub3O1vw3sDNxFrw/S6bR1Fl3Gg9b68FTF4Yo5UbcYdRwJc6qgXA0RO8ZplHfmtA4OTEm1dPJDsyy1y05jItrsaVHvpx9coxlhSpVCzcyBNk2BoGuJR9vEd/gCwOPLa/kXHIZJ3tbG14/MoQhL7Ig86RJlNWFGrh8ZBtRnLwAA7QAAAAAA==" alt="Logo de RoCla VPN"></span>
-        <span><strong>RoCla VPN</strong><small>Mi proyecto de conectividad y privacidad, integrado al ecosistema Roclahy.</small></span><span class="arrow">↗</span>
+        <span class="project-logo vpn"><img src="https://vpn.roclahy.com/roclavpn-logo.webp" alt="Logo de RoCla VPN" loading="lazy" decoding="async"></span>
+        <span><strong>RoCla VPN</strong><small>VPN multiprotocolo pensada para Cuba: acceso sin bloqueos, navegación privada, anti-censura y bloqueo de anuncios.</small></span><span class="arrow">↗</span>
       </a>
       <a class="project" href="https://astra.roclahy.com/" target="_blank" rel="noopener">
         <span class="project-logo"><img src="data:image/webp;base64,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" alt="Logo de ASTRA"></span>
-        <span><strong>ASTRA</strong><small>Asistentes de Telegram entrenados con conocimiento propio mediante inteligencia artificial.</small></span><span class="arrow">↗</span>
+        <span><strong>ASTRA</strong><small>Plataforma para crear y administrar asistentes de Telegram entrenados con tu propio conocimiento mediante IA.</small></span><span class="arrow">↗</span>
       </a>
       <a class="project" href="https://roclahy.com/" target="_blank" rel="noopener">
         <span class="project-logo"><img src="data:image/webp;base64,UklGRmYDAABXRUJQVlA4IFoDAADwGQCdASrAAMAAPnk8nkkko6MhJLho2JAPCWlu4W3BG8YBkK7+cqmGCmVeRL6KFQKh7xpU89cZpQU89bgaCFS0c9QUW7cePlJEW+cpdbgRKmHngvGejo2KRThouo5uM15HDF7H2xNMLOXHZZADgV2FRzvVFBpb+uz3H9jMzhKY0lmCYzSZdvpuE3iw/yYDGKApLux1h4pgFaKbSYuTgWt6m9WM8SgMFiv3yxqxMKQhAR/D5koeG/U02RSFS6Zx5fuxeVQ4xUPnf7eOXIUXyBwKh7xpU89cVAAA/v6HIA++NtzW8cTIuT+aZxsEQ4bHS+6e9HR+BaAoI28lB4r+zjSeajAqlNoHE5X5gyNe94xrNtqsp0oGI1OCms5UDjzZC7DGUD6/d1nwN4StgGTEN9j/mqgrPF37KM4XHP2loWRcsHz59+Wg6ZXj0mOyMBSlWUgfvKuvzZyTWcIiBx3VYD7ysAU9UDf/KwPrdDJ7f8+l87XXiSnhksMCOdfOMdTZMG15JxTtgwogZeElDwr+X2j5hxK7H3E4DJW0qHMnnbYZHVROoy8miJ513yei3aFP8v2bbKQteapNy9jfP+0KWCEemwmk1RzQZjLFR/tQJjh4M4fvwYoX/idO6ZmquTl2eS6JFS6PQLe9sfi0iCfTIVJEg0VxG2Nz0IbxUnhZnTur25qktbAXXm00PFr232pxHfAaXSIOuH2nHP+jD+9+q9OlmWic9yRs9vRXD+GGvCXoHenx0cu60wkCOI2Z7yIobeANFdBVNY94mgTdbonUmw5mkF3bMvncdP4mWfewwnRLuUfODM7waAnj2IgSGmdBD9ZguhyC4bX4KDjLw0CgSUCLY8MaQJtHmcb5f+ldQRcckTVmURy9MU9flQO+ebOt9wJfWVd/sN7t64//zCoPHVXZoWIyq6gj84Xdmk/lR2PjDy/MBi2k4h2GGyfpxuyBLyAOXWjqTRB7CXuzlhrkXUW1/tew2j4nonhRH3Wsrbsb/IE1NWW2D7Oegdin+8LE/RikNKwIzcZ/K0e7egIsMFoYakEA+EHuLMJLOIgMb/T8AryQ4rATdld6IK7OiDPo0IZYJoBey4MWW1omDoDR7B6UyBkp0Si7dWIg7krr6J4d+cil9PwRgAAAAAA=" alt="Logo de Roclahy.com"></span>
-        <span><strong>Roclahy.com</strong><small>Mi publicación de tecnología: análisis, guías, pruebas y opinión.</small></span><span class="arrow">↗</span>
+        <span><strong>Roclahy.com</strong><small>Publicación de tecnología con tutoriales, reseñas, análisis y soluciones para Android, Windows, seguridad y servicios digitales.</small></span><span class="arrow">↗</span>
       </a>
     </div>
   </section>
