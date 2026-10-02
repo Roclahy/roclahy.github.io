@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "subject": "Roclahy",
+  "canonical_url": "https://roclahy.me/",
+  "verification_id": "roclahy-me-official-2026-10",
+  "statement": "roclahy.me is the canonical official portfolio and identity URL used by Roclahy.",
+  "official_sites": [
+    "https://roclahy.me/",
+    "https://roclahy.com/"
+  ],
+  "official_profiles": [
+    "https://t.me/fundadora"
+  ],
+  "verification_methods": [
+    "domain-control",
+    "cross-linked-official-sites",
+    "rel-me-identity-linking",
+    "public-profile-backlinks"
+  ],
+  "last_updated": "2026-10-02"
+}
