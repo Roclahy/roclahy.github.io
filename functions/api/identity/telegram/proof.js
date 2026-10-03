@@ -1,7 +1,7 @@
 import {
   publicProofView,
   readTelegramMiniAppProof
-} from "../../../../_lib/telegram-miniapp-proof.js";
+} from "../../../_lib/telegram-miniapp-proof.js";
 
 function json(data,status=200,cache="public, max-age=60"){
   return new Response(JSON.stringify(data),{
