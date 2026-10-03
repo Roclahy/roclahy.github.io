@@ -1,4 +1,4 @@
-import {cookieValue,readStateCookie,saveTelegramVerification,verifyTelegramIdToken} from "../../../_lib/telegram-identity.js";
+import {cookieValue,readStateCookie,verifyTelegramIdToken} from "../../../_lib/telegram-identity.js";
 
 const CALLBACK_URL="https://roclahy.me/api/identity/telegram/callback";
 const clearCookie="tg_identity_flow=; Path=/api/identity/telegram; Max-Age=0; HttpOnly; Secure; SameSite=Lax";
@@ -44,8 +44,7 @@ export async function onRequestGet({request,env}){
     });
     if(!tokenResponse.ok)return redirect("token_exchange_failed");
     const tokens=await tokenResponse.json();
-    const payload=await verifyTelegramIdToken(env,tokens.id_token,flow.nonce);
-    await saveTelegramVerification(env,payload);
+    await verifyTelegramIdToken(env,tokens.id_token,flow.nonce);
     return redirect("verified");
   }catch(error){
     if(String(error?.message||"")==="wrong_telegram_account")return redirect("wrong_account");
