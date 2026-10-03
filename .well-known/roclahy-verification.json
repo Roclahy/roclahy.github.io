@@ -9,7 +9,8 @@
     "https://roclahy.com/"
   ],
   "official_profiles": [
-    "https://t.me/rclhy"
+    "https://t.me/rclhy",
+    "https://bsky.app/profile/roclahy.me"
   ],
   "verification_methods": [
     "domain-control",
@@ -17,7 +18,8 @@
     "rel-me-identity-linking",
     "public-profile-backlinks",
     "telegram-openid-connect-signed-id-token",
-    "telegram-mini-app-ed25519-signed-init-data"
+    "telegram-mini-app-ed25519-signed-init-data",
+    "bluesky-domain-handle"
   ],
   "last_updated": "2026-10-02",
   "telegram": {
@@ -29,5 +31,10 @@
     "sanitized_cryptographic_proof": "https://roclahy.me/api/identity/telegram/proof",
     "mini_app": "https://roclahy.me/identity/telegram/",
     "note": "Fresh revalidation is accepted only when Telegram's Ed25519 signature is valid, auth_date is recent, the configured bot ID matches, and the Telegram user ID is 1480932444. Raw signed initData is kept private; the public proof exposes only minimal identity metadata and a SHA-256 fingerprint."
+  },
+  "bluesky": {
+    "handle": "roclahy.me",
+    "account_url": "https://bsky.app/profile/roclahy.me",
+    "verification": "The Bluesky account uses roclahy.me as its public domain handle."
   }
 }
