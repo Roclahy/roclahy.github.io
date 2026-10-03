@@ -20,10 +20,9 @@
   ],
   "last_updated": "2026-10-02",
   "telegram": {
-    "claimed_username": "rclhy",
-    "claimed_user_id": "1480932444",
+    "account_url": "https://t.me/rclhy",
     "authentication_protocol": "Telegram OpenID Connect",
     "live_verification_status": "https://roclahy.me/api/identity/telegram/status",
-    "note": "The live status is only marked verified after roclahy.me validates a Telegram-signed ID token for user ID 1480932444."
+    "note": "The live status is marked verified only after roclahy.me validates a Telegram-signed OpenID Connect ID token for the linked account."
   }
 }
