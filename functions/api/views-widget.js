@@ -87,7 +87,7 @@ body{
   color:inherit;
 }
 svg{width:14px;height:14px;opacity:.88;flex:none;color:inherit}
-strong{font-size:11.5px;font-weight:650;color:inherit}
+strong{font-size:11.5px;font-weight:500;color:inherit}
 span{font-size:11px;font-weight:500;color:inherit}
 </style>
 </head>
