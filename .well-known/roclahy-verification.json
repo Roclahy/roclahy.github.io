@@ -16,14 +16,18 @@
     "reciprocal-official-site-linking",
     "rel-me-identity-linking",
     "public-profile-backlinks",
-    "telegram-openid-connect-signed-id-token"
+    "telegram-openid-connect-signed-id-token",
+    "telegram-mini-app-ed25519-signed-init-data"
   ],
   "last_updated": "2026-10-02",
   "telegram": {
     "account_url": "https://t.me/rclhy",
     "stable_user_id": "1480932444",
-    "authentication_protocol": "Telegram OpenID Connect",
+    "initial_authentication": "Telegram OpenID Connect",
+    "fresh_revalidation": "Telegram Mini App signed initData · Ed25519",
     "live_verification_status": "https://roclahy.me/api/identity/telegram/status",
-    "note": "The live status is marked verified only after roclahy.me validates a Telegram-signed OpenID Connect ID token for this stable Telegram user ID."
+    "sanitized_cryptographic_proof": "https://roclahy.me/api/identity/telegram/proof",
+    "mini_app": "https://roclahy.me/identity/telegram/",
+    "note": "Fresh revalidation is accepted only when Telegram's Ed25519 signature is valid, auth_date is recent, the configured bot ID matches, and the Telegram user ID is 1480932444. Raw signed initData is kept private; the public proof exposes only minimal identity metadata and a SHA-256 fingerprint."
   }
 }
