@@ -1125,10 +1125,10 @@ html[data-theme="sakura"] .book-copy .book-cta{
         textEl.textContent='Cuenta vinculada a Telegram: @rclhy · ID 1480932444.';
         if(dateEl){
           if(data.proofAvailable){
-            const freshness=data.fresh?'Prueba criptográfica fresca':'Última prueba criptográfica';
-            dateEl.textContent=freshness+' · Ed25519 · '+telegramProofAge(data.ageSeconds)+'.';
+            const freshness=data.fresh?'Verificación reciente':'Última verificación';
+            dateEl.textContent=freshness+' · '+telegramProofAge(data.ageSeconds)+'.';
           }else{
-            dateEl.textContent='Verificada mediante Telegram OpenID Connect el 2 oct 2026 · pendiente de primera revalidación desde @roclahybot.';
+            dateEl.textContent='Verificación inicial: 2 oct 2026 · pendiente de primera revalidación desde @roclahybot.';
           }
         }
         verifiedBadge?.setAttribute('title','Página oficial · Telegram verificado');
@@ -1399,7 +1399,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
   <path d="M8 12C8 18 12 22 12 22C12 22 16 18 16 12C16 6 12 2 12 2C12 2 8 6 8 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
   <path d="M21 15H3M21 9H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-        Ver prueba criptográfica
+        Ver verificación
       </a>
     </div>
     <p class="verification-note">Esta verificación acredita control y vinculación de presencia web. No representa una verificación de identidad legal realizada por un tercero.</p>
