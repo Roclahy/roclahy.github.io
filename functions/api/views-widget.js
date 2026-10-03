@@ -105,7 +105,7 @@ span{font-size:11px;font-weight:500;color:inherit}
     try{
       const parentRoot=window.parent.document.documentElement;
       const parentStyle=window.parent.getComputedStyle(parentRoot);
-      const themedColor=parentStyle.getPropertyValue('--muted').trim();
+      const themedColor=parentStyle.getPropertyValue('--accent').trim();
       if(themedColor){
         document.documentElement.style.setProperty('--counter-color',themedColor);
       }
