@@ -711,28 +711,48 @@ details{
   .profile-description{max-width:540px;font-size:12.5px;line-height:1.62}
 }
 
-.views-widget{
-  width:220px;
-  height:28px;
-  border:0;
-  overflow:hidden;
-  background:transparent;
-  color-scheme:light dark;
-}
-/* Views widget transparency fix */
+/* Views counter: render in the parent document so it inherits the active theme. */
 .site-metric{
+  position:relative;
   background:transparent!important;
   box-shadow:none!important;
+  color:var(--muted)!important;
+  opacity:1!important;
 }
-.views-widget{
-  display:block;
-  width:220px;
-  height:28px;
+.site-metric-eye{
+  width:14px;
+  height:14px;
+  flex:none;
+  color:currentColor;
+  opacity:.88;
+}
+.site-metric-main{
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+  flex-wrap:wrap;
+}
+.site-metric strong,
+.site-metric span{
+  color:currentColor!important;
+}
+.site-metric strong{
+  font-size:11.5px;
+  font-weight:650;
+}
+.site-metric span{
+  font-size:11px;
+  font-weight:500;
+}
+.views-counter-frame{
+  position:absolute;
+  width:1px;
+  height:1px;
+  left:-9999px;
+  top:-9999px;
   border:0;
-  outline:0;
-  overflow:hidden;
-  background:transparent!important;
-  box-shadow:none;
+  opacity:0;
+  pointer-events:none;
 }
 /* Always-open trajectory card */
 .trajectory-card{
@@ -1003,7 +1023,15 @@ html[data-theme="sakura"] .book-copy .book-cta{
     </div>
 
     <div class="site-metric" aria-label="Vistas totales del sitio">
-      <iframe class="views-widget" src="/api/views-widget" title="Vistas totales" loading="eager"></iframe>
+      <iframe class="views-counter-frame" src="/api/views-widget" title="" aria-hidden="true" tabindex="-1"></iframe>
+      <svg class="site-metric-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/>
+        <circle cx="12" cy="12" r="2.8"/>
+      </svg>
+      <div class="site-metric-main">
+        <strong id="siteViewsTotal">118.131</strong>
+        <span data-i18n="views">vistas totales</span>
+      </div>
     </div>
   </section>
 
@@ -1342,6 +1370,26 @@ html[data-theme="sakura"] .book-copy .book-cta{
     }catch(_){}
   }
   loadPortfolioFeed();
+
+  async function refreshSiteViews(){
+    const el=document.getElementById('siteViewsTotal');
+    if(!el) return;
+    try{
+      const res=await fetch('/api/views',{cache:'no-store',credentials:'same-origin'});
+      if(!res.ok) return;
+      const data=await res.json();
+      const total=Number(data?.total);
+      if(Number.isSafeInteger(total) && total>=118131){
+        el.textContent=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(total);
+      }
+    }catch(_){}
+  }
+
+  const viewsFrame=document.querySelector('.views-counter-frame');
+  if(viewsFrame){
+    viewsFrame.addEventListener('load',()=>setTimeout(refreshSiteViews,120),{once:true});
+  }
+  refreshSiteViews();
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
