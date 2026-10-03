@@ -709,7 +709,7 @@ details{
     <div class="site-metric" aria-label="Vistas totales del sitio">
       <img class="hicon" src="https://ico.hugeicons.com/view-stroke-rounded%402x.webp" alt="" aria-hidden="true">
       <div class="site-metric-main">
-        <strong>118,131</strong>
+        <strong id="siteViewsTotal">118,131</strong>
         <span>vistas totales</span>
       </div>
     </div>
@@ -982,6 +982,28 @@ details{
     }catch(_){}
   }
   loadPortfolioFeed();
+
+  async function loadSiteViews(){
+    const totalEl=document.getElementById('siteViewsTotal');
+    if(!totalEl) return;
+
+    try{
+      const res=await fetch('/api/views?count=1',{
+        method:'GET',
+        cache:'no-store',
+        credentials:'same-origin'
+      });
+      if(!res.ok) throw new Error('views');
+      const data=await res.json();
+      const total=Number(data?.total);
+      if(Number.isSafeInteger(total) && total>=118131){
+        totalEl.textContent=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(total);
+      }
+    }catch(_){
+      // Keep the imported Lnk.Bio baseline visible if the counter is unavailable.
+    }
+  }
+  loadSiteViews();
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
