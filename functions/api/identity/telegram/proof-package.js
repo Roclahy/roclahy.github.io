@@ -10,7 +10,8 @@ function json(data,status=200){
       "cache-control":"no-store, max-age=0",
       "x-content-type-options":"nosniff",
       "referrer-policy":"no-referrer",
-      "access-control-allow-origin":"*"
+      "access-control-allow-origin":"*",
+      "x-robots-tag":"noindex, nofollow, noarchive"
     }
   });
 }
