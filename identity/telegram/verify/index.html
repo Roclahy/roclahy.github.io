@@ -111,7 +111,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-al
   const identityBlock=document.getElementById('identityBlock');
   const account=document.getElementById('account');
   const issued=document.getElementById('issued');
-  const technical=document.getElementById('technical');
 
   function hexToBytes(hex){
     const out=new Uint8Array(hex.length/2);
@@ -188,9 +187,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-al
     identityBlock.hidden=false;
     account.textContent='@'+String(user.username||pkg.username||'rclhy')+' · ID '+String(user.id);
     issued.textContent='Emitida '+ageLabel(age)+'.';
-    technical.innerHTML=
-      'Proveedor: Telegram · Firma: Ed25519 · ID del bot: <code>'+String(pkg.botId).replace(/[<>&]/g,'')+
-      '</code> · Fecha firmada: <code>'+new Date(authDate*1000).toISOString()+'</code>.';
   }
 
   verify().catch(error=>{
@@ -198,7 +194,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-al
     resultTitle.textContent='No se pudo verificar';
     resultTitle.classList.add('error');
     resultMeta.textContent=String(error?.message||'Error inesperado.');
-    technical.textContent='La comprobación no produjo un resultado válido.';
   });
 })();
 </script>
