@@ -88,12 +88,17 @@ img{display:block}
 .site-metric{
   display:flex;align-items:center;justify-content:center;gap:7px;
   margin:22px auto 0;padding:12px 0 0;border-top:1px solid var(--line);
-  color:var(--faint);font-size:11px
+  color:var(--accent);font-size:11px
 }
-.site-metric .hicon{width:14px;height:14px;opacity:.72}
+.site-metric-icon{
+  width:14px;height:14px;display:inline-block;flex:0 0 auto;
+  background:currentColor;
+  -webkit-mask:url("https://ico.hugeicons.com/view-stroke-rounded%402x.webp") center/contain no-repeat;
+  mask:url("https://ico.hugeicons.com/view-stroke-rounded%402x.webp") center/contain no-repeat;
+}
 .site-metric-main{display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
-.site-metric strong{font-size:11.5px;line-height:1;font-weight:700;letter-spacing:-.01em;color:var(--muted)}
-.site-metric span{color:var(--faint);font-size:11px;font-weight:550}
+.site-metric strong{font-size:11.5px;line-height:1;font-weight:700;letter-spacing:-.01em;color:currentColor}
+.site-metric span{color:currentColor;font-size:11px;font-weight:550}
 .verified-icon{width:19px;height:19px;color:#1d9bf0;flex:0 0 auto}
 .hero h1{margin-top:24px}
 .avatar{
@@ -429,21 +434,23 @@ details{
   margin:30px auto 0;
   padding:0;
   border:0;
-  opacity:.72;
+  opacity:.82;
   font-size:10.5px;
+  color:color-mix(in srgb,var(--accent) 78%,var(--text));
 }
-.site-metric .hicon{
+.site-metric-icon{
   width:13px;
   height:13px;
 }
 .site-metric strong{
   font-size:10.5px;
   font-weight:650;
-  color:var(--faint);
+  color:currentColor;
 }
 .site-metric span{
   font-size:10.5px;
   font-weight:500;
+  color:currentColor;
 }
 .dock{
   border-radius:24px;
@@ -707,7 +714,7 @@ details{
     </div>
 
     <div class="site-metric" aria-label="Vistas totales del sitio">
-      <img class="hicon" src="https://ico.hugeicons.com/view-stroke-rounded%402x.webp" alt="" aria-hidden="true">
+      <span class="site-metric-icon" aria-hidden="true"></span>
       <div class="site-metric-main">
         <strong id="siteViewsTotal">118,131</strong>
         <span>vistas totales</span>
