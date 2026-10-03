@@ -21,8 +21,9 @@
   "last_updated": "2026-10-02",
   "telegram": {
     "account_url": "https://t.me/rclhy",
+    "stable_user_id": "1480932444",
     "authentication_protocol": "Telegram OpenID Connect",
     "live_verification_status": "https://roclahy.me/api/identity/telegram/status",
-    "note": "The live status is marked verified only after roclahy.me validates a Telegram-signed OpenID Connect ID token for the linked account."
+    "note": "The live status is marked verified only after roclahy.me validates a Telegram-signed OpenID Connect ID token for this stable Telegram user ID."
   }
 }
