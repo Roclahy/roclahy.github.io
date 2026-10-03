@@ -94,44 +94,4 @@ export async function verifyTelegramIdToken(env, token, expectedNonce) {
   if (String(payload.id || "") !== EXPECTED_TELEGRAM_ID) throw new Error("wrong_telegram_account");
   return payload;
 }
-export async function ensureIdentitySchema(env) {
-  if (!env.VIEWS_DB) throw new Error("identity_db_not_configured");
-  await env.VIEWS_DB.prepare(`CREATE TABLE IF NOT EXISTS identity_verifications (
-    provider TEXT PRIMARY KEY,
-    user_id TEXT NOT NULL,
-    username TEXT NOT NULL DEFAULT '',
-    display_name TEXT NOT NULL DEFAULT '',
-    verified_at TEXT NOT NULL,
-    method TEXT NOT NULL
-  )`).run();
-}
-export async function saveTelegramVerification(env, payload) {
-  await ensureIdentitySchema(env);
-  const verifiedAt = new Date().toISOString();
-  await env.VIEWS_DB.prepare(`INSERT INTO identity_verifications
-    (provider,user_id,username,display_name,verified_at,method)
-    VALUES ('telegram',?,?,?,?,?)
-    ON CONFLICT(provider) DO UPDATE SET
-      user_id=excluded.user_id,
-      username=excluded.username,
-      display_name=excluded.display_name,
-      verified_at=excluded.verified_at,
-      method=excluded.method`)
-    .bind(
-      String(payload.id || ""),
-      String(payload.preferred_username || ""),
-      String(payload.name || ""),
-      verifiedAt,
-      "Telegram OpenID Connect · signed ID token"
-    ).run();
-  return verifiedAt;
-}
-export async function getTelegramVerification(env) {
-  await ensureIdentitySchema(env);
-  return env.VIEWS_DB.prepare(
-    "SELECT user_id,username,display_name,verified_at,method FROM identity_verifications WHERE provider='telegram' LIMIT 1"
-  ).first();
-}
-
-
 export { EXPECTED_TELEGRAM_ID };
