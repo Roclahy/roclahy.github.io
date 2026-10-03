@@ -1137,8 +1137,10 @@ html[data-theme="sakura"] .book-copy .book-cta{
   const telegramIdentityResult=new URLSearchParams(location.search).get('telegram_identity');
   if(telegramIdentityResult){
     history.replaceState(null,'',location.pathname+location.hash);
-    document.getElementById('verificationDialog')?.showModal();
-    refreshTelegramVerification();
+    addEventListener('DOMContentLoaded',()=>{
+      document.getElementById('verificationDialog')?.showModal();
+      refreshTelegramVerification();
+    },{once:true});
   }
 
   const browserLanguage=(navigator.languages?.[0]||navigator.language||'es').toLowerCase();
