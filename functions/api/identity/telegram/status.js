@@ -13,11 +13,13 @@ function json(data,status=200){
 }
 
 export async function onRequestGet({env}){
+  const configured=Boolean(env.TELEGRAM_OIDC_CLIENT_ID&&env.TELEGRAM_OIDC_CLIENT_SECRET);
   try{
     const row=await getTelegramVerification(env);
     const verified=String(row?.user_id||"")===EXPECTED_TELEGRAM_ID;
     return json({
       ok:true,
+      configured,
       verified,
       provider:"Telegram",
       protocol:"OpenID Connect",
@@ -27,6 +29,6 @@ export async function onRequestGet({env}){
       method:verified?String(row.method||""):null
     });
   }catch{
-    return json({ok:true,verified:false,provider:"Telegram",protocol:"OpenID Connect"});
+    return json({ok:true,configured,verified:false,provider:"Telegram",protocol:"OpenID Connect"});
   }
 }
