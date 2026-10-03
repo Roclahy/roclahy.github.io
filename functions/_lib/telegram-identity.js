@@ -1,3 +1,4 @@
+const EXPECTED_TELEGRAM_ID = "1480932444";
 const TELEGRAM_ISSUER = "https://oauth.telegram.org";
 const JWKS_URL = "https://oauth.telegram.org/.well-known/jwks.json";
 
@@ -90,10 +91,7 @@ export async function verifyTelegramIdToken(env, token, expectedNonce) {
   if (!Number(payload.exp) || Number(payload.exp) <= now) throw new Error("expired_token");
   if (expectedNonce && String(payload.nonce || "") !== String(expectedNonce)) throw new Error("invalid_nonce");
 
-  const existing = await getTelegramVerification(env).catch(() => null);
-  const expectedId = String(existing?.user_id || env.TELEGRAM_EXPECTED_USER_ID || "");
-  if (!expectedId) throw new Error("telegram_identity_not_initialized");
-  if (String(payload.id || "") !== expectedId) throw new Error("wrong_telegram_account");
+  if (String(payload.id || "") !== EXPECTED_TELEGRAM_ID) throw new Error("wrong_telegram_account");
   return payload;
 }
 export async function ensureIdentitySchema(env) {
@@ -135,3 +133,5 @@ export async function getTelegramVerification(env) {
   ).first();
 }
 
+
+export { EXPECTED_TELEGRAM_ID };
