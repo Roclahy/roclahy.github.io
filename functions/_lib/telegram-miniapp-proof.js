@@ -122,6 +122,28 @@ export async function readTelegramMiniAppProof(env){
   };
 }
 
+export async function readTelegramMiniAppSignedProof(env){
+  if(!env.IDENTITY_PROOF_KV)return null;
+  const raw=await env.IDENTITY_PROOF_KV.get(PROOF_KEY);
+  if(!raw)return null;
+  let record;
+  try{record=JSON.parse(raw);}catch{return null;}
+  if(!record?.initData||!record?.botId)return null;
+  const proof=await verifyTelegramMiniAppInitData(record.initData,record.botId);
+  return {
+    version:1,
+    source:"telegram-mini-app",
+    botId:proof.botId,
+    initData:proof.raw,
+    userId:proof.userId,
+    username:proof.username,
+    authDate:proof.authDate,
+    publishedAt:String(record.publishedAt||""),
+    fingerprint:proof.fingerprint,
+    ageSeconds:proof.ageSeconds
+  };
+}
+
 export function publicProofView(proof){
   if(!proof)return null;
   const age=Math.max(0,Number(proof.ageSeconds||0));
