@@ -30,7 +30,7 @@ async function sha256Base64Url(value){
 function canonicalMiniAppData(params,botId){
   const entries=[...params.entries()]
     .filter(([key])=>key!=="hash"&&key!=="signature")
-    .sort(([a],[b])=>a.localeCompare(b))
+    .sort(([a],[b])=>a<b?-1:a>b?1:0)
     .map(([key,value])=>key+"="+value);
   return String(botId)+":WebAppData\n"+entries.join("\n");
 }
