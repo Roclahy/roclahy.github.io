@@ -22,7 +22,8 @@ export async function onRequestGet({env}){
       provider:"Telegram",
       protocol:"OpenID Connect",
       account:verified?"https://t.me/rclhy":null,
-      username:verified?"rclhy":null
+      username:verified?"rclhy":null,
+      userId:verified?String(row.user_id):null
     });
   }catch{
     return json({ok:true,verified:false,provider:"Telegram",protocol:"OpenID Connect"});
