@@ -17,7 +17,7 @@
 <link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRoIEAABXRUJQVlA4IHYEAABQGwCdASqAAIAAPlUqkUajoqGhJJVZcHAKiWkKFqPoa/nPZ1/Vei/7hJF/rX+G8j/7l4S7wz+Wf5X8quC6AB9Tv9R4AOoF3d/w3oj/57jp6AH8z/pH/L/uvrcfQXn6/K/8J/5P8N8Bf8r/rv/G/ufCufuAO74ORx6p0y1yrUxaqsoje4duNrBK+28rXVZ/jgcWeQnRni8t3lsBG8irm9Jh76U0JZlO6pd8iNLi/BD7oIVS3dr43ulU7rpy6iqmFAnzmyErqSXV35/xE35E4o1nwq9CCs5JBz3voGRWb3tsElhgAAD+/7ZLAcjWh4dJgEyoWs062+oR3ZZcXYozaZ9ongjdIlTPyVUu1fnOokfCKDt7bHDdsUuAjbiQ68qP9kaIstg0ainT2H4Z7wxcIPG9pYM8dvUAQsgDoZNq+JRHczBVktPhvwwLEd/5kxmn/I2e8HWY8B7SVJYu65jxWE3HWGq6uWvtuGbNWV6LPMJtwoNcRr2tXYbCi1q3zUILx33efzXzPuO41PvGHUsY45Kf5/J9zf6K3/R7Rmggx5M6PjFK46JDoYiK41uEuL25KssITz9sb/Oc46kYRmm1eUCC4SLRS28X78Ha+nN3TmXmBhBRCIgkt9qkgVUmGfjlqN4DpZKrxLxHq6MyCOfqG+xAysYMjBos+GOeZoFxMitDT4Ou5Grrec6Di8Ne2LxBjKbqOSfXK4hak4ehsWEjMr7OUFfeMav31w8NH+64HSgJTlZirpX5fgPAryoDZk952rmOv6JWG0wgSRjE+Z3A/xeSQpRiVtadYOrkvvdE+KmtGXpwS+a7wO6O0pSpJjhHpfq5iyr/w3JpFOKCOgYrrpxrV1n93zShysdZZOXJFkKcaAGlrlWj5S3lfS9tG/L8OsV8KzUOkPlHLpJfFPt0rQe1RRMA1+kavf9BI37ifseLvHuoCw3PdLM+1pjodnyCTXUnXySR6Poi+F83D7qLnJUeR69wDE7+guEkU2HJZgWtSHsqdn70vQ6WGFibcGKJ5uI+7pDHbVOHODaeTpy1B54XiUD5mU3l6zz24bM8od7Av6VxIjN5+/SLNdriU4nzTYGYkde/a1PW1c1QTP5eDbFNA1IdO0icyohqXYSZLiSFRIgTjBfh/2MJhVh5sYLPaxQE/vx3cHtxaEpdI6W7r8ahS+Gi3TrshGrkQFREuaCnRCdyRWiP80xD2hmzvlOp79K///Tisbvv/pz+nohIbP0NmYbmGey9+fjzPDbj/XuetUS4834ac0nU4eyvMFVskGFMSgXSZMsyPMMcXB+LPIVigdpy6K5hZxugjztkPu2HsxuJRH9ROXeE+Ob433k4fIuAFcY3hOwLKVV7x6h9KY2H0kCgqv3syQPjMsjvA9E+o4+Lz7jznlahPtf6XITJh5X7JW6syL0Aw6WxQhLENDWocNHOzJRdagQEiRs7iVRr3fz6XC96Qj9tP027/0AKNCEIXskBd3rXfeIrjP8tNLT9neTl7ZgYGXD+eAAB5Rw9M5/vAAAAAA==">
 <title>Rosanna — Roclahy</title>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","@id":"https://roclahy.me/#person","name":"Rosanna","alternateName":"Roclahy","url":"https://roclahy.me/","sameAs":["https://t.me/rclhy","https://roclahy.com/"]}
+{"@context":"https://schema.org","@type":"Person","@id":"https://roclahy.me/#person","name":"Rosanna","alternateName":"Roclahy","url":"https://roclahy.me/","identifier":[{"@type":"PropertyValue","propertyID":"Telegram User ID","value":"1480932444"}],"sameAs":["https://t.me/rclhy","https://roclahy.com/"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1112,12 +1112,12 @@ html[data-theme="sakura"] .book-copy .book-cta{
       const data=await response.json();
       if(data?.verified){
         const username=data.username?'@'+String(data.username).replace(/^@/,''):'@rclhy';
-        textEl.textContent='Cuenta vinculada mediante Telegram OpenID Connect: '+username+'.';
+        textEl.textContent='Cuenta vinculada mediante Telegram OpenID Connect: '+username+' · ID '+String(data.userId||'1480932444')+'.';
         if(dateEl)dateEl.textContent='Vinculación criptográfica activa.';
         if(button)button.hidden=true;
         verifiedBadge?.setAttribute('title','Página oficial · Telegram vinculado');
       }else{
-        textEl.textContent='Pendiente de autenticación criptográfica de @rclhy.';
+        textEl.textContent='Pendiente de autenticación criptográfica de @rclhy · ID 1480932444.';
         if(dateEl)dateEl.textContent='';
         if(button)button.hidden=false;
         if(buttonText)buttonText.textContent='Vincular con Telegram';
