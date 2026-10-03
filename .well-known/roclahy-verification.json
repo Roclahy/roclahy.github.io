@@ -13,16 +13,17 @@
   ],
   "verification_methods": [
     "domain-control",
-    "cross-linked-official-sites",
+    "reciprocal-official-site-linking",
     "rel-me-identity-linking",
     "public-profile-backlinks",
-    "stable-telegram-user-id"
+    "telegram-openid-connect-signed-id-token"
   ],
   "last_updated": "2026-10-02",
   "telegram": {
-    "username": "rclhy",
-    "profile_url": "https://t.me/rclhy",
-    "user_id": "1480932444",
-    "note": "The numeric Telegram user ID is a stable account identifier even if the public username changes."
+    "claimed_username": "rclhy",
+    "claimed_user_id": "1480932444",
+    "authentication_protocol": "Telegram OpenID Connect",
+    "live_verification_status": "https://roclahy.me/api/identity/telegram/status",
+    "note": "The live status is only marked verified after roclahy.me validates a Telegram-signed ID token for user ID 1480932444."
   }
 }
