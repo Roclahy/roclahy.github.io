@@ -63,13 +63,16 @@ html,body{
   background:transparent!important;
   color-scheme:light dark;
 }
+html{
+  --counter-color:#86868b;
+}
 body{
   min-height:28px;
   display:flex;
   align-items:center;
   justify-content:center;
   background:transparent!important;
-  color:#86868b;
+  color:var(--counter-color);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   font-size:11px;
   line-height:1;
@@ -81,10 +84,11 @@ body{
   gap:7px;
   white-space:nowrap;
   background:transparent!important;
+  color:inherit;
 }
-svg{width:14px;height:14px;opacity:.78;flex:none}
-strong{font-size:11.5px;font-weight:650;color:#86868b}
-span{font-size:11px;font-weight:500}
+svg{width:14px;height:14px;opacity:.88;flex:none;color:inherit}
+strong{font-size:11.5px;font-weight:650;color:inherit}
+span{font-size:11px;font-weight:500;color:inherit}
 </style>
 </head>
 <body>
@@ -95,6 +99,28 @@ span{font-size:11px;font-weight:500}
 </svg>
 <strong>${formatted}</strong><span>${label}</span>
 </div>
+<script>
+(() => {
+  function syncTheme(){
+    try{
+      const parentRoot=window.parent.document.documentElement;
+      const parentStyle=window.parent.getComputedStyle(parentRoot);
+      const themedColor=parentStyle.getPropertyValue('--muted').trim();
+      if(themedColor){
+        document.documentElement.style.setProperty('--counter-color',themedColor);
+      }
+    }catch(_){}
+  }
+
+  syncTheme();
+
+  try{
+    const parentRoot=window.parent.document.documentElement;
+    const observer=new MutationObserver(syncTheme);
+    observer.observe(parentRoot,{attributes:true,attributeFilter:['data-theme']});
+  }catch(_){}
+})();
+</script>
 </body>
 </html>`;
 
