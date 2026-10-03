@@ -16,7 +16,7 @@ function json(data,status=200){
   });
 }
 
-export async function onRequestGet({env}){
+export async function onRequestPost({env}){
   try{
     const proof=await readTelegramMiniAppSignedProof(env);
     if(!proof)return json({ok:false,error:"proof_unavailable"},404);
@@ -35,4 +35,9 @@ export async function onRequestGet({env}){
   }catch{
     return json({ok:false,error:"proof_unavailable"},503);
   }
+}
+
+
+export async function onRequestGet(){
+  return json({ok:false,error:"open_verifier"},405);
 }
