@@ -136,7 +136,6 @@ img{display:block}
 .verification-actions .primary .telegram-brand-icon{color:#fff}
 .verification-actions .primary{background:var(--accent);color:#fff}
 .verification-actions .secondary{border:1px solid var(--line);background:var(--surface2);color:var(--text)}
-.verification-actions a[hidden]{display:none!important}
 .verification-note{margin:14px 0 0;color:var(--faint);font-size:10.5px;line-height:1.45}
 .hero h1{margin-top:24px}
 .avatar{
@@ -1101,15 +1100,20 @@ html[data-theme="sakura"] .book-copy .book-cta{
   const themeIcon=document.getElementById('themeIcon');
   const verifiedBadge=document.getElementById('verifiedBadge');
 
+  function telegramProofAge(seconds){
+    const s=Math.max(0,Number(seconds||0));
+    if(s<60)return 'ahora';
+    if(s<3600)return 'hace '+Math.floor(s/60)+' min';
+    if(s<86400)return 'hace '+Math.floor(s/3600)+' h';
+    return 'hace '+Math.floor(s/86400)+' d';
+  }
+
   async function refreshTelegramVerification(){
     const textEl=document.getElementById('telegramVerificationText');
     const dateEl=document.getElementById('telegramVerificationDate');
-    const button=document.getElementById('telegramVerifyButton');
-    const buttonText=document.getElementById('telegramVerifyButtonText');
     if(!textEl)return;
 
-    if(button)button.hidden=true;
-    textEl.textContent='Comprobando la vinculación criptográfica con @rclhy · ID 1480932444…';
+    textEl.textContent='Comprobando la prueba criptográfica de @rclhy · ID 1480932444…';
     if(dateEl)dateEl.textContent='';
 
     try{
@@ -1118,22 +1122,23 @@ html[data-theme="sakura"] .book-copy .book-cta{
       const data=await response.json();
 
       if(data?.verified && String(data.userId)==='1480932444'){
-        textEl.textContent='Cuenta vinculada mediante Telegram OpenID Connect: @rclhy · ID 1480932444.';
-        if(dateEl)dateEl.textContent='Vinculación criptográfica activa y persistente.';
-        if(button)button.hidden=true;
-        verifiedBadge?.setAttribute('title','Página oficial · Telegram vinculado');
+        textEl.textContent='Cuenta vinculada a Telegram: @rclhy · ID 1480932444.';
+        if(dateEl){
+          if(data.proofAvailable){
+            const freshness=data.fresh?'Prueba criptográfica fresca':'Última prueba criptográfica';
+            dateEl.textContent=freshness+' · Ed25519 · '+telegramProofAge(data.ageSeconds)+'.';
+          }else{
+            dateEl.textContent='Verificada mediante Telegram OpenID Connect el 2 oct 2026 · pendiente de primera revalidación desde @roclahybot.';
+          }
+        }
+        verifiedBadge?.setAttribute('title','Página oficial · Telegram verificado');
         return;
       }
 
-      textEl.textContent='Pendiente de autenticación criptográfica de @rclhy · ID 1480932444.';
-      if(button){
-        button.hidden=false;
-        if(buttonText)buttonText.textContent='Vincular con Telegram';
-      }
+      textEl.textContent='No hay una prueba válida de Telegram disponible.';
     }catch{
       textEl.textContent='La comprobación en línea no está disponible temporalmente.';
-      if(dateEl)dateEl.textContent='La vinculación registrada no depende de esta sesión del navegador.';
-      if(button)button.hidden=true;
+      if(dateEl)dateEl.textContent='La identidad publicada no depende de esta sesión del navegador.';
     }
   }
 
@@ -1381,12 +1386,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
       </li>
     </ul>
     <div class="verification-actions">
-      <a class="primary" id="telegramVerifyButton" href="/api/identity/telegram/start" hidden>
-        <svg class="telegram-brand-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-  <path d="M11.9854 15.4083L15.2268 19.0936C16.4277 20.4589 17.0282 21.1416 17.6567 20.9754C18.2852 20.8092 18.5008 19.9108 18.9318 18.1138L21.3229 8.1459C21.9868 5.37832 22.3187 3.99454 21.5808 3.312C20.843 2.62947 19.564 3.13725 17.0061 4.15282L5.13876 8.86449C3.09293 9.67674 2.07001 10.0829 2.00507 10.7808C1.99842 10.8522 1.99831 10.9241 2.00474 10.9955C2.06754 11.6937 3.08921 12.1033 5.13255 12.9223C6.05838 13.2934 6.5213 13.479 6.8532 13.8344C6.89052 13.8743 6.9264 13.9157 6.96078 13.9584C7.26658 14.3384 7.39709 14.8371 7.65808 15.8344L8.14653 17.701C8.4005 18.6715 8.52749 19.1568 8.86008 19.223C9.19267 19.2891 9.48225 18.8867 10.0614 18.0819L11.9854 15.4083ZM11.9854 15.4083L11.6676 15.0771C11.3059 14.7001 11.1251 14.5117 11.1251 14.2775C11.1251 14.0433 11.3059 13.8548 11.6676 13.4778L15.2406 9.75409" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-        <span id="telegramVerifyButtonText">Vincular con Telegram</span>
-      </a>
       <a class="secondary" href="/api/identity/telegram/status" target="_blank" rel="noopener">
         <svg class="verification-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
   <path d="M9.14339 10.691L9.35031 10.4841C11.329 8.50532 14.5372 8.50532 16.5159 10.4841C18.4947 12.4628 18.4947 15.671 16.5159 17.6497L13.6497 20.5159C11.671 22.4947 8.46279 22.4947 6.48405 20.5159C4.50532 18.5372 4.50532 15.329 6.48405 13.3503L6.9484 12.886" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1394,13 +1393,13 @@ html[data-theme="sakura"] .book-copy .book-cta{
 </svg>
         Estado verificable
       </a>
-      <a class="secondary" href="/.well-known/roclahy-verification.json" target="_blank" rel="noopener">
+      <a class="secondary" href="/api/identity/telegram/proof" target="_blank" rel="noopener">
         <svg class="verification-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
   <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
   <path d="M8 12C8 18 12 22 12 22C12 22 16 18 16 12C16 6 12 2 12 2C12 2 8 6 8 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
   <path d="M21 15H3M21 9H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-        Ver prueba técnica
+        Ver prueba criptográfica
       </a>
     </div>
     <p class="verification-note">Esta verificación acredita control y vinculación de presencia web. No representa una verificación de identidad legal realizada por un tercero.</p>
