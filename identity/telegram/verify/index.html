@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Comprobar identidad · Roclahy</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --text:#161617;
+  --muted:#6e6e73;
+  --line:rgba(0,0,0,.1);
+  --ok:#138a55;
+  --soft:#eef7f2;
+  --button:#111113;
+  --buttonText:#fff;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0d0d0f;
+    --card:#171719;
+    --text:#f5f5f7;
+    --muted:#a1a1a6;
+    --line:rgba(255,255,255,.12);
+    --ok:#38c985;
+    --soft:#12251c;
+    --button:#f5f5f7;
+    --buttonText:#111113;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{padding:24px 16px 40px}
+main{max-width:620px;margin:0 auto}
+.back{display:inline-flex;align-items:center;min-height:44px;color:var(--text);text-decoration:none;font-weight:650}
+.hero{padding:18px 2px 12px}
+.icon{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;background:var(--soft);color:var(--ok)}
+.icon svg{width:31px;height:31px}
+h1{font-size:30px;letter-spacing:-.04em;margin:16px 0 7px}
+.sub{margin:0;color:var(--muted);line-height:1.5}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin-top:14px}
+.status{display:flex;gap:13px;align-items:flex-start}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--muted);margin-top:7px;flex:0 0 auto}
+.dot.ok{background:var(--ok)}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:750}
+.title{font-size:20px;font-weight:760;margin-top:5px;letter-spacing:-.02em}
+.meta{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.5}
+.account{font-size:17px;font-weight:720;margin-top:8px}
+.actions{display:grid;gap:10px;margin-top:18px}
+.action{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:15px;text-decoration:none;font-weight:730;padding:0 14px}
+.primary{background:var(--button);color:var(--buttonText)}
+.secondary{border:1px solid var(--line);color:var(--text);background:var(--card)}
+details{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+summary{cursor:pointer;font-weight:700}
+.tech{color:var(--muted);font-size:12px;line-height:1.55;margin-top:10px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
+.error{color:#c0392b}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin:16px 2px 0}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Volver a roclahy.me</a>
+
+  <section class="hero">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12s4.477 10 10 10 10-4.477 10-10Z" stroke="currentColor" stroke-width="1.6"/>
+        <path d="m8 12.5 2.5 2.5L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1>Comprobar identidad</h1>
+    <p class="sub">Esta página comprueba en su navegador que la última vinculación publicada contiene una firma válida de Telegram.</p>
+  </section>
+
+  <section class="card" aria-live="polite">
+    <div class="status">
+      <span class="dot" id="dot"></span>
+      <div>
+        <div class="label">Resultado</div>
+        <div class="title" id="resultTitle">Comprobando…</div>
+        <div class="meta" id="resultMeta">Validando la última prueba publicada.</div>
+      </div>
+    </div>
+    <div id="identityBlock" hidden>
+      <div class="account" id="account"></div>
+      <div class="meta" id="issued"></div>
+    </div>
+
+    <div class="actions">
+      <a class="secondary" href="/api/identity/telegram/proof-package" target="_blank" rel="noopener">Ver prueba firmada</a>
+      <a class="secondary" href="https://core.telegram.org/bots/webapps#validating-data-for-third-party-use" target="_blank" rel="noopener noreferrer">Cómo verifica Telegram esta prueba</a>
+    </div>
+
+    <details>
+      <summary>Detalles técnicos</summary>
+      <div class="tech" id="technical">Se mostrarán después de completar la comprobación.</div>
+    </details>
+  </section>
+
+  <p class="note">La verificación se realiza localmente en este navegador con la clave pública de Telegram. La prueba firmada también puede descargarse y comprobarse con otra implementación compatible.</p>
+</main>
+
+<script>
+(() => {
+  const EXPECTED_ID='1480932444';
+  const TELEGRAM_PUBLIC_KEY='e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242d';
+  const dot=document.getElementById('dot');
+  const resultTitle=document.getElementById('resultTitle');
+  const resultMeta=document.getElementById('resultMeta');
+  const identityBlock=document.getElementById('identityBlock');
+  const account=document.getElementById('account');
+  const issued=document.getElementById('issued');
+  const technical=document.getElementById('technical');
+
+  function hexToBytes(hex){
+    const out=new Uint8Array(hex.length/2);
+    for(let i=0;i<out.length;i++)out[i]=parseInt(hex.slice(i*2,i*2+2),16);
+    return out;
+  }
+
+  function base64UrlToBytes(value){
+    const normalized=String(value||'').replace(/-/g,'+').replace(/_/g,'/');
+    const padded=normalized+'='.repeat((4-normalized.length%4)%4);
+    const binary=atob(padded);
+    return Uint8Array.from(binary,c=>c.charCodeAt(0));
+  }
+
+  function ageLabel(seconds){
+    const s=Math.max(0,Number(seconds||0));
+    if(s<60)return 'ahora';
+    if(s<3600)return 'hace '+Math.floor(s/60)+' min';
+    if(s<86400)return 'hace '+Math.floor(s/3600)+' h';
+    return 'hace '+Math.floor(s/86400)+' d';
+  }
+
+  function canonicalData(params,botId){
+    const entries=[...params.entries()]
+      .filter(([key])=>key!=='hash'&&key!=='signature')
+      .sort(([a],[b])=>a<b?-1:a>b?1:0)
+      .map(([key,value])=>key+'='+value);
+    return String(botId)+':WebAppData\n'+entries.join('\n');
+  }
+
+  async function verify(){
+    if(!crypto?.subtle){
+      throw new Error('Este navegador no permite realizar la comprobación criptográfica local.');
+    }
+
+    const response=await fetch('/api/identity/telegram/proof-package',{cache:'no-store'});
+    if(!response.ok)throw new Error('Todavía no hay una prueba pública disponible.');
+    const pkg=await response.json();
+
+    if(!pkg?.ok||!pkg.initData||!pkg.botId)throw new Error('La prueba publicada está incompleta.');
+    if(String(pkg.publicKey||'').toLowerCase()!==TELEGRAM_PUBLIC_KEY){
+      throw new Error('La clave pública publicada no coincide con la clave oficial esperada.');
+    }
+
+    const params=new URLSearchParams(pkg.initData);
+    const signature=params.get('signature');
+    const userRaw=params.get('user');
+    const authDate=Number(params.get('auth_date'));
+    if(!signature||!userRaw||!Number.isFinite(authDate))throw new Error('La prueba no contiene los campos firmados necesarios.');
+
+    let user;
+    try{user=JSON.parse(userRaw);}catch{throw new Error('Los datos de identidad firmados no son válidos.');}
+    if(String(user?.id||'')!==EXPECTED_ID)throw new Error('La firma corresponde a otra cuenta de Telegram.');
+
+    const key=await crypto.subtle.importKey(
+      'raw',
+      hexToBytes(TELEGRAM_PUBLIC_KEY),
+      {name:'Ed25519'},
+      false,
+      ['verify']
+    );
+    const valid=await crypto.subtle.verify(
+      {name:'Ed25519'},
+      key,
+      base64UrlToBytes(signature),
+      new TextEncoder().encode(canonicalData(params,pkg.botId))
+    );
+    if(!valid)throw new Error('La firma de Telegram no es válida.');
+
+    const age=Math.max(0,Math.floor(Date.now()/1000)-authDate);
+    dot.classList.add('ok');
+    resultTitle.textContent='Firma de Telegram válida';
+    resultMeta.textContent='La prueba coincide con la cuenta pública indicada y pasó la comprobación criptográfica.';
+    identityBlock.hidden=false;
+    account.textContent='@'+String(user.username||pkg.username||'rclhy')+' · ID '+String(user.id);
+    issued.textContent='Emitida '+ageLabel(age)+'.';
+    technical.innerHTML=
+      'Proveedor: Telegram · Firma: Ed25519 · ID del bot: <code>'+String(pkg.botId).replace(/[<>&]/g,'')+
+      '</code> · Fecha firmada: <code>'+new Date(authDate*1000).toISOString()+'</code>.';
+  }
+
+  verify().catch(error=>{
+    dot.classList.remove('ok');
+    resultTitle.textContent='No se pudo verificar';
+    resultTitle.classList.add('error');
+    resultMeta.textContent=String(error?.message||'Error inesperado.');
+    technical.textContent='La comprobación no produjo un resultado válido.';
+  });
+})();
+</script>
+</body>
+</html>
