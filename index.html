@@ -127,12 +127,12 @@ img{display:block}
 .verification-list{display:grid;gap:9px;margin:18px 0 0;padding:0;list-style:none}
 .verification-list li{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border:1px solid var(--line);border-radius:16px;background:var(--surface2);font-size:12.5px;line-height:1.4}
 .verification-list b{font-weight:700}
-.verification-check-icon{font-size:19px;line-height:1;flex:0 0 auto;margin-top:1px;color:#22a06b}
+.verification-check-icon{width:19px;height:19px;flex:0 0 auto;margin-top:1px;color:#22a06b}
 .verification-status{display:block;margin-top:3px;color:var(--faint);font-size:11px}
 .verification-actions{display:grid;gap:8px;margin-top:18px}
 .verification-actions a{min-height:42px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;font-size:12.5px;font-weight:700}
-.verification-action-icon{font-size:18px;line-height:1}
-.telegram-brand-icon{color:#229ED9;font-size:20px;line-height:1}
+.verification-action-icon{width:18px;height:18px;flex:0 0 auto}
+.telegram-brand-icon{width:20px;height:20px;flex:0 0 auto;color:#229ED9}
 .verification-actions .primary .telegram-brand-icon{color:#fff}
 .verification-actions .primary{background:var(--accent);color:#fff}
 .verification-actions .secondary{border:1px solid var(--line);background:var(--surface2);color:var(--text)}
@@ -1346,29 +1346,47 @@ html[data-theme="sakura"] .book-copy .book-cta{
     <p class="verification-copy">Esta insignia confirma que <strong>roclahy.me</strong> es la dirección canónica utilizada por Roclahy para identificar su presencia pública en Internet.</p>
     <ul class="verification-list">
       <li>
-        <i class="hgi-stroke hgi-checkmark-circle-02 verification-check-icon" aria-hidden="true"></i>
+        <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
         <span><b>Control del dominio.</b> La prueba técnica se publica bajo <code>roclahy.me/.well-known/</code>.</span>
       </li>
       <li>
-        <i class="hgi-stroke hgi-checkmark-circle-02 verification-check-icon" aria-hidden="true"></i>
+        <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
         <span><b>Relación oficial.</b> <a href="https://roclahy.com/" target="_blank" rel="me noopener"><b>roclahy.com</b></a> enlaza públicamente a <b>roclahy.me</b> como su página «Acerca de».</span>
       </li>
       <li id="telegramVerificationRow">
-        <i class="hgi-stroke hgi-checkmark-circle-02 verification-check-icon" aria-hidden="true"></i>
+        <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
         <span><b>Telegram.</b> <span id="telegramVerificationText">Comprobando la vinculación criptográfica con @rclhy · ID 1480932444…</span><small class="verification-status" id="telegramVerificationDate"></small></span>
       </li>
     </ul>
     <div class="verification-actions">
       <a class="primary" id="telegramVerifyButton" href="/api/identity/telegram/start">
-        <i class="hgi-stroke hgi-telegram telegram-brand-icon" aria-hidden="true"></i>
+        <svg class="telegram-brand-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <path d="M11.9854 15.4083L15.2268 19.0936C16.4277 20.4589 17.0282 21.1416 17.6567 20.9754C18.2852 20.8092 18.5008 19.9108 18.9318 18.1138L21.3229 8.1459C21.9868 5.37832 22.3187 3.99454 21.5808 3.312C20.843 2.62947 19.564 3.13725 17.0061 4.15282L5.13876 8.86449C3.09293 9.67674 2.07001 10.0829 2.00507 10.7808C1.99842 10.8522 1.99831 10.9241 2.00474 10.9955C2.06754 11.6937 3.08921 12.1033 5.13255 12.9223C6.05838 13.2934 6.5213 13.479 6.8532 13.8344C6.89052 13.8743 6.9264 13.9157 6.96078 13.9584C7.26658 14.3384 7.39709 14.8371 7.65808 15.8344L8.14653 17.701C8.4005 18.6715 8.52749 19.1568 8.86008 19.223C9.19267 19.2891 9.48225 18.8867 10.0614 18.0819L11.9854 15.4083ZM11.9854 15.4083L11.6676 15.0771C11.3059 14.7001 11.1251 14.5117 11.1251 14.2775C11.1251 14.0433 11.3059 13.8548 11.6676 13.4778L15.2406 9.75409" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
         <span id="telegramVerifyButtonText">Vincular con Telegram</span>
       </a>
       <a class="secondary" href="/api/identity/telegram/status" target="_blank" rel="noopener">
-        <i class="hgi-stroke hgi-link-01 verification-action-icon" aria-hidden="true"></i>
+        <svg class="verification-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <path d="M9.14339 10.691L9.35031 10.4841C11.329 8.50532 14.5372 8.50532 16.5159 10.4841C18.4947 12.4628 18.4947 15.671 16.5159 17.6497L13.6497 20.5159C11.671 22.4947 8.46279 22.4947 6.48405 20.5159C4.50532 18.5372 4.50532 15.329 6.48405 13.3503L6.9484 12.886" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M17.0516 11.114L17.5159 10.6497C19.4947 8.67095 19.4947 5.46279 17.5159 3.48405C15.5372 1.50532 12.329 1.50532 10.3503 3.48405L7.48405 6.35031C5.50532 8.32904 5.50532 11.5372 7.48405 13.5159C9.46279 15.4947 12.671 15.4947 14.6497 13.5159L14.8566 13.309" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
         Estado verificable
       </a>
       <a class="secondary" href="/.well-known/roclahy-verification.json" target="_blank" rel="noopener">
-        <i class="hgi-stroke hgi-globe-02 verification-action-icon" aria-hidden="true"></i>
+        <svg class="verification-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8 12C8 18 12 22 12 22C12 22 16 18 16 12C16 6 12 2 12 2C12 2 8 6 8 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M21 15H3M21 9H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
         Ver prueba técnica
       </a>
     </div>
