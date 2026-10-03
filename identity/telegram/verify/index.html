@@ -73,7 +73,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-al
       </svg>
     </div>
     <h1>Comprobar identidad</h1>
-    <p class="sub">Esta página comprueba en su navegador que la última vinculación publicada contiene una firma válida de Telegram.</p>
+    <p class="sub">Esta página comprueba que la última vinculación publicada fue confirmada por Telegram.</p>
   </section>
 
   <section class="card" aria-live="polite">
@@ -95,13 +95,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-al
       <a class="secondary" href="https://core.telegram.org/bots/webapps#validating-data-for-third-party-use" target="_blank" rel="noopener noreferrer">Cómo verifica Telegram esta prueba</a>
     </div>
 
-    <details>
-      <summary>Detalles técnicos</summary>
-      <div class="tech" id="technical">Se mostrarán después de completar la comprobación.</div>
-    </details>
+    
   </section>
 
-  <p class="note">La verificación se realiza localmente en este navegador con la clave pública de Telegram. La prueba firmada también puede descargarse y comprobarse con otra implementación compatible.</p>
+  <p class="note">La comprobación se realiza en este navegador y solo muestra el resultado necesario para acreditar la vinculación.</p>
 </main>
 
 <script>
@@ -187,7 +184,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-al
     const age=Math.max(0,Math.floor(Date.now()/1000)-authDate);
     dot.classList.add('ok');
     resultTitle.textContent='Firma de Telegram válida';
-    resultMeta.textContent='La prueba coincide con la cuenta pública indicada y pasó la comprobación criptográfica.';
+    resultMeta.textContent='Telegram confirmó esta vinculación con la cuenta pública indicada.';
     identityBlock.hidden=false;
     account.textContent='@'+String(user.username||pkg.username||'rclhy')+' · ID '+String(user.id);
     issued.textContent='Emitida '+ageLabel(age)+'.';
