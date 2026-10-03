@@ -57,13 +57,13 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
       </svg>
     </div>
     <h1>Identidad Roclahy</h1>
-    <p class="subtitle">Renueva la prueba criptográfica pública de Telegram asociada a Roclahy.</p>
+    <p class="subtitle">Confirma de nuevo la identidad de Roclahy mediante Telegram.</p>
   </section>
 
   <section class="card">
     <div class="label">Cuenta autorizada</div>
     <div class="identity">@rclhy · ID 1480932444</div>
-    <div class="meta">La validación del servidor exige este ID estable. El nombre de usuario puede cambiar sin romper la identidad.</div>
+    <div class="meta">Esta es la cuenta autorizada para renovar la verificación pública.</div>
   </section>
 
   <section class="card">
@@ -80,7 +80,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
   <section class="card result" id="resultCard" aria-live="polite">
     <strong id="resultTitle"></strong>
     <small id="resultText"></small>
-    <small id="fingerprintWrap" hidden>Huella: <code id="fingerprint"></code></small>
   </section>
 
   <div class="actions">
@@ -88,7 +87,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
     <button class="secondary" id="closeButton" type="button">Cerrar</button>
   </div>
 
-  <p class="note">La Mini App envía el <code>initData</code> original al backend. Allí se verifica la firma Ed25519 de Telegram, la antigüedad de <code>auth_date</code>, el ID del bot y el ID 1480932444. El material firmado completo se conserva de forma privada; la web pública solo muestra los datos mínimos y una huella SHA-256.</p>
+  <p class="note">Telegram confirma la cuenta antes de actualizar la verificación pública. Solo se muestran los datos necesarios para acreditar el estado y la fecha de la última validación.</p>
 </main>
 
 <script>
@@ -102,8 +101,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
   const resultCard=document.getElementById('resultCard');
   const resultTitle=document.getElementById('resultTitle');
   const resultText=document.getElementById('resultText');
-  const fingerprintWrap=document.getElementById('fingerprintWrap');
-  const fingerprint=document.getElementById('fingerprint');
 
   let hasProof=false;
 
@@ -122,11 +119,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
       hasProof=Boolean(data?.proofAvailable);
       statusDot.classList.toggle('ok',Boolean(data?.verified));
       if(hasProof){
-        statusTitle.textContent=data.fresh?'Prueba criptográfica fresca':'Prueba criptográfica publicada';
-        statusMeta.textContent='Telegram Ed25519 · '+ageLabel(data.ageSeconds);
+        statusTitle.textContent=data.fresh?'Verificación reciente':'Verificación publicada';
+        statusMeta.textContent='Validada por Telegram · '+ageLabel(data.ageSeconds);
       }else{
         statusTitle.textContent='Verificación inicial registrada';
-        statusMeta.textContent='Telegram OpenID Connect · 2 oct 2026';
+        statusMeta.textContent='Verificación inicial · 2 oct 2026';
       }
       verifyButton.textContent=hasProof?'Revalidar ahora':'Validar ahora';
     }catch{
@@ -136,12 +133,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
     }
   }
 
-  function setResult(ok,title,text,fp){
+  function setResult(ok,title,text){
     resultCard.classList.add('show');
     resultTitle.textContent=title;
     resultText.textContent=text;
-    fingerprintWrap.hidden=!fp;
-    fingerprint.textContent=fp||'';
     if(tg?.HapticFeedback){
       tg.HapticFeedback.notificationOccurred(ok?'success':'error');
     }
@@ -173,10 +168,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
       }
       hasProof=true;
       const proof=data.proof||{};
-      setResult(true,'Prueba criptográfica actualizada','Telegram confirmó la identidad. La nueva prueba ya está disponible públicamente.',proof.proofFingerprint);
+      setResult(true,'Verificación actualizada','Telegram confirmó la identidad. La nueva validación ya está disponible públicamente.');
       statusDot.classList.add('ok');
-      statusTitle.textContent='Prueba criptográfica fresca';
-      statusMeta.textContent='Telegram Ed25519 · ahora';
+      statusTitle.textContent='Verificación reciente';
+      statusMeta.textContent='Validada por Telegram · ahora';
       verifyButton.textContent='Revalidar ahora';
     }catch(error){
       setResult(false,'No se pudo validar',String(error?.message||'Error inesperado.'));
