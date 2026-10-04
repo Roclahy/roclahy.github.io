@@ -1011,30 +1011,26 @@ details{
 
     siteViewsState.animated=true;
     const target=siteViewsState.target;
-    const reduceMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    const duration=2400;
 
-    if(reduceMotion){
-      totalEl.textContent=formatSiteViews(target);
-      return;
-    }
+    setTimeout(()=>{
+      const startedAt=performance.now();
+      totalEl.textContent='0';
 
-    const duration=1600;
-    const startedAt=performance.now();
-    totalEl.textContent='0';
+      const tick=(now)=>{
+        const progress=Math.min(1,(now-startedAt)/duration);
+        const eased=1-Math.pow(1-progress,3);
+        totalEl.textContent=formatSiteViews(Math.round(target*eased));
 
-    const tick=(now)=>{
-      const progress=Math.min(1,(now-startedAt)/duration);
-      const eased=1-Math.pow(1-progress,4);
-      totalEl.textContent=formatSiteViews(Math.round(target*eased));
+        if(progress<1){
+          requestAnimationFrame(tick);
+        }else{
+          totalEl.textContent=formatSiteViews(target);
+        }
+      };
 
-      if(progress<1){
-        requestAnimationFrame(tick);
-      }else{
-        totalEl.textContent=formatSiteViews(target);
-      }
-    };
-
-    requestAnimationFrame(tick);
+      requestAnimationFrame(tick);
+    },300);
   }
 
   function observeSiteViews(){
