@@ -984,59 +984,50 @@ details{
   loadPortfolioFeed();
 
   (() => {
+    const BASELINE=118131;
     const metric=document.querySelector('.site-metric');
     const totalEl=document.getElementById('siteViewsTotal');
     if(!metric || !totalEl) return;
 
-    const BASELINE=118131;
-    let target=BASELINE;
-    let ready=false;
-    let visible=false;
+    let target=Number(String(totalEl.textContent||'').replace(/\D/g,''))||BASELINE;
     let started=false;
-    let timer=null;
 
     const format=(value)=>new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(value);
 
-    const tryStart=()=>{
-      if(started || !ready || !visible) return;
-      started=true;
-
-      timer=setTimeout(()=>{
-        const duration=3000;
-        const startAt=performance.now();
-        totalEl.textContent='0';
-
-        const frame=(now)=>{
-          const p=Math.min(1,(now-startAt)/duration);
-          const eased=1-Math.pow(1-p,3);
-          totalEl.textContent=format(Math.round(target*eased));
-
-          if(p<1) requestAnimationFrame(frame);
-          else totalEl.textContent=format(target);
-        };
-
-        requestAnimationFrame(frame);
-      },250);
+    const isVisible=()=>{
+      const rect=metric.getBoundingClientRect();
+      const vh=window.innerHeight||document.documentElement.clientHeight;
+      return rect.top<vh*.95 && rect.bottom>vh*.05;
     };
 
-    if('IntersectionObserver' in window){
-      const observer=new IntersectionObserver((entries)=>{
-        const entry=entries[0];
-        visible=Boolean(entry && entry.isIntersecting && entry.intersectionRatio>=0.25);
+    const animate=()=>{
+      if(started || !isVisible()) return;
+      started=true;
+      window.removeEventListener('scroll',check);
+      window.removeEventListener('resize',check);
 
-        if(!visible && timer){
-          clearTimeout(timer);
-          timer=null;
-          started=false;
-        }
+      const duration=2600;
+      const startAt=performance.now();
+      totalEl.textContent='0';
 
-        if(visible) tryStart();
-      },{threshold:[0,0.25,0.5,0.75]});
+      const frame=(now)=>{
+        const p=Math.min(1,(now-startAt)/duration);
+        const eased=1-Math.pow(1-p,3);
+        totalEl.textContent=format(Math.round(target*eased));
+        if(p<1) requestAnimationFrame(frame);
+        else totalEl.textContent=format(target);
+      };
 
-      observer.observe(metric);
-    }else{
-      visible=true;
-    }
+      requestAnimationFrame(frame);
+    };
+
+    const check=()=>{
+      if(!started && isVisible()) setTimeout(animate,180);
+    };
+
+    window.addEventListener('scroll',check,{passive:true});
+    window.addEventListener('resize',check);
+    window.addEventListener('pageshow',check);
 
     fetch('/api/views?count=1',{
       method:'GET',
@@ -1048,15 +1039,15 @@ details{
         return res.json();
       })
       .then((data)=>{
-        const value=Number(data && data.total);
-        if(Number.isSafeInteger(value) && value>=BASELINE) target=value;
+        const value=Number(data&&data.total);
+        if(Number.isSafeInteger(value) && value>=BASELINE){
+          target=value;
+          if(!started) totalEl.textContent=format(target);
+        }
       })
-      .catch(()=>{})
-      .finally(()=>{
-        ready=true;
-        totalEl.textContent=format(target);
-        tryStart();
-      });
+      .catch(()=>{});
+
+    check();
   })();
 
   function show(name){
