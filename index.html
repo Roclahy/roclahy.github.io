@@ -963,8 +963,11 @@ html[data-theme="sakura"] .book-copy .book-cta{
   color:currentColor;
   flex:none;
 }
-.icon-telegram{color:var(--accent)!important}
-.telegram-item .latest-source{color:var(--accent)!important}
+/* Telegram uses the same neutral icon treatment as the rest of the interface.
+   Only the quick-contact pill keeps the themed accent. */
+.profile-contact-links .icon-telegram{color:var(--accent)!important}
+.link-row .icon-telegram{color:inherit!important}
+.telegram-item .latest-source{color:var(--faint)!important}
 .hero{padding-top:14px}
 @media(max-width:620px){
   .hero{padding-top:6px}
