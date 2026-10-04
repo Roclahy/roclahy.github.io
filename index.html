@@ -1448,7 +1448,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     }catch(_){}
   }
 
-  runWhenIdle(refreshSiteViews,350);
+  refreshSiteViews();
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
