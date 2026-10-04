@@ -2,23 +2,28 @@
   const BASELINE_TOTAL = 118131;
   const metric = document.querySelector('.site-metric');
   const totalEl = document.getElementById('siteViewsTotal');
-
   if (!metric || !totalEl) return;
 
-  let target = BASELINE_TOTAL;
-  let targetReady = false;
-  let visible = false;
+  let target = Number(String(totalEl.textContent || '').replace(/\D/g, '')) || BASELINE_TOTAL;
   let started = false;
-  let startTimer = null;
+  let raf = 0;
 
-  const locale = document.documentElement.lang === 'en' ? 'en-US' : 'es-ES';
-  const formatter = new Intl.NumberFormat(locale);
+  const formatter = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-US' : 'es-ES');
+
+  const isVisible = () => {
+    const rect = metric.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top < vh * 0.95 && rect.bottom > vh * 0.05;
+  };
 
   const animate = () => {
-    if (started || !visible || !targetReady) return;
-
+    if (started || !isVisible()) return;
     started = true;
-    const duration = 2200;
+
+    window.removeEventListener('scroll', check, { passive: true });
+    window.removeEventListener('resize', check);
+
+    const duration = 2600;
     const startedAt = performance.now();
     totalEl.textContent = '0';
 
@@ -28,50 +33,28 @@
       totalEl.textContent = formatter.format(Math.round(target * eased));
 
       if (progress < 1) {
-        requestAnimationFrame(tick);
+        raf = requestAnimationFrame(tick);
       } else {
         totalEl.textContent = formatter.format(target);
       }
     };
 
-    requestAnimationFrame(tick);
+    raf = requestAnimationFrame(tick);
   };
 
-  const scheduleAnimation = () => {
-    if (started || startTimer || !visible || !targetReady) return;
-
-    startTimer = window.setTimeout(() => {
-      startTimer = null;
-      if (visible) animate();
-    }, 450);
-  };
-
-  const updateVisibility = (isVisible) => {
-    visible = isVisible;
-
-    if (!visible && startTimer) {
-      clearTimeout(startTimer);
-      startTimer = null;
-      return;
+  const check = () => {
+    if (started) return;
+    if (isVisible()) {
+      window.setTimeout(animate, 180);
     }
-
-    if (visible) scheduleAnimation();
   };
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      updateVisibility(Boolean(entry?.isIntersecting && entry.intersectionRatio >= 0.55));
-
-      if (started) observer.disconnect();
-    }, {
-      threshold: [0, 0.55, 0.85, 1]
-    });
-
-    observer.observe(metric);
-  } else {
-    updateVisibility(true);
-  }
+  window.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('resize', check);
+  window.addEventListener('pageshow', check);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) check();
+  });
 
   fetch('/api/views?count=1', {
     method: 'GET',
@@ -83,17 +66,13 @@
       return res.json();
     })
     .then((data) => {
-      const total = Number(data?.total);
-      if (Number.isSafeInteger(total) && total >= BASELINE_TOTAL) {
-        target = total;
+      const value = Number(data?.total);
+      if (Number.isSafeInteger(value) && value >= BASELINE_TOTAL) {
+        target = value;
+        if (!started) totalEl.textContent = formatter.format(target);
       }
     })
-    .catch(() => {
-      target = BASELINE_TOTAL;
-    })
-    .finally(() => {
-      targetReady = true;
-      if (!started) totalEl.textContent = formatter.format(target);
-      scheduleAnimation();
-    });
+    .catch(() => {});
+
+  check();
 })();
