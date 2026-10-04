@@ -1065,7 +1065,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
     </div>
 
     <div class="site-metric" aria-label="Vistas totales del sitio">
-      <iframe class="views-counter-frame" data-src="/api/views-widget" title="" aria-hidden="true" tabindex="-1"></iframe>
       <svg class="site-metric-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/>
         <circle cx="12" cy="12" r="2.8"/>
@@ -1436,7 +1435,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     const el=document.getElementById('siteViewsTotal');
     if(!el) return;
     try{
-      const res=await fetch('/api/views',{cache:'no-store',credentials:'same-origin'});
+      const res=await fetch('/api/views?count=1',{cache:'no-store',credentials:'same-origin'});
       if(!res.ok) return;
       const data=await res.json();
       const total=Number(data?.total);
@@ -1446,14 +1445,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
     }catch(_){}
   }
 
-  const viewsFrame=document.querySelector('.views-counter-frame');
-  if(viewsFrame){
-    viewsFrame.addEventListener('load',()=>setTimeout(refreshSiteViews,120),{once:true});
-    runWhenIdle(()=>{
-      const src=viewsFrame.dataset.src;
-      if(src && !viewsFrame.getAttribute('src')) viewsFrame.setAttribute('src',src);
-    },900);
-  }
+  runWhenIdle(refreshSiteViews,350);
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
