@@ -995,6 +995,72 @@ details{
   };
   runWhenIdle(loadPortfolioFeed,2200);
 
+  const siteViewsState={
+    target:118131,
+    ready:false,
+    visible:false,
+    animated:false
+  };
+
+  const formatSiteViews=(value)=>
+    new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(value);
+
+  function animateSiteViews(){
+    const totalEl=document.getElementById('siteViewsTotal');
+    if(!totalEl || siteViewsState.animated || !siteViewsState.visible || !siteViewsState.ready) return;
+
+    siteViewsState.animated=true;
+    const target=siteViewsState.target;
+    const reduceMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+
+    if(reduceMotion){
+      totalEl.textContent=formatSiteViews(target);
+      return;
+    }
+
+    const duration=1600;
+    const startedAt=performance.now();
+    totalEl.textContent='0';
+
+    const tick=(now)=>{
+      const progress=Math.min(1,(now-startedAt)/duration);
+      const eased=1-Math.pow(1-progress,4);
+      totalEl.textContent=formatSiteViews(Math.round(target*eased));
+
+      if(progress<1){
+        requestAnimationFrame(tick);
+      }else{
+        totalEl.textContent=formatSiteViews(target);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  }
+
+  function observeSiteViews(){
+    const metric=document.querySelector('.site-metric');
+    if(!metric) return;
+
+    if(!('IntersectionObserver' in window)){
+      siteViewsState.visible=true;
+      animateSiteViews();
+      return;
+    }
+
+    const observer=new IntersectionObserver((entries)=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting || entry.intersectionRatio<0.35) return;
+
+      siteViewsState.visible=true;
+      observer.disconnect();
+      animateSiteViews();
+    },{
+      threshold:[0,0.35,0.75]
+    });
+
+    observer.observe(metric);
+  }
+
   async function loadSiteViews(){
     const totalEl=document.getElementById('siteViewsTotal');
     if(!totalEl) return;
@@ -1009,13 +1075,18 @@ details{
       const data=await res.json();
       const total=Number(data?.total);
       if(Number.isSafeInteger(total) && total>=118131){
-        totalEl.textContent=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(total);
+        siteViewsState.target=total;
       }
     }catch(_){
-      // Keep the imported Lnk.Bio baseline visible if the counter is unavailable.
+      // Keep the imported Lnk.Bio baseline if the counter is unavailable.
+    }finally{
+      siteViewsState.ready=true;
+      animateSiteViews();
     }
   }
-  runWhenIdle(loadSiteViews,2600);
+
+  observeSiteViews();
+  runWhenIdle(loadSiteViews,1200);
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
