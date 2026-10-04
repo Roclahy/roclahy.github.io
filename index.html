@@ -1426,21 +1426,86 @@ html[data-theme="sakura"] .book-copy .book-cta{
 
   if(!constrainedNetwork) runWhenIdle(loadPortfolioFeed,1400);
 
-  async function refreshSiteViews(){
+  (() => {
+    const BASELINE_TOTAL=118131;
+    const metric=document.querySelector('.site-metric');
     const el=document.getElementById('siteViewsTotal');
-    if(!el) return;
-    try{
-      const res=await fetch('/api/views?count=1',{cache:'no-store',credentials:'same-origin'});
-      if(!res.ok) return;
-      const data=await res.json();
-      const total=Number(data?.total);
-      if(Number.isSafeInteger(total) && total>=118131){
-        el.textContent=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES').format(total);
-      }
-    }catch(_){}
-  }
+    if(!metric || !el) return;
 
-  refreshSiteViews();
+    const formatter=new Intl.NumberFormat(locale==='en'?'en-US':'es-ES');
+    let target=BASELINE_TOTAL;
+    let started=false;
+    let targetReady=false;
+
+    const animate=()=>{
+      if(started || !targetReady) return;
+      started=true;
+
+      const duration=2600;
+      const startedAt=performance.now();
+      el.textContent='0';
+
+      const tick=(now)=>{
+        const progress=Math.min(1,(now-startedAt)/duration);
+        const eased=1-Math.pow(1-progress,3);
+        el.textContent=formatter.format(Math.round(target*eased));
+
+        if(progress<1){
+          requestAnimationFrame(tick);
+        }else{
+          el.textContent=formatter.format(target);
+        }
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const startWhenVisible=()=>{
+      if('IntersectionObserver' in window){
+        const observer=new IntersectionObserver((entries)=>{
+          const entry=entries[0];
+          if(!entry?.isIntersecting || entry.intersectionRatio<0.3) return;
+          observer.disconnect();
+          setTimeout(animate,180);
+        },{threshold:[0,0.3,0.6]});
+
+        observer.observe(metric);
+        return;
+      }
+
+      const check=()=>{
+        const rect=metric.getBoundingClientRect();
+        const vh=window.innerHeight||document.documentElement.clientHeight;
+        if(rect.top<vh && rect.bottom>0){
+          window.removeEventListener('scroll',check);
+          window.removeEventListener('resize',check);
+          setTimeout(animate,180);
+        }
+      };
+
+      window.addEventListener('scroll',check,{passive:true});
+      window.addEventListener('resize',check);
+      check();
+    };
+
+    fetch('/api/views?count=1',{cache:'no-store',credentials:'same-origin'})
+      .then((res)=>{
+        if(!res.ok) throw new Error('views');
+        return res.json();
+      })
+      .then((data)=>{
+        const total=Number(data?.total);
+        if(Number.isSafeInteger(total) && total>=BASELINE_TOTAL){
+          target=total;
+          el.textContent=formatter.format(total);
+        }
+      })
+      .catch(()=>{})
+      .finally(()=>{
+        targetReady=true;
+        startWhenVisible();
+      });
+  })();
 
   function show(name){
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
