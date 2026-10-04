@@ -952,6 +952,23 @@ html[data-theme="sakura"] .book-copy .book-cta{
 .icon-globe{--icon-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22M3%2012h18M12%203c2.2%202.4%203.3%205.4%203.3%209S14.2%2018.6%2012%2021C9.8%2018.6%208.7%2015.6%208.7%2012S9.8%205.4%2012%203Z%22%2F%3E%3C%2Fsvg%3E")}
 .icon-sun{--icon-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%224%22%2F%3E%3Cpath%20d%3D%22M12%202v2M12%2020v2M4.93%204.93l1.42%201.42M17.65%2017.65l1.42%201.42M2%2012h2M20%2012h2M4.93%2019.07l1.42-1.42M17.65%206.35l1.42-1.42%22%2F%3E%3C%2Fsvg%3E")}
 .icon-moon{--icon-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M20.5%2015.4A8.5%208.5%200%200%201%208.6%203.5%208.5%208.5%200%201%200%2020.5%2015.4Z%22%2F%3E%3C%2Fsvg%3E")}
+
+
+/* 2026-10-04 visual fixes: reliable inline dock icons, themed Telegram, tighter profile placement */
+.dock-icon::before{content:none!important;display:none!important}
+.dock-svg{
+  width:20px;
+  height:20px;
+  display:block;
+  color:currentColor;
+  flex:none;
+}
+.icon-telegram{color:var(--accent)!important}
+.telegram-item .latest-source{color:var(--accent)!important}
+.hero{padding-top:14px}
+@media(max-width:620px){
+  .hero{padding-top:6px}
+}
 </style>
 </head>
 <body>
@@ -1136,19 +1153,40 @@ html[data-theme="sakura"] .book-copy .book-cta{
 
 <nav class="dock" aria-label="Navegación del portfolio" data-i18n-aria="nav_aria">
   <button type="button" class="is-active" data-nav="inicio">
-    <span class="dock-icon" aria-hidden="true"></span>
+    <span class="dock-icon" aria-hidden="true">
+      <svg class="dock-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.5 10.8 12 3.8l8.5 7v8.1a1.6 1.6 0 0 1-1.6 1.6H5.1a1.6 1.6 0 0 1-1.6-1.6Z"/>
+        <path d="M9.2 20.5v-6.3h5.6v6.3"/>
+      </svg>
+    </span>
     <span class="dock-label" data-i18n="nav_home">Inicio</span>
   </button>
   <button type="button" data-nav="proyectos">
-    <span class="dock-icon" aria-hidden="true"></span>
+    <span class="dock-icon" aria-hidden="true">
+      <svg class="dock-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="7" width="18" height="13" rx="2"/>
+        <path d="M8 7V5.4A2.4 2.4 0 0 1 10.4 3h3.2A2.4 2.4 0 0 1 16 5.4V7M3 12.2h18"/>
+      </svg>
+    </span>
     <span class="dock-label" data-i18n="nav_projects">Proyectos</span>
   </button>
   <button type="button" data-nav="escritura">
-    <span class="dock-icon" aria-hidden="true"></span>
+    <span class="dock-icon" aria-hidden="true">
+      <svg class="dock-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m4.2 19.8 3.9-.8L19 8.1a2.1 2.1 0 0 0-3-3L5.1 16Z"/>
+        <path d="m14.6 6.5 2.9 2.9M4.2 19.8 5.1 16"/>
+      </svg>
+    </span>
     <span class="dock-label" data-i18n="nav_writing">Escritura</span>
   </button>
   <button type="button" data-nav="enlaces">
-    <span class="dock-icon" aria-hidden="true"></span>
+    <span class="dock-icon" aria-hidden="true">
+      <svg class="dock-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.5 14.5 14.5 9.5"/>
+        <path d="m7.2 16.8-1.3 1.3a3.6 3.6 0 0 1-5.1-5.1l3.1-3.1A3.6 3.6 0 0 1 9 9.8"/>
+        <path d="m16.8 7.2 1.3-1.3a3.6 3.6 0 0 1 5.1 5.1l-3.1 3.1a3.6 3.6 0 0 1-5.1.1"/>
+      </svg>
+    </span>
     <span class="dock-label" data-i18n="nav_links">Enlaces</span>
   </button>
 </nav>
