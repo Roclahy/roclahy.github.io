@@ -6,22 +6,46 @@
 
   let target = Number(String(totalEl.textContent || '').replace(/\D/g, '')) || BASELINE_TOTAL;
   let started = false;
+  let finished = false;
   let raf = 0;
+  let startTimer = 0;
+  let observer = null;
+  let hasUserScrolled = window.scrollY > 2;
 
   const formatter = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-US' : 'es-ES');
+  const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
 
-  const isVisible = () => {
+  const visibleRatio = () => {
     const rect = metric.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
-    return rect.top < vh * 0.95 && rect.bottom > vh * 0.05;
+    const visibleBottom = Math.max(0, vh - 104);
+    const visibleHeight = Math.max(
+      0,
+      Math.min(rect.bottom, visibleBottom) - Math.max(rect.top, 0)
+    );
+
+    return visibleHeight / Math.max(rect.height, 1);
+  };
+
+  const cleanup = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = null;
+    }
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', scheduleStart);
   };
 
   const animate = () => {
-    if (started || !isVisible()) return;
+    if (started || !hasUserScrolled || visibleRatio() < 0.6) return;
     started = true;
+    cleanup();
 
-    window.removeEventListener('scroll', check, { passive: true });
-    window.removeEventListener('resize', check);
+    if (reduceMotion) {
+      totalEl.textContent = formatter.format(target);
+      finished = true;
+      return;
+    }
 
     const duration = 2600;
     const startedAt = performance.now();
@@ -35,6 +59,8 @@
       if (progress < 1) {
         raf = requestAnimationFrame(tick);
       } else {
+        raf = 0;
+        finished = true;
         totalEl.textContent = formatter.format(target);
       }
     };
@@ -42,19 +68,55 @@
     raf = requestAnimationFrame(tick);
   };
 
-  const check = () => {
-    if (started) return;
-    if (isVisible()) {
-      window.setTimeout(animate, 180);
-    }
+  const scheduleStart = () => {
+    if (started || !hasUserScrolled || visibleRatio() < 0.6) return;
+
+    window.clearTimeout(startTimer);
+    startTimer = window.setTimeout(() => {
+      if (!started && hasUserScrolled && visibleRatio() >= 0.6) {
+        animate();
+      }
+    }, 120);
   };
 
-  window.addEventListener('scroll', check, { passive: true });
-  window.addEventListener('resize', check);
-  window.addEventListener('pageshow', check);
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) check();
-  });
+  function onScroll() {
+    if (!hasUserScrolled && window.scrollY > 2) {
+      hasUserScrolled = true;
+    }
+    scheduleStart();
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', scheduleStart);
+
+  if ('IntersectionObserver' in window) {
+    observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting && hasUserScrolled) {
+          scheduleStart();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -104px 0px',
+        threshold: [0.6]
+      }
+    );
+
+    observer.observe(metric);
+  }
+
+  window.addEventListener(
+    'pageshow',
+    () => {
+      if (window.scrollY > 2) {
+        hasUserScrolled = true;
+        scheduleStart();
+      }
+    },
+    { once: true }
+  );
 
   fetch('/api/views?count=1', {
     method: 'GET',
@@ -69,10 +131,11 @@
       const value = Number(data?.total);
       if (Number.isSafeInteger(value) && value >= BASELINE_TOTAL) {
         target = value;
-        if (!started) totalEl.textContent = formatter.format(target);
+
+        if (!started || finished) {
+          totalEl.textContent = formatter.format(target);
+        }
       }
     })
     .catch(() => {});
-
-  check();
 })();
