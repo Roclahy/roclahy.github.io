@@ -1,6 +1,8 @@
 (() => {
   const BASELINE_TOTAL = 118131;
-  const MIN_VISIBLE_RATIO = 0.95;
+  const TRIGGER_RATIO = 0.80;
+  const MIN_REAL_SCROLL = 24;
+
   const metric = document.querySelector('.site-metric');
   const totalEl = document.getElementById('siteViewsTotal');
   if (!metric || !totalEl) return;
@@ -9,49 +11,64 @@
   let started = false;
   let finished = false;
   let raf = 0;
-  let startTimer = 0;
-  let observer = null;
-  let hasUserScrolled = false;
+  let hasScrollIntent = false;
   let touchStartY = null;
+  const initialScrollY = window.scrollY;
 
-  const formatter = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-US' : 'es-ES');
-  const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+  const formatter = new Intl.NumberFormat(
+    document.documentElement.lang === 'en' ? 'en-US' : 'es-ES'
+  );
+  const reduceMotion =
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
 
-  const visibleRatio = () => {
-    const rect = metric.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const visibleBottom = Math.max(0, vh - 104);
-    const visibleHeight = Math.max(
-      0,
-      Math.min(rect.bottom, visibleBottom) - Math.max(rect.top, 0)
-    );
+  // El contador permanece en cero hasta que el usuario llegue realmente a él.
+  totalEl.textContent = '0';
 
-    return visibleHeight / Math.max(rect.height, 1);
-  };
-
-  const cleanup = () => {
-    if (observer) {
-      observer.disconnect();
-      observer = null;
+  const visibleViewport = () => {
+    const vv = window.visualViewport;
+    if (vv) {
+      return {
+        top: vv.offsetTop || 0,
+        height: vv.height
+      };
     }
 
-    window.clearTimeout(startTimer);
+    return {
+      top: 0,
+      height: document.documentElement.clientHeight || window.innerHeight
+    };
+  };
+
+  const reachedTriggerLine = () => {
+    const rect = metric.getBoundingClientRect();
+    const viewport = visibleViewport();
+    const triggerY = viewport.top + viewport.height * TRIGGER_RATIO;
+
+    return rect.top <= triggerY && rect.bottom > viewport.top;
+  };
+
+  const hasActuallyScrolled = () =>
+    Math.abs(window.scrollY - initialScrollY) >= MIN_REAL_SCROLL;
+
+  const cleanup = () => {
     window.removeEventListener('scroll', onScroll);
-    window.removeEventListener('resize', scheduleStart);
     window.removeEventListener('wheel', onWheel);
     window.removeEventListener('touchstart', onTouchStart);
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('keydown', onKeyDown);
+    window.visualViewport?.removeEventListener('resize', onViewportChange);
   };
 
   const animate = () => {
-    if (started || !hasUserScrolled || visibleRatio() < MIN_VISIBLE_RATIO) return;
+    if (started) return;
+    if (!hasScrollIntent || !hasActuallyScrolled() || !reachedTriggerLine()) return;
+
     started = true;
     cleanup();
 
     if (reduceMotion) {
-      totalEl.textContent = formatter.format(target);
       finished = true;
+      totalEl.textContent = formatter.format(target);
       return;
     }
 
@@ -76,33 +93,15 @@
     raf = requestAnimationFrame(tick);
   };
 
-  const scheduleStart = () => {
-    if (started || !hasUserScrolled || visibleRatio() < MIN_VISIBLE_RATIO) return;
-
-    window.clearTimeout(startTimer);
-    startTimer = window.setTimeout(() => {
-      if (!started && hasUserScrolled && visibleRatio() >= MIN_VISIBLE_RATIO) {
-        animate();
-      }
-    }, 100);
-  };
-
-  const armFromUserScroll = () => {
-    if (!hasUserScrolled) {
-      hasUserScrolled = true;
-    }
-    scheduleStart();
-  };
-
   function onScroll() {
-    // El evento scroll por sí solo no habilita la animación:
-    // algunos navegadores restauran o ajustan el scroll al abrir la página.
-    scheduleStart();
+    // Solo un desplazamiento real, precedido por intención explícita del usuario,
+    // puede iniciar la animación. Los ajustes automáticos del navegador no bastan.
+    animate();
   }
 
   function onWheel(event) {
     if (Math.abs(event.deltaY) > 1) {
-      armFromUserScroll();
+      hasScrollIntent = true;
     }
   }
 
@@ -115,40 +114,29 @@
     if (touchStartY == null || y == null) return;
 
     if (Math.abs(y - touchStartY) >= 8) {
-      armFromUserScroll();
+      hasScrollIntent = true;
     }
   }
 
   function onKeyDown(event) {
     if (['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].includes(event.key)) {
-      armFromUserScroll();
+      hasScrollIntent = true;
+      requestAnimationFrame(animate);
+    }
+  }
+
+  function onViewportChange() {
+    if (hasScrollIntent && hasActuallyScrolled()) {
+      requestAnimationFrame(animate);
     }
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', scheduleStart);
   window.addEventListener('wheel', onWheel, { passive: true });
   window.addEventListener('touchstart', onTouchStart, { passive: true });
   window.addEventListener('touchmove', onTouchMove, { passive: true });
   window.addEventListener('keydown', onKeyDown);
-
-  if ('IntersectionObserver' in window) {
-    observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry?.isIntersecting && hasUserScrolled) {
-          scheduleStart();
-        }
-      },
-      {
-        root: null,
-        rootMargin: '0px 0px -104px 0px',
-        threshold: [MIN_VISIBLE_RATIO]
-      }
-    );
-
-    observer.observe(metric);
-  }
+  window.visualViewport?.addEventListener('resize', onViewportChange, { passive: true });
 
   fetch('/api/views?count=1', {
     method: 'GET',
@@ -164,7 +152,9 @@
       if (Number.isSafeInteger(value) && value >= BASELINE_TOTAL) {
         target = value;
 
-        if (!started || finished) {
+        // Antes de activarse debe seguir mostrando 0. Si ya terminó,
+        // sí actualizamos el total por si la respuesta llegó tarde.
+        if (finished) {
           totalEl.textContent = formatter.format(target);
         }
       }
