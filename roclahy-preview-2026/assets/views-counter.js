@@ -1,5 +1,6 @@
 (() => {
   const BASELINE_TOTAL = 118131;
+  const MIN_VISIBLE_RATIO = 0.95;
   const metric = document.querySelector('.site-metric');
   const totalEl = document.getElementById('siteViewsTotal');
   if (!metric || !totalEl) return;
@@ -10,7 +11,8 @@
   let raf = 0;
   let startTimer = 0;
   let observer = null;
-  let hasUserScrolled = window.scrollY > 2;
+  let hasUserScrolled = false;
+  let touchStartY = null;
 
   const formatter = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-US' : 'es-ES');
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
@@ -32,12 +34,18 @@
       observer.disconnect();
       observer = null;
     }
+
+    window.clearTimeout(startTimer);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', scheduleStart);
+    window.removeEventListener('wheel', onWheel);
+    window.removeEventListener('touchstart', onTouchStart);
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('keydown', onKeyDown);
   };
 
   const animate = () => {
-    if (started || !hasUserScrolled || visibleRatio() < 0.6) return;
+    if (started || !hasUserScrolled || visibleRatio() < MIN_VISIBLE_RATIO) return;
     started = true;
     cleanup();
 
@@ -69,25 +77,60 @@
   };
 
   const scheduleStart = () => {
-    if (started || !hasUserScrolled || visibleRatio() < 0.6) return;
+    if (started || !hasUserScrolled || visibleRatio() < MIN_VISIBLE_RATIO) return;
 
     window.clearTimeout(startTimer);
     startTimer = window.setTimeout(() => {
-      if (!started && hasUserScrolled && visibleRatio() >= 0.6) {
+      if (!started && hasUserScrolled && visibleRatio() >= MIN_VISIBLE_RATIO) {
         animate();
       }
-    }, 120);
+    }, 100);
   };
 
-  function onScroll() {
-    if (!hasUserScrolled && window.scrollY > 2) {
+  const armFromUserScroll = () => {
+    if (!hasUserScrolled) {
       hasUserScrolled = true;
     }
     scheduleStart();
+  };
+
+  function onScroll() {
+    // El evento scroll por sí solo no habilita la animación:
+    // algunos navegadores restauran o ajustan el scroll al abrir la página.
+    scheduleStart();
+  }
+
+  function onWheel(event) {
+    if (Math.abs(event.deltaY) > 1) {
+      armFromUserScroll();
+    }
+  }
+
+  function onTouchStart(event) {
+    touchStartY = event.touches?.[0]?.clientY ?? null;
+  }
+
+  function onTouchMove(event) {
+    const y = event.touches?.[0]?.clientY;
+    if (touchStartY == null || y == null) return;
+
+    if (Math.abs(y - touchStartY) >= 8) {
+      armFromUserScroll();
+    }
+  }
+
+  function onKeyDown(event) {
+    if (['ArrowDown', 'PageDown', 'End', ' ', 'Spacebar'].includes(event.key)) {
+      armFromUserScroll();
+    }
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', scheduleStart);
+  window.addEventListener('wheel', onWheel, { passive: true });
+  window.addEventListener('touchstart', onTouchStart, { passive: true });
+  window.addEventListener('touchmove', onTouchMove, { passive: true });
+  window.addEventListener('keydown', onKeyDown);
 
   if ('IntersectionObserver' in window) {
     observer = new IntersectionObserver(
@@ -100,23 +143,12 @@
       {
         root: null,
         rootMargin: '0px 0px -104px 0px',
-        threshold: [0.6]
+        threshold: [MIN_VISIBLE_RATIO]
       }
     );
 
     observer.observe(metric);
   }
-
-  window.addEventListener(
-    'pageshow',
-    () => {
-      if (window.scrollY > 2) {
-        hasUserScrolled = true;
-        scheduleStart();
-      }
-    },
-    { once: true }
-  );
 
   fetch('/api/views?count=1', {
     method: 'GET',
