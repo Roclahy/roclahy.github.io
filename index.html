@@ -1479,6 +1479,9 @@ html[data-theme="sakura"] .book-copy .book-cta{
     let target=BASELINE_TOTAL;
     let started=false;
     let targetReady=false;
+    let userScrollIntent=false;
+    let touchStartY=null;
+    const initialScrollY=window.scrollY;
 
     const lockCountWidth=()=>{
       const finalText=formatter.format(target);
@@ -1490,9 +1493,33 @@ html[data-theme="sakura"] .book-copy .book-cta{
       el.style.flex='0 0 '+width+'px';
     };
 
+    const isMetricReached=()=>{
+      const rect=metric.getBoundingClientRect();
+      const viewportHeight=window.visualViewport?.height
+        || document.documentElement.clientHeight
+        || window.innerHeight;
+      const viewportTop=window.visualViewport?.offsetTop || 0;
+      const dock=document.querySelector('.dock');
+      const dockHeight=dock ? Math.ceil(dock.getBoundingClientRect().height) : 0;
+      const visibleBottom=viewportTop+viewportHeight-dockHeight-12;
+
+      return rect.top<=visibleBottom && rect.bottom>viewportTop;
+    };
+
+    const hasRealScroll=()=>Math.abs(window.scrollY-initialScrollY)>=12;
+
+    const cleanup=()=>{
+      window.removeEventListener('scroll',onScroll);
+      window.removeEventListener('wheel',onWheel);
+      window.removeEventListener('touchstart',onTouchStart);
+      window.removeEventListener('touchmove',onTouchMove);
+      window.removeEventListener('keydown',onKeyDown);
+    };
+
     const animate=()=>{
-      if(started || !targetReady) return;
+      if(started || !targetReady || !userScrollIntent || !hasRealScroll() || !isMetricReached()) return;
       started=true;
+      cleanup();
 
       const duration=2600;
       const startedAt=performance.now();
@@ -1513,33 +1540,36 @@ html[data-theme="sakura"] .book-copy .book-cta{
       requestAnimationFrame(tick);
     };
 
-    const startWhenVisible=()=>{
-      if('IntersectionObserver' in window){
-        const observer=new IntersectionObserver((entries)=>{
-          const entry=entries[0];
-          if(!entry?.isIntersecting || entry.intersectionRatio<0.3) return;
-          observer.disconnect();
-          setTimeout(animate,180);
-        },{threshold:[0,0.3,0.6]});
+    function onScroll(){
+      animate();
+    }
 
-        observer.observe(metric);
-        return;
+    function onWheel(event){
+      if(Math.abs(event.deltaY)>1) userScrollIntent=true;
+    }
+
+    function onTouchStart(event){
+      touchStartY=event.touches?.[0]?.clientY ?? null;
+    }
+
+    function onTouchMove(event){
+      const y=event.touches?.[0]?.clientY;
+      if(touchStartY==null || y==null) return;
+      if(Math.abs(y-touchStartY)>=8) userScrollIntent=true;
+    }
+
+    function onKeyDown(event){
+      if(['ArrowDown','PageDown','End',' ','Spacebar'].includes(event.key)){
+        userScrollIntent=true;
+        requestAnimationFrame(animate);
       }
+    }
 
-      const check=()=>{
-        const rect=metric.getBoundingClientRect();
-        const vh=window.innerHeight||document.documentElement.clientHeight;
-        if(rect.top<vh && rect.bottom>0){
-          window.removeEventListener('scroll',check);
-          window.removeEventListener('resize',check);
-          setTimeout(animate,180);
-        }
-      };
-
-      window.addEventListener('scroll',check,{passive:true});
-      window.addEventListener('resize',check);
-      check();
-    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('wheel',onWheel,{passive:true});
+    window.addEventListener('touchstart',onTouchStart,{passive:true});
+    window.addEventListener('touchmove',onTouchMove,{passive:true});
+    window.addEventListener('keydown',onKeyDown);
 
     fetch('/api/views?count=1',{cache:'no-store',credentials:'same-origin'})
       .then((res)=>{
@@ -1557,7 +1587,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
       .finally(()=>{
         lockCountWidth();
         targetReady=true;
-        startWhenVisible();
+        animate();
       });
   })();
 
