@@ -110,64 +110,7 @@ img{display:block}
 .site-metric strong{font-size:11.5px;line-height:1;font-weight:700;letter-spacing:-.01em;color:var(--muted)}
 .site-metric span{color:var(--faint);font-size:11px;font-weight:550}
 .verified-icon{width:19px;height:19px;color:#1d9bf0;flex:0 0 auto}
-.verified-badge{display:inline-grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;border-radius:50%}
-.verified-badge:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.verification-dialog{
-  width:min(calc(100% - 24px),520px);max-height:88vh;max-height:88dvh;padding:0;
-  border:1px solid var(--line);border-radius:28px;background:var(--surface);color:var(--text);
-  box-shadow:0 24px 80px rgba(0,0,0,.28);overflow:hidden
-}
-.verification-dialog::backdrop{background:rgba(0,0,0,.52);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-.verification-card{
-  display:flex;flex-direction:column;max-height:88vh;max-height:88dvh;min-height:0
-}
-.verification-head{
-  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
-  padding:22px 22px 16px;flex:0 0 auto;border-bottom:1px solid var(--line);background:var(--surface)
-}
-.verification-title{display:flex;align-items:center;gap:10px;min-width:0}
-.verification-title .verified-icon{width:25px;height:25px;flex:0 0 auto}
-.verification-title h3{font-size:21px;line-height:1.15;letter-spacing:-.035em}
-.verification-close{
-  width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto;border:1px solid var(--line);
-  border-radius:50%;background:var(--surface2);cursor:pointer;color:var(--muted);font-size:18px
-}
-.verification-body{
-  min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
-  padding:18px 22px 20px;scrollbar-gutter:stable
-}
-.verification-copy{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
-.verification-list{display:grid;gap:9px;margin:16px 0 0;padding:0;list-style:none}
-.verification-list li{
-  display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid var(--line);
-  border-radius:16px;background:var(--surface2);font-size:12.5px;line-height:1.42
-}
-.verification-list b{font-weight:700}
-.verification-check-icon{width:19px;height:19px;flex:0 0 auto;margin-top:1px;color:#22a06b}
-.verification-status{display:block;margin-top:4px;color:var(--faint);font-size:11px}
-.verification-note{margin:14px 1px 0;color:var(--faint);font-size:10.5px;line-height:1.5}
-.verification-actions{
-  display:grid;grid-template-columns:1fr;gap:8px;margin:0;padding:13px 22px calc(16px + env(safe-area-inset-bottom));
-  flex:0 0 auto;border-top:1px solid var(--line);background:var(--surface)
-}
-.verification-actions a{
-  min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;
-  font-size:12.5px;font-weight:700;text-align:center
-}
-.verification-action-icon{width:18px;height:18px;flex:0 0 auto}
-.telegram-brand-icon{width:20px;height:20px;flex:0 0 auto;color:#229ED9}
-.verification-actions .primary .telegram-brand-icon{color:#fff}
-.verification-actions .primary{background:var(--accent);color:#fff}
-.verification-actions .secondary{border:1px solid var(--line);background:var(--surface2);color:var(--text)}
-.verification-actions .tertiary{min-height:36px;border:0;background:transparent;color:var(--muted);font-size:11.5px}
-@media(max-width:420px){
-  .verification-dialog{width:calc(100% - 16px);border-radius:24px}
-  .verification-head{padding:18px 18px 14px}
-  .verification-body{padding:16px 18px 18px}
-  .verification-actions{padding:11px 18px calc(13px + env(safe-area-inset-bottom))}
-  .verification-title h3{font-size:19px}
-  .verification-list li{padding:11px 12px}
-}
+.verified-badge{display:inline-grid;place-items:center;padding:0;border:0;background:transparent;border-radius:50%}
 .hero h1{margin-top:24px}
 .avatar{
   width:82px;height:82px;border-radius:50%;object-fit:cover;object-position:center 34%;
@@ -1049,11 +992,11 @@ html[data-theme="sakura"] .book-copy .book-cta{
         <img class="avatar" src="https://cdn2.lnk.bi/profilepics/-1575227_20260705643.jpg" alt="Rosanna" width="82" height="82" fetchpriority="high" decoding="async">
         <div class="profile-name">
           <span>Rosanna</span>
-          <button class="verified-badge" id="verifiedBadge" type="button" aria-label="Ver verificación de página oficial" aria-haspopup="dialog">
+          <span class="verified-badge" aria-label="Insignia simbólica" title="Insignia simbólica">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"/>
             </svg>
-          </button>
+          </span>
         </div>
         <div class="profile-handle">@roclahy</div>
         <p class="profile-description" data-i18n="profile_description">Escribo contenido desde 2019 y soy la principal QA de los proyectos de Roclahy™. Escribir me ha permitido llegar a millones de lectores, y analizo casi cualquier tema que despierte mi curiosidad. La tecnología me apasiona y ocupa una parte central de mi vida. Leo de agosto.</p>
@@ -1239,65 +1182,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
   const go=[...document.querySelectorAll('[data-go]')];
   const trigger=document.getElementById('themeButton');
   const themeIcon=document.getElementById('themeIcon');
-  const verifiedBadge=document.getElementById('verifiedBadge');
-
-  function telegramProofAge(seconds){
-    const s=Math.max(0,Number(seconds||0));
-    if(s<60)return 'ahora';
-    if(s<3600)return 'hace '+Math.floor(s/60)+' min';
-    if(s<86400)return 'hace '+Math.floor(s/3600)+' h';
-    return 'hace '+Math.floor(s/86400)+' d';
-  }
-
-  async function refreshTelegramVerification(){
-    const textEl=document.getElementById('telegramVerificationText');
-    const dateEl=document.getElementById('telegramVerificationDate');
-    if(!textEl)return;
-
-    textEl.textContent='Comprobando la prueba criptográfica de @rclhy · ID 1480932444…';
-    if(dateEl)dateEl.textContent='';
-
-    try{
-      const response=await fetch('/api/identity/telegram/status',{cache:'no-store'});
-      if(!response.ok)throw new Error('status_unavailable');
-      const data=await response.json();
-
-      if(data?.verified && data?.proofAvailable && data?.independentlyVerifiable && String(data.linkedTelegramUserId)==='1480932444'){
-        textEl.textContent='Prueba OIDC verificable para la cuenta vinculada @rclhy · ID 1480932444.';
-        if(dateEl){
-          const when=data.authenticatedAt?new Intl.DateTimeFormat('es-ES',{dateStyle:'medium',timeStyle:'short',timeZone:'UTC'}).format(new Date(data.authenticatedAt))+' UTC':'fecha no disponible';
-          dateEl.textContent='Autenticada: '+when+' · alcance público: openid.';
-        }
-        verifiedBadge?.setAttribute('title','Página oficial · prueba OIDC de Telegram verificable');
-        return;
-      }
-
-      textEl.textContent='No hay una prueba criptográfica pública de Telegram disponible.';
-    }catch{
-      textEl.textContent='La comprobación en línea no está disponible temporalmente.';
-      if(dateEl)dateEl.textContent='La identidad publicada no depende de esta sesión del navegador.';
-    }
-  }
-
-  verifiedBadge?.addEventListener('click',()=>{
-    document.getElementById('verificationDialog')?.showModal();
-    refreshTelegramVerification();
-  });
-  document.addEventListener('click',(event)=>{
-    const dialog=document.getElementById('verificationDialog');
-    if(!dialog)return;
-    if(event.target?.id==='verificationClose') dialog.close();
-    if(event.target===dialog) dialog.close();
-  });
-
-  const telegramIdentityResult=new URLSearchParams(location.search).get('telegram_identity');
-  if(telegramIdentityResult){
-    history.replaceState(null,'',location.pathname+location.hash);
-    addEventListener('DOMContentLoaded',()=>{
-      document.getElementById('verificationDialog')?.showModal();
-      refreshTelegramVerification();
-    },{once:true});
-  }
 
   const browserLanguage=(navigator.languages?.[0]||navigator.language||'es').toLowerCase();
   const locale=browserLanguage.startsWith('en')?'en':'es';
@@ -1348,7 +1232,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
       theme_light:'Cambiar a tema claro',
       theme_dark:'Cambiar a tema oscuro',
       theme_sakura:'Cambiar a tema Sakura',
-      verified:'Cuenta oficial verificada'
     },
     en:{
       profile_description:'I’ve been creating content since 2019 and I’m the lead QA across Roclahy™ projects. Writing has allowed me to reach millions of readers, and I analyze almost any topic that sparks my curiosity. Technology is a passion of mine and a central part of my life. An August Leo.',
@@ -1396,7 +1279,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
       theme_light:'Switch to light mode',
       theme_dark:'Switch to dark mode',
       theme_sakura:'Switch to Sakura theme',
-      verified:'Official verified account'
     }
   };
   const t=(key)=>messages[locale][key]||messages.es[key]||key;
@@ -1625,77 +1507,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
   });
 })();
 </script>
-<dialog class="verification-dialog" id="verificationDialog" aria-labelledby="verificationTitle">
-  <div class="verification-card">
-    <div class="verification-head">
-      <div class="verification-title">
-        <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"/></svg>
-        <h3 id="verificationTitle">Página oficial de Roclahy</h3>
-      </div>
-      <button class="verification-close" id="verificationClose" type="button" aria-label="Cerrar">×</button>
-    </div>
 
-    <div class="verification-body">
-      <p class="verification-copy">Esta insignia reúne distintas pruebas públicas que vinculan <strong>roclahy.me</strong> con la presencia oficial de Roclahy.</p>
-
-      <ul class="verification-list">
-        <li>
-          <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span><b>Dominio.</b> La prueba técnica se publica bajo <code>roclahy.me/.well-known/</code>.</span>
-        </li>
-
-        <li>
-          <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span><b>roclahy.com.</b> El sitio principal enlaza públicamente a <b>roclahy.me</b> como su página «Acerca de».</span>
-        </li>
-
-        <li id="blueskyVerificationRow">
-          <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span><b>Bluesky.</b> <a href="https://bsky.app/profile/roclahy.me" target="_blank" rel="me noopener noreferrer"><b>@roclahy.me</b></a> utiliza este dominio como identificador público.</span>
-        </li>
-
-        <li id="telegramVerificationRow">
-          <svg class="verification-check-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span><b>Telegram.</b> <span id="telegramVerificationText">Comprobando la vinculación con @rclhy…</span><small class="verification-status" id="telegramVerificationDate"></small></span>
-        </li>
-      </ul>
-
-      <p class="verification-note">Estas pruebas acreditan control y vinculación de presencia web. No representan una verificación de identidad legal realizada por un tercero.</p>
-    </div>
-
-    <div class="verification-actions">
-      <a class="secondary" href="/identity/telegram/verify/">
-        <svg class="verification-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9.14339 10.691L9.35031 10.4841C11.329 8.50532 14.5372 8.50532 16.5159 10.4841C18.4947 12.4628 18.4947 15.671 16.5159 17.6497L13.6497 20.5159C11.671 22.4947 8.46279 22.4947 6.48405 20.5159C4.50532 18.5372 4.50532 15.329 6.48405 13.3503L6.9484 12.886" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M17.0516 11.114L17.5159 10.6497C19.4947 8.67095 19.4947 5.46279 17.5159 3.48405C15.5372 1.50532 12.329 1.50532 10.3503 3.48405L7.48405 6.35031C5.50532 8.32904 5.50532 11.5372 7.48405 13.5159C9.46279 15.4947 12.671 15.4947 14.6497 13.5159L14.8566 13.309" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Verificar prueba de Telegram
-      </a>
-
-      <a class="secondary" href="https://bsky.app/profile/roclahy.me" target="_blank" rel="me noopener noreferrer">
-        <svg class="verification-action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M7.5 4.5C9.3 5.85 11.24 8.59 12 10.05C12.76 8.59 14.7 5.85 16.5 4.5C17.8 3.53 19.9 2.78 19.9 5.17C19.9 5.65 19.63 9.19 19.47 9.76C18.92 11.75 16.91 12.26 15.12 11.95C18.25 12.49 19.05 14.28 17.33 16.08C14.06 19.5 12.63 15.22 12.27 14.13C12.2 13.93 12.17 13.83 12 13.83C11.83 13.83 11.8 13.93 11.73 14.13C11.37 15.22 9.94 19.5 6.67 16.08C4.95 14.28 5.75 12.49 8.88 11.95C7.09 12.26 5.08 11.75 4.53 9.76C4.37 9.19 4.1 5.65 4.1 5.17C4.1 2.78 6.2 3.53 7.5 4.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        </svg>
-        Comprobar en Bluesky
-      </a>
-
-      <a class="tertiary" href="/verification/">
-        Ver detalles de verificación
-      </a>
-    </div>
-  </div>
-</dialog>
 </body>
 </html>

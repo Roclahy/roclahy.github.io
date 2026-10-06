@@ -1,3 +1,0 @@
-import {publicOidcProofView} from "../../../_lib/telegram-identity.js";
-function json(data,status=200,cache="public, max-age=60"){return new Response(JSON.stringify(data),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":cache,"x-content-type-options":"nosniff","referrer-policy":"no-referrer","access-control-allow-origin":"https://roclahy.me"}});}
-export async function onRequestGet({env}){try{const proof=await publicOidcProofView(env);if(proof)return json({ok:true,...proof});}catch{}return json({ok:true,proofAvailable:false,verified:false,cryptographic:false,independentlyVerifiable:false,privacyMode:"openid-only",linkedAccount:"https://t.me/rclhy",linkedTelegramUserId:"1480932444"},200,"no-store, max-age=0");}
