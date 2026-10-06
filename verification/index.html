@@ -107,7 +107,7 @@ summary{cursor:pointer;font-weight:650;color:var(--muted)}
         <svg class="check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12s4.477 10 10 10 10-4.477 10-10Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 12.5 2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div>
           <div class="label">Telegram · @rclhy</div>
-          <div class="meta">La cuenta asociada publica una prueba Ed25519 firmada por Telegram que cualquier tercero puede comprobar.</div>
+          <div class="meta">La cuenta asociada publica una prueba OIDC firmada por Telegram con el alcance mínimo openid y sin exponer los datos de la Mini App.</div>
           <span class="status" id="telegramStatus">Consultando la última verificación…</span>
         </div>
       </div>
@@ -115,7 +115,7 @@ summary{cursor:pointer;font-weight:650;color:var(--muted)}
   </section>
 
   <div class="actions">
-    <a class="primary action" href="/identity/telegram/verify/">Verificar firma de Telegram</a>
+    <a class="primary action" href="/identity/telegram/verify/">Verificar prueba de Telegram</a>
     <a class="secondary action" href="https://bsky.app/profile/roclahy.me" target="_blank" rel="me noopener noreferrer">Comprobar en Bluesky</a>
   </div>
 
@@ -138,8 +138,8 @@ summary{cursor:pointer;font-weight:650;color:var(--muted)}
   fetch('/api/identity/telegram/status',{cache:'no-store'})
     .then(r=>r.ok?r.json():Promise.reject())
     .then(data=>{
-      if(data?.verified&&data?.proofAvailable&&data?.independentlyVerifiable&&String(data.userId)==='1480932444'){
-        el.textContent='Firma Ed25519 verificable · '+absoluteDate(data.authenticatedAt);
+      if(data?.verified&&data?.proofAvailable&&data?.independentlyVerifiable&&String(data.linkedTelegramUserId)==='1480932444'){
+        el.textContent='Prueba OIDC verificable · '+absoluteDate(data.authenticatedAt);
       }else{
         el.textContent='No hay una prueba criptográfica pública disponible.';
       }

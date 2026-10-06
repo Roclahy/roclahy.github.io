@@ -7,201 +7,29 @@
 <title>Identidad Roclahy</title>
 <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
 <style>
-:root{
-  color-scheme:light dark;
-  --bg:var(--tg-theme-bg-color,#fff);
-  --text:var(--tg-theme-text-color,#111);
-  --muted:var(--tg-theme-hint-color,#6b7280);
-  --surface:var(--tg-theme-secondary-bg-color,#f4f4f5);
-  --accent:var(--tg-theme-button-color,#2481cc);
-  --accentText:var(--tg-theme-button-text-color,#fff);
-  --line:color-mix(in srgb,var(--text) 12%,transparent);
-  --ok:#20a464;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-body{padding:18px 16px calc(20px + env(safe-area-inset-bottom))}
-main{max-width:520px;margin:0 auto}
-.hero{padding:10px 2px 18px}
-.mark{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
-.mark svg{width:28px;height:28px}
-h1{margin:14px 0 5px;font-size:25px;letter-spacing:-.04em}
-.subtitle{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
-.card{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:16px;margin-top:12px}
-.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
-.identity{margin-top:8px;font-size:16px;font-weight:750}
-.meta{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.45}
-.status{display:flex;align-items:flex-start;gap:10px}
-.dot{width:10px;height:10px;border-radius:50%;margin-top:5px;background:var(--muted);flex:0 0 auto}
-.dot.ok{background:var(--ok)}
-.actions{display:grid;gap:10px;margin-top:18px}
-button{min-height:48px;border-radius:15px;border:0;padding:0 16px;font-size:15px;font-weight:750;cursor:pointer}
-.primary{background:var(--accent);color:var(--accentText)}
-.secondary{background:var(--surface);color:var(--text);border:1px solid var(--line)}
-button:disabled{opacity:.5;cursor:not-allowed}
-.note{margin:16px 2px 0;color:var(--muted);font-size:11.5px;line-height:1.45}
-.result{margin-top:12px;display:none}
-.result.show{display:block}
-.result strong{display:block;font-size:15px}
-.result small{display:block;margin-top:5px;color:var(--muted);line-height:1.4}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;word-break:break-all}
+:root{color-scheme:light dark;--bg:var(--tg-theme-bg-color,#fff);--text:var(--tg-theme-text-color,#111);--muted:var(--tg-theme-hint-color,#6b7280);--surface:var(--tg-theme-secondary-bg-color,#f4f4f5);--accent:var(--tg-theme-button-color,#2481cc);--accentText:var(--tg-theme-button-text-color,#fff);--line:color-mix(in srgb,var(--text) 12%,transparent);--ok:#20a464}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}body{padding:18px 16px calc(20px + env(safe-area-inset-bottom))}main{max-width:520px;margin:0 auto}.hero{padding:10px 2px 18px}.mark{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}.mark svg{width:28px;height:28px}h1{margin:14px 0 5px;font-size:25px;letter-spacing:-.04em}.subtitle{margin:0;color:var(--muted);font-size:14px;line-height:1.45}.card{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:16px;margin-top:12px}.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.identity{margin-top:8px;font-size:16px;font-weight:750}.meta{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.45}.status{display:flex;align-items:flex-start;gap:10px}.dot{width:10px;height:10px;border-radius:50%;margin-top:5px;background:var(--muted);flex:0 0 auto}.dot.ok{background:var(--ok)}.actions{display:grid;gap:10px;margin-top:18px}button{min-height:48px;border-radius:15px;border:0;padding:0 16px;font-size:15px;font-weight:750;cursor:pointer}.primary{background:var(--accent);color:var(--accentText)}.secondary{background:var(--surface);color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:not-allowed}.note{margin:16px 2px 0;color:var(--muted);font-size:11.5px;line-height:1.45}.result{margin-top:12px;display:none}.result.show{display:block}.result strong{display:block;font-size:15px}.result small{display:block;margin-top:5px;color:var(--muted);line-height:1.4}
 </style>
 </head>
 <body>
 <main>
-  <section class="hero">
-    <div class="mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <h1>Identidad Roclahy</h1>
-    <p class="subtitle">Confirma de nuevo la identidad de Roclahy mediante Telegram.</p>
-  </section>
-
-  <section class="card">
-    <div class="label">Cuenta autorizada</div>
-    <div class="identity">@rclhy · ID 1480932444</div>
-    <div class="meta">Esta es la cuenta autorizada para renovar la verificación pública.</div>
-  </section>
-
-  <section class="card">
-    <div class="status">
-      <span class="dot" id="statusDot"></span>
-      <div>
-        <div class="label">Prueba pública</div>
-        <div class="identity" id="statusTitle">Consultando…</div>
-        <div class="meta" id="statusMeta">Comprobando la última prueba publicada.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="card result" id="resultCard" aria-live="polite">
-    <strong id="resultTitle"></strong>
-    <small id="resultText"></small>
-  </section>
-
-  <div class="actions">
-    <button class="primary" id="verifyButton" type="button" disabled>Preparando…</button>
-    <button class="secondary" id="closeButton" type="button">Cerrar</button>
-  </div>
-
-  <p class="note">Telegram confirma la cuenta antes de actualizar la verificación pública. Solo se muestran los datos necesarios para acreditar el estado y la fecha de la última validación.</p>
+<section class="hero"><div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5"/><path d="M8 12.5L10.5 15L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h1>Identidad Roclahy</h1><p class="subtitle">Publica una nueva prueba criptográfica de la cuenta de Telegram vinculada a Roclahy.</p></section>
+<section class="card"><div class="label">Cuenta autorizada</div><div class="identity">@rclhy · ID 1480932444</div><div class="meta">La Mini App comprueba esta cuenta de forma privada antes de iniciar la autenticación pública.</div></section>
+<section class="card"><div class="status"><span class="dot" id="statusDot"></span><div><div class="label">Prueba pública</div><div class="identity" id="statusTitle">Consultando…</div><div class="meta" id="statusMeta">Comprobando la última prueba publicada.</div></div></div></section>
+<section class="card result" id="resultCard" aria-live="polite"><strong id="resultTitle"></strong><small id="resultText"></small></section>
+<div class="actions"><button class="primary" id="verifyButton" type="button" disabled>Preparando…</button><button class="secondary" id="closeButton" type="button">Cerrar</button></div>
+<p class="note">Privacidad reforzada: el <b>initData</b> de la Mini App se usa solo para autorizar esta cuenta y no se publica. La prueba pública usa OpenID Connect con el alcance mínimo <b>openid</b>, sin perfil, foto, teléfono, idioma, Premium, query_id ni datos del chat.</p>
 </main>
-
 <script>
-(() => {
-  const tg=window.Telegram?.WebApp;
-  const verifyButton=document.getElementById('verifyButton');
-  const closeButton=document.getElementById('closeButton');
-  const statusDot=document.getElementById('statusDot');
-  const statusTitle=document.getElementById('statusTitle');
-  const statusMeta=document.getElementById('statusMeta');
-  const resultCard=document.getElementById('resultCard');
-  const resultTitle=document.getElementById('resultTitle');
-  const resultText=document.getElementById('resultText');
-
-  let hasProof=false;
-
-  function ageLabel(seconds){
-    const s=Math.max(0,Number(seconds||0));
-    if(s<60)return 'ahora';
-    if(s<3600)return 'hace '+Math.floor(s/60)+' min';
-    if(s<86400)return 'hace '+Math.floor(s/3600)+' h';
-    return 'hace '+Math.floor(s/86400)+' d';
-  }
-
-  async function loadStatus(){
-    try{
-      const response=await fetch('/api/identity/telegram/status',{cache:'no-store'});
-      const data=await response.json();
-      hasProof=Boolean(data?.proofAvailable);
-      statusDot.classList.toggle('ok',Boolean(data?.verified));
-      if(hasProof){
-        statusTitle.textContent=data.fresh?'Verificación reciente':'Verificación publicada';
-        statusMeta.textContent='Validada por Telegram · '+ageLabel(data.ageSeconds);
-      }else{
-        statusTitle.textContent='Verificación inicial registrada';
-        statusMeta.textContent='Verificación inicial · 2 oct 2026';
-      }
-      verifyButton.textContent=hasProof?'Revalidar ahora':'Validar ahora';
-    }catch{
-      statusTitle.textContent='No se pudo consultar el estado';
-      statusMeta.textContent='Puedes intentar publicar una prueba igualmente.';
-      verifyButton.textContent='Validar ahora';
-    }
-  }
-
-  function setResult(ok,title,text){
-    resultCard.classList.add('show');
-    resultTitle.textContent=title;
-    resultText.textContent=text;
-    if(tg?.HapticFeedback){
-      tg.HapticFeedback.notificationOccurred(ok?'success':'error');
-    }
-  }
-
-  async function verify(){
-    if(!tg?.initData){
-      setResult(false,'Abre esta Mini App desde Telegram','No se recibió initData firmado de Telegram.');
-      return;
-    }
-    verifyButton.disabled=true;
-    verifyButton.textContent='Verificando…';
-    try{
-      const response=await fetch('/api/identity/telegram/miniapp/verify',{
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify({initData:tg.initData})
-      });
-      const data=await response.json();
-      if(!response.ok||!data?.ok){
-        const messages={
-          wrong_telegram_account:'La cuenta de Telegram no está autorizada.',
-          stale_telegram_proof:'La prueba ya no es suficientemente reciente. Cierra y vuelve a abrir la Mini App.',
-          invalid_telegram_signature:'Telegram no pudo validar la firma.',
-          bot_id_not_configured:'Falta configurar el ID de @roclahybot en Cloudflare.',
-          proof_storage_not_configured:'Falta vincular el almacenamiento KV de identidad.'
-        };
-        throw new Error(messages[data?.error]||'No se pudo publicar la prueba.');
-      }
-      hasProof=true;
-      const proof=data.proof||{};
-      setResult(true,'Prueba pública actualizada','La firma de Telegram es válida. La nueva prueba criptográfica ya puede verificarse públicamente.');
-      statusDot.classList.add('ok');
-      statusTitle.textContent='Firma Ed25519 publicada';
-      statusMeta.textContent='Autenticada por Telegram · ahora';
-      verifyButton.textContent='Revalidar ahora';
-    }catch(error){
-      setResult(false,'No se pudo validar',String(error?.message||'Error inesperado.'));
-      verifyButton.textContent=hasProof?'Revalidar ahora':'Validar ahora';
-    }finally{
-      verifyButton.disabled=false;
-    }
-  }
-
-  if(tg){
-    tg.ready();
-    tg.expand();
-    if(tg.setHeaderColor)tg.setHeaderColor('bg_color');
-    closeButton.addEventListener('click',()=>tg.close());
-  }else{
-    closeButton.addEventListener('click',()=>history.back());
-  }
-
-  verifyButton.addEventListener('click',verify);
-
-  loadStatus().finally(()=>{
-    if(tg?.initData){
-      verifyButton.disabled=false;
-    }else{
-      verifyButton.disabled=true;
-      verifyButton.textContent='Abrir desde @roclahybot';
-      setResult(false,'Mini App fuera de Telegram','Abre Identidad Roclahy desde @roclahybot para generar una prueba firmada.');
-    }
-  });
+(()=>{const tg=window.Telegram?.WebApp,verifyButton=document.getElementById('verifyButton'),closeButton=document.getElementById('closeButton'),statusDot=document.getElementById('statusDot'),statusTitle=document.getElementById('statusTitle'),statusMeta=document.getElementById('statusMeta'),resultCard=document.getElementById('resultCard'),resultTitle=document.getElementById('resultTitle'),resultText=document.getElementById('resultText');let hasProof=false;
+function setResult(ok,title,text){resultCard.classList.add('show');resultTitle.textContent=title;resultText.textContent=text;if(tg?.HapticFeedback)tg.HapticFeedback.notificationOccurred(ok?'success':'error');}
+function formatDate(iso){const d=new Date(iso);return Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat('es-ES',{dateStyle:'medium',timeStyle:'short'}).format(d);}
+async function loadStatus(){try{const r=await fetch('/api/identity/telegram/status',{cache:'no-store'}),d=await r.json();hasProof=Boolean(d?.proofAvailable&&d?.verified);statusDot.classList.toggle('ok',hasProof);if(hasProof){statusTitle.textContent='Prueba OIDC publicada';statusMeta.textContent='Autenticada por Telegram · '+formatDate(d.authenticatedAt);}else{statusTitle.textContent='Sin prueba pública OIDC';statusMeta.textContent='Publica una nueva validación desde esta Mini App.';}verifyButton.textContent=hasProof?'Revalidar ahora':'Validar ahora';}catch{statusTitle.textContent='No se pudo consultar el estado';statusMeta.textContent='Puedes intentar validar igualmente.';verifyButton.textContent='Validar ahora';}}
+async function verify(){if(!tg?.initData){setResult(false,'Abre esta Mini App desde Telegram','No se recibió la autorización firmada de Telegram.');return;}verifyButton.disabled=true;verifyButton.textContent='Preparando…';try{const r=await fetch('/api/identity/telegram/miniapp/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({initData:tg.initData})}),d=await r.json();if(!r.ok||!d?.ok)throw new Error(d?.error||'No se pudo autorizar la cuenta.');location.assign(d.startUrl||'/api/identity/telegram/start');}catch(e){setResult(false,'No se pudo iniciar',String(e?.message||'Error inesperado.'));verifyButton.disabled=false;verifyButton.textContent=hasProof?'Revalidar ahora':'Validar ahora';}}
+if(tg){tg.ready();tg.expand();if(tg.setHeaderColor)tg.setHeaderColor('bg_color');closeButton.addEventListener('click',()=>tg.close());}else closeButton.addEventListener('click',()=>history.back());
+verifyButton.addEventListener('click',verify);
+const result=new URLSearchParams(location.search).get('telegram_identity');if(result){history.replaceState(null,'',location.pathname);if(result==='verified')setResult(true,'Prueba pública actualizada','Telegram autenticó la cuenta y se publicó una prueba OIDC con divulgación mínima.');else if(result==='bound')setResult(true,'Cuenta vinculada de forma privada','La cuenta quedó vinculada sin publicar los datos de perfil. Pulse Validar ahora una vez más para generar la prueba pública con alcance openid solamente.');else if(result==='privacy_guard')setResult(false,'Publicación bloqueada por privacidad','Telegram devolvió datos fuera del alcance mínimo esperado y la prueba no se publicó.');else if(result==='wrong_account')setResult(false,'Cuenta incorrecta','La cuenta elegida en Telegram no coincide con la cuenta autorizada.');else setResult(false,'No se pudo completar la validación','La autenticación no terminó correctamente.');}
+loadStatus().finally(()=>{if(tg?.initData)verifyButton.disabled=false;else{verifyButton.disabled=true;verifyButton.textContent='Abrir desde @roclahybot';setResult(false,'Mini App fuera de Telegram','Abre Identidad Roclahy desde @roclahybot.');}});
 })();
 </script>
-</body>
-</html>
+</body></html>

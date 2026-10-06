@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "subject": "Roclahy",
   "canonical_url": "https://roclahy.me/",
   "verification_id": "roclahy-me-official-2026-10",
@@ -17,22 +17,42 @@
     "reciprocal-official-site-linking",
     "rel-me-identity-linking",
     "public-profile-backlinks",
-    "telegram-mini-app-ed25519-third-party-verification",
+    "telegram-oidc-openid-only-public-proof",
+    "telegram-mini-app-private-account-binding",
     "bluesky-domain-handle"
   ],
   "last_updated": "2026-10-06",
   "telegram": {
     "account_url": "https://t.me/rclhy",
     "stable_user_id": "1480932444",
-    "verification": "Telegram Mini App signed initData · Ed25519",
-    "signature_algorithm": "Ed25519",
-    "telegram_production_public_key_hex": "e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242d",
+    "public_verification": "Telegram OpenID Connect ID token using only the openid scope",
+    "private_binding": "Telegram Mini App signed initData is used only to authorize the expected account and is not published by the public proof flow",
+    "public_claims": [
+      "sub",
+      "iss",
+      "aud",
+      "iat",
+      "exp",
+      "nonce"
+    ],
+    "excluded_public_data": [
+      "name",
+      "username",
+      "profile photo",
+      "phone number",
+      "language_code",
+      "Premium status",
+      "query_id",
+      "chat_instance",
+      "Mini App initData"
+    ],
     "live_verification_status": "https://roclahy.me/api/identity/telegram/status",
     "sanitized_status": "https://roclahy.me/api/identity/telegram/proof",
     "public_cryptographic_proof": "https://roclahy.me/api/identity/telegram/proof-package",
     "browser_verifier": "https://roclahy.me/identity/telegram/verify/",
-    "telegram_documentation": "https://core.telegram.org/bots/webapps#validating-data-for-third-party-use",
-    "note": "The public proof contains the exact Ed25519-signed data, signature, bot ID and Telegram production public key required to reproduce the verification independently. A valid proof must also contain Telegram user ID 1480932444."
+    "telegram_oidc_documentation": "https://core.telegram.org/bots/telegram-login",
+    "telegram_jwks": "https://oauth.telegram.org/.well-known/jwks.json",
+    "note": "On first use, a private OIDC profile authorization binds the Telegram OIDC subject to Telegram user ID 1480932444; that profile token is not published. Public revalidations then request only the openid scope. The public ID token can be independently verified against Telegram's JWKS and does not contain profile, phone or Mini App session data."
   },
   "bluesky": {
     "handle": "roclahy.me",

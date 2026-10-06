@@ -1,11 +1,7 @@
-import {
-  EXPECTED_TELEGRAM_ID,
-  publishTelegramMiniAppProof,
-  publicProofView,
-  verifyTelegramMiniAppInitData
-} from "../../../../_lib/telegram-miniapp-proof.js";
+import {EXPECTED_TELEGRAM_ID,makeStateCookie} from "../../../../_lib/telegram-identity.js";
+import {verifyTelegramMiniAppInitData} from "../../../../_lib/telegram-miniapp-proof.js";
 
-function json(data,status=200){
+function json(data,status=200,extraHeaders={}){
   return new Response(JSON.stringify(data),{
     status,
     headers:{
@@ -13,7 +9,8 @@ function json(data,status=200){
       "cache-control":"no-store, max-age=0",
       "x-content-type-options":"nosniff",
       "referrer-policy":"no-referrer",
-      "access-control-allow-origin":"https://roclahy.me"
+      "access-control-allow-origin":"https://roclahy.me",
+      ...extraHeaders
     }
   });
 }
@@ -24,7 +21,6 @@ export async function onRequestPost({request,env}){
 
   const botId=String(env.ROCLAHY_BOT_ID||"");
   if(!botId)return json({ok:false,error:"bot_id_not_configured"},503);
-  if(!env.IDENTITY_PROOF_KV)return json({ok:false,error:"proof_storage_not_configured"},503);
 
   let body;
   try{
@@ -39,9 +35,18 @@ export async function onRequestPost({request,env}){
   try{
     const proof=await verifyTelegramMiniAppInitData(body?.initData,botId,{maxAgeSeconds:300});
     if(proof.userId!==EXPECTED_TELEGRAM_ID)return json({ok:false,error:"wrong_account"},403);
-    const stored=await publishTelegramMiniAppProof(env,proof);
-    const publicProof=publicProofView({...proof,publishedAt:stored.publishedAt});
-    return json({ok:true,proof:publicProof});
+
+    const authorization=await makeStateCookie(env,{
+      purpose:"telegram_identity_bootstrap",
+      userId:EXPECTED_TELEGRAM_ID,
+      createdAt:Date.now()
+    });
+
+    return json(
+      {ok:true,startUrl:"/api/identity/telegram/start"},
+      200,
+      {"set-cookie":"tg_identity_authorized="+encodeURIComponent(authorization)+"; Path=/api/identity/telegram; Max-Age=300; HttpOnly; Secure; SameSite=Lax"}
+    );
   }catch(error){
     const code=String(error?.message||"verification_failed");
     const status=code==="wrong_telegram_account"?403:
