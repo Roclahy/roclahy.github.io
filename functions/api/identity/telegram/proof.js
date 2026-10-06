@@ -11,7 +11,7 @@ function json(data,status=200,cache="public, max-age=60"){
       "cache-control":cache,
       "x-content-type-options":"nosniff",
       "referrer-policy":"no-referrer",
-      "access-control-allow-origin":"https://roclahy.me"
+      "access-control-allow-origin":"*"
     }
   });
 }
@@ -19,36 +19,18 @@ function json(data,status=200,cache="public, max-age=60"){
 export async function onRequestGet({env}){
   try{
     const proof=await readTelegramMiniAppProof(env);
-    if(!proof){
-      return json({
-        ok:true,
-        proofAvailable:false,
-        verified:true,
-        cryptographic:true,
-        provider:"Telegram OpenID Connect",
-        protocol:"OpenID Connect",
-        signatureAlgorithm:"RS256",
-        account:"https://t.me/rclhy",
-        username:"rclhy",
-        userId:"1480932444",
-        verifiedOn:"2026-10-02",
-        fresh:false,
-        note:"Initial Telegram OIDC verification is on record. No Mini App revalidation has been published yet."
-      });
-    }
-    return json({ok:true,proofAvailable:true,...publicProofView(proof)});
-  }catch{
-    return json({
-      ok:false,
-      proofAvailable:false,
-      verified:true,
-      provider:"Telegram OpenID Connect",
-      protocol:"OpenID Connect",
-      account:"https://t.me/rclhy",
-      username:"rclhy",
-      userId:"1480932444",
-      verifiedOn:"2026-10-02",
-      fresh:false
-    },200,"no-store, max-age=0");
-  }
+    if(proof)return json({ok:true,...publicProofView(proof)});
+  }catch{}
+
+  return json({
+    ok:true,
+    proofAvailable:false,
+    verified:false,
+    cryptographic:false,
+    independentlyVerifiable:false,
+    account:"https://t.me/rclhy",
+    username:"rclhy",
+    userId:"1480932444",
+    note:"No hay una prueba criptográfica pública de Telegram disponible en este momento."
+  },200,"no-store, max-age=0");
 }

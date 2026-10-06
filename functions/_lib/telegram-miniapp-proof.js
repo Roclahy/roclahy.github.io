@@ -47,7 +47,7 @@ export async function verifyTelegramMiniAppInitData(initData,botId,{maxAgeSecond
   if(!signature||!Number.isFinite(authDate)||!userRaw)throw new Error("missing_signed_fields");
 
   let user;
-  try{ user=JSON.parse(userRaw); }catch{ throw new Error("invalid_user"); }
+  try{user=JSON.parse(userRaw);}catch{throw new Error("invalid_user");}
   if(String(user?.id||"")!==EXPECTED_TELEGRAM_ID)throw new Error("wrong_telegram_account");
 
   const publicKey=await crypto.subtle.importKey(
@@ -57,12 +57,12 @@ export async function verifyTelegramMiniAppInitData(initData,botId,{maxAgeSecond
     false,
     ["verify"]
   );
-  const dataCheckString=canonicalMiniAppData(params,botId);
+  const signedData=canonicalMiniAppData(params,botId);
   const valid=await crypto.subtle.verify(
     {name:"Ed25519"},
     publicKey,
     base64UrlToBytes(signature),
-    new TextEncoder().encode(dataCheckString)
+    new TextEncoder().encode(signedData)
   );
   if(!valid)throw new Error("invalid_telegram_signature");
 
@@ -76,18 +76,18 @@ export async function verifyTelegramMiniAppInitData(initData,botId,{maxAgeSecond
     botId:String(botId),
     userId:EXPECTED_TELEGRAM_ID,
     username:String(user.username||""),
-    firstName:String(user.first_name||""),
     authDate,
     signature:String(signature),
+    signedData,
     ageSeconds,
-    fingerprint:await sha256Base64Url(raw)
+    fingerprint:await sha256Base64Url(signedData)
   };
 }
 
 export async function publishTelegramMiniAppProof(env,proof){
   if(!env.IDENTITY_PROOF_KV)throw new Error("identity_proof_kv_not_configured");
   const record={
-    version:1,
+    version:2,
     source:"telegram-mini-app",
     botId:proof.botId,
     userId:proof.userId,
@@ -110,7 +110,7 @@ export async function readTelegramMiniAppProof(env){
   if(!record?.initData||!record?.botId)return null;
   const proof=await verifyTelegramMiniAppInitData(record.initData,record.botId);
   return {
-    version:1,
+    version:2,
     source:"telegram-mini-app",
     botId:proof.botId,
     userId:proof.userId,
@@ -131,10 +131,11 @@ export async function readTelegramMiniAppSignedProof(env){
   if(!record?.initData||!record?.botId)return null;
   const proof=await verifyTelegramMiniAppInitData(record.initData,record.botId);
   return {
-    version:1,
+    version:2,
     source:"telegram-mini-app",
     botId:proof.botId,
-    initData:proof.raw,
+    signedData:proof.signedData,
+    signature:proof.signature,
     userId:proof.userId,
     username:proof.username,
     authDate:proof.authDate,
@@ -149,9 +150,11 @@ export function publicProofView(proof){
   const age=Math.max(0,Number(proof.ageSeconds||0));
   return {
     verified:true,
+    proofAvailable:true,
     cryptographic:true,
-    provider:"Telegram Mini App",
-    protocol:"Telegram Mini Apps",
+    independentlyVerifiable:true,
+    provider:"Telegram",
+    protocol:"Telegram Mini Apps third-party validation",
     signatureAlgorithm:"Ed25519",
     account:"https://t.me/rclhy",
     username:proof.username||"rclhy",
@@ -160,8 +163,13 @@ export function publicProofView(proof){
     publishedAt:proof.publishedAt||null,
     ageSeconds:age,
     fresh:age<=900,
-    proofFingerprint:proof.fingerprint
+    proofFingerprint:proof.fingerprint,
+    publicProofPackage:"https://roclahy.me/api/identity/telegram/proof-package",
+    verificationPage:"https://roclahy.me/identity/telegram/verify/"
   };
 }
 
-export {EXPECTED_TELEGRAM_ID};
+export {
+  EXPECTED_TELEGRAM_ID,
+  TELEGRAM_PRODUCTION_PUBLIC_KEY_HEX
+};

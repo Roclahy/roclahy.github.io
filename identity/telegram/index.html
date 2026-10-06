@@ -168,10 +168,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;wo
       }
       hasProof=true;
       const proof=data.proof||{};
-      setResult(true,'Verificación actualizada','Telegram confirmó la identidad. La nueva validación ya está disponible públicamente.');
+      setResult(true,'Prueba pública actualizada','La firma de Telegram es válida. La nueva prueba criptográfica ya puede verificarse públicamente.');
       statusDot.classList.add('ok');
-      statusTitle.textContent='Verificación reciente';
-      statusMeta.textContent='Validada por Telegram · ahora';
+      statusTitle.textContent='Firma Ed25519 publicada';
+      statusMeta.textContent='Autenticada por Telegram · ahora';
       verifyButton.textContent='Revalidar ahora';
     }catch(error){
       setResult(false,'No se pudo validar',String(error?.message||'Error inesperado.'));

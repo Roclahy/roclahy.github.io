@@ -16,23 +16,18 @@ function json(data,status=200,cache="public, max-age=60"){
 export async function onRequestGet({env}){
   try{
     const proof=await readTelegramMiniAppProof(env);
-    if(proof){
-      return json({ok:true,proofAvailable:true,...publicProofView(proof)});
-    }
-  }catch(_){}
+    if(proof)return json({ok:true,...publicProofView(proof)});
+  }catch{}
 
   return json({
     ok:true,
     proofAvailable:false,
-    verified:true,
-    cryptographic:true,
-    provider:"Telegram OpenID Connect",
-    protocol:"OpenID Connect",
-    signatureAlgorithm:"RS256",
+    verified:false,
+    cryptographic:false,
+    independentlyVerifiable:false,
     account:"https://t.me/rclhy",
     username:"rclhy",
     userId:"1480932444",
-    verifiedOn:"2026-10-02",
     fresh:false
-  });
+  },200,"no-store, max-age=0");
 }

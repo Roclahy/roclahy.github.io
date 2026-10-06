@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "subject": "Roclahy",
   "canonical_url": "https://roclahy.me/",
   "verification_id": "roclahy-me-official-2026-10",
@@ -17,20 +17,22 @@
     "reciprocal-official-site-linking",
     "rel-me-identity-linking",
     "public-profile-backlinks",
-    "telegram-openid-connect-signed-id-token",
-    "telegram-mini-app-ed25519-signed-init-data",
+    "telegram-mini-app-ed25519-third-party-verification",
     "bluesky-domain-handle"
   ],
-  "last_updated": "2026-10-02",
+  "last_updated": "2026-10-06",
   "telegram": {
     "account_url": "https://t.me/rclhy",
     "stable_user_id": "1480932444",
-    "initial_authentication": "Telegram OpenID Connect",
-    "fresh_revalidation": "Telegram Mini App signed initData · Ed25519",
+    "verification": "Telegram Mini App signed initData · Ed25519",
+    "signature_algorithm": "Ed25519",
+    "telegram_production_public_key_hex": "e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242d",
     "live_verification_status": "https://roclahy.me/api/identity/telegram/status",
-    "sanitized_cryptographic_proof": "https://roclahy.me/api/identity/telegram/proof",
-    "mini_app": "https://roclahy.me/identity/telegram/",
-    "note": "Fresh revalidation is accepted only when Telegram's Ed25519 signature is valid, auth_date is recent, the configured bot ID matches, and the Telegram user ID is 1480932444. Raw signed initData is kept private; the public proof exposes only minimal identity metadata and a SHA-256 fingerprint."
+    "sanitized_status": "https://roclahy.me/api/identity/telegram/proof",
+    "public_cryptographic_proof": "https://roclahy.me/api/identity/telegram/proof-package",
+    "browser_verifier": "https://roclahy.me/identity/telegram/verify/",
+    "telegram_documentation": "https://core.telegram.org/bots/webapps#validating-data-for-third-party-use",
+    "note": "The public proof contains the exact Ed25519-signed data, signature, bot ID and Telegram production public key required to reproduce the verification independently. A valid proof must also contain Telegram user ID 1480932444."
   },
   "bluesky": {
     "handle": "roclahy.me",
