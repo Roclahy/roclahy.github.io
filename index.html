@@ -673,20 +673,22 @@ details{
   opacity:.88;
 }
 .site-metric-main{
-  display:flex;
+  display:inline-flex;
   align-items:baseline;
-  gap:3px;
+  column-gap:10px;
   flex-wrap:nowrap;
+  white-space:nowrap;
 }
 .site-metric strong,
 .site-metric span{
   color:currentColor!important;
 }
 .site-metric strong{
-  display:inline-block;
+  display:block;
+  min-width:8ch;
   width:auto;
   flex:0 0 auto;
-  text-align:center;
+  text-align:right;
   white-space:nowrap;
   font-size:11.5px;
   font-weight:650;
@@ -1336,7 +1338,7 @@ html[data-theme="sakura"] .book-copy .book-cta{
       const tgMeta=document.getElementById('latestTelegramMeta');
       if(data.telegram && tg && tgText){
         tg.href=data.telegram.url || 'https://t.me/fundadora';
-        tgText.textContent=data.telegram.text || 'Nueva publicación en Telegram';
+        tgText.textContent=(data.telegram.text || 'Nueva publicación en Telegram').replace(/([0-9#*])[\uFE0E\uFE0F]?\u20E3/g,'$1');
         if(tgMeta) tgMeta.textContent=data.telegram.date || '@fundadora';
       }
 
@@ -1369,16 +1371,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
     let userScrollIntent=false;
     let touchStartY=null;
     const initialScrollY=window.scrollY;
-
-    const lockCountWidth=()=>{
-      const finalText=formatter.format(target);
-      el.style.width='auto';
-      el.style.flex='0 0 auto';
-      el.textContent=finalText;
-      const width=Math.ceil(el.getBoundingClientRect().width);
-      el.style.width=width+'px';
-      el.style.flex='0 0 '+width+'px';
-    };
 
     const isMetricReached=()=>{
       const rect=metric.getBoundingClientRect();
@@ -1472,7 +1464,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
       })
       .catch(()=>{})
       .finally(()=>{
-        lockCountWidth();
         targetReady=true;
         animate();
       });
