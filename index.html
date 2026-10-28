@@ -976,6 +976,9 @@ html[data-theme="sakura"] .book-copy .book-cta{
   white-space:nowrap;
 }
 
+/* All project logos use a fully circular mask, including branded exceptions. */
+.project-logo, .project-logo.mi-ecoflow{border-radius:50%}
+.project-logo img, .project-logo.rocla img, .project-logo.vpn img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 </style>
 </head>
 <body>
@@ -1070,10 +1073,14 @@ html[data-theme="sakura"] .book-copy .book-cta{
       <p data-i18n="projects_intro">Una selección de proyectos en los que trabajo.</p>
     </div>
     <div class="project-list">
+      <div class="project" role="group" aria-label="Mi EcoFlow">
+        <span class="project-logo mi-ecoflow"><img src="/assets/mi-ecoflow-logo.webp" alt="Logo de Mi EcoFlow" width="50" height="50" loading="lazy" decoding="async"></span>
+        <span><span class="project-title"><strong>Mi EcoFlow</strong><span class="project-badge" data-i18n="project_new">Nuevo</span></span><small data-i18n="project_mi_ecoflow">Gestiona tu estación EcoFlow mediante Bluetooth, sin necesidad de Internet.</small></span>
+      </div>
       <a class="project" href="https://t.me/ArgosSecurity_bot" target="_blank" rel="noopener">
         <span class="project-logo argos"><img src="https://t.me/i/userpic/320/ArgosSecurity_bot.jpg" alt="Logo de ARGOS Security" width="50" height="50" loading="lazy" decoding="async"></span>
         <span>
-          <span class="project-title"><strong>ARGOS Security</strong><span class="project-badge" data-i18n="project_new">Nuevo</span></span>
+          <span class="project-title"><strong>ARGOS Security</strong></span>
           <small data-i18n="project_argos">Protege grupos y canales de Telegram con AntiRaid, CAPTCHA, moderación automática y configuración asistida por ASTRA IA.</small>
         </span>
       </a>
@@ -1091,10 +1098,6 @@ html[data-theme="sakura"] .book-copy .book-cta{
           <small data-i18n="project_telegram_id">Un bot gratuito y sin anuncios para consultar rápidamente el ID de usuarios, bots, grupos y canales en Telegram.</small>
         </span>
       </a>
-      <div class="project" role="group" aria-label="Mi EcoFlow">
-        <span class="project-logo mi-ecoflow"><img src="/assets/mi-ecoflow-logo.webp" alt="Logo de Mi EcoFlow" width="50" height="50" loading="lazy" decoding="async"></span>
-        <span><strong>Mi EcoFlow</strong><small data-i18n="project_mi_ecoflow">Gestiona tu estación EcoFlow mediante Bluetooth, sin necesidad de Internet.</small></span>
-      </div>
       <a class="project" href="https://roclaussd.roclahy.com/" target="_blank" rel="noopener">
         <span class="project-logo rocla"><img src="https://roclaussd.roclahy.com/assets/logo.svg?v=20260904-43" alt="Logo de RoCla USSD" loading="eager" decoding="async" fetchpriority="high"></span>
         <span><strong>RoCla USSD</strong><small data-i18n="project_ussd">Una app Android ligera para gestionar tu línea Cubacel: planes, consultas, red y seguridad.</small></span>
